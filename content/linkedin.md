@@ -1,17 +1,17 @@
 Your ADRs remember what you decided.
 They forget why it was right.
 
-I built WHY: it stores the assumptions behind engineering decisions in Hindsight agent memory and checks if they still hold.
+Research keeps finding the same gap: agents rarely notice when a later fact invalidates a memory.
 
-What worked:
+I built WHY to close it for engineering decisions: it stores each ADR's assumptions in Hindsight agent memory and checks they still hold.
 
-→ Extract assumptions from ADR prose. Keep one only if its quote is verbatim.
+→ Extract assumptions from ADR prose; keep only those quoted verbatim.
 
-→ Retain every record with its real date. Only evidence from after a decision counts.
+→ Retain records with their real dates. Only later evidence counts.
 
-→ The LLM labels each assumption. Code picks the verdict and deletes invented citations.
+→ The LLM labels assumptions. Code picks the verdict and deletes invented citations.
 
-Before/after, same model: "reuse Postgres" without memory; RECONSIDER with WHY, citing a 3,140 writes/s peak and a Snowflake migration.
+Same model: "reuse Postgres" without memory; RECONSIDER with WHY, citing a 3,140 writes/s peak and a Snowflake move.
 
 26 test questions: 8 right without memory, 23 with WHY.
 
