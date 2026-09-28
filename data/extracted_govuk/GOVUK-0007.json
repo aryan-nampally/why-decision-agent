@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The team is currently in a phase of testing with Integration and prioritizing getting the stack up and running over implementing robust certificate management.",
+      "critical": true,
+      "quote": "we're testing this with Integration to concentrate on getting the stack up and running",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The team is willing to accept the operational risk of manual intervention and deployment delays if the Puppetmaster is lost or recreated.",
+      "critical": true,
+      "quote": "accept the loss of certicates",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "A suitable solution for certificate management is not currently present in the existing Puppet code, making immediate implementation difficult or impossible.",
+      "critical": false,
+      "quote": "a solution that is not currently present in our Puppet code",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

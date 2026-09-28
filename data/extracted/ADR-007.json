@@ -1,0 +1,33 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Write volume will stay within the projected ~1,800 writes/second that a single well\u2011tuned Postgres primary can sustain",
+      "critical": true,
+      "quote": "Current peak load is roughly 600 ledger writes per second ... the 18-month projection ... tops out around 1,800 writes per second, which is comfortably within what a single well\u2011tuned Postgres primary can sustain.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The system will remain single\u2011region (us\u2011east\u20111) with no need for a second region in the planning horizon",
+      "critical": true,
+      "quote": "All payment processing runs in us-east-1, and there is no plan for a second region within the planning horizon.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "Finance month\u2011end reporting can continue on the same database with only minor query rewrites",
+      "critical": false,
+      "quote": "Finance's month\u2011end close runs a set of about 40 SQL reports ... has asked that they keep working with minimal rewrites; the close has to finish inside two business days.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A4",
+      "statement": "A two\u2011engineer team without a dedicated DBA can operate and maintain an RDS PostgreSQL instance",
+      "critical": false,
+      "quote": "Small team: two backend engineers, no dedicated DBA.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

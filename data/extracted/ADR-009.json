@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The team already knows HCL from a previous employer",
+      "critical": true,
+      "quote": "The team already knows HCL from a previous employer",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "AWS is our only cloud provider today",
+      "critical": true,
+      "quote": "AWS is our only cloud provider today",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The backend team works in Python and Go, not TypeScript",
+      "critical": false,
+      "quote": "the backend team works in Python and Go, not TypeScript",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

@@ -1,0 +1,19 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The monitoring system relies on Icinga to communicate with hosts and services.",
+      "critical": true,
+      "quote": "For our current monitoring to work we need Icinga to be able to communicate with hosts and services.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The infrastructure is organized into distinct stacks that require internal service discovery.",
+      "critical": true,
+      "quote": "Each stack will have an internal, private, zone for internal services such as the puppetmaster.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The provisioning process relies on a user_data script to perform customisation during instance initialisation.",
+      "critical": true,
+      "quote": "Our provisioning process with Terraform uses a user_data script to customise the installation during the instance initialisation.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "There is a significant amount of common customisation logic (e.g., puppet client, updates, disks) that is currently duplicated across projects.",
+      "critical": true,
+      "quote": "Parts of this customisation will be common to most projects, for instance, install the puppet client, apply package updates, add external disks, etc.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The current node_group module architecture supports appending an additional script to a default user_data script.",
+      "critical": false,
+      "quote": "the node_group module takes a parameter for a default user_data script, and optionally accepts another parameter for an additional script that is appended to the default one.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

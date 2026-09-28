@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Pricing's /quote endpoint latency (p99 95\u202fms) fits within the booking flow\u2019s 150\u202fms budget",
+      "critical": true,
+      "quote": "Pricing's /quote endpoint has had a p99 of 95 ms over the last quarter, and the booking flow's budget for the pricing call is 150 ms.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "Only two synchronous consumers exist, so adding another caller won\u2019t cause fan\u2011in issues",
+      "critical": true,
+      "quote": "Pricing has exactly two synchronous consumers today, booking and the customer portal, so an extra synchronous caller does not create a fan-in risk.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The user is waiting on the confirmation screen, making added latency and correlation complexity from Kafka unacceptable",
+      "critical": false,
+      "quote": "the user is waiting on the confirmation screen, and request/reply over Kafka adds latency and correlation complexity for no benefit at current latencies.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

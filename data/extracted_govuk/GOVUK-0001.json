@@ -1,0 +1,19 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The project involves making architectural decisions that require documentation.",
+      "critical": true,
+      "quote": "We need to record the architectural decisions made on this project.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The team is familiar with or willing to adopt the ADR methodology described by Michael Nygard.",
+      "critical": false,
+      "quote": "We will use Architecture Decision Records, as described by Michael Nygard in [documenting architecture decisions](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions)",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

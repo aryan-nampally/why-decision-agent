@@ -1,0 +1,33 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Finance has approved a recurring $1,200 per\u2011month spend for the managed flag service in the FY25 platform budget",
+      "critical": true,
+      "quote": "Finance approved that spend in the FY25 platform budget",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The platform team does not have capacity to operate a self\u2011hosted flag service because they are already stretched operating Kafka and Keycloak",
+      "critical": true,
+      "quote": "Self-hosting was rejected because the platform team is already stretched operating Kafka and Keycloak",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The current volume of active flags (~180) fits within the vendor\u2019s Growth tier limit of 500 flags",
+      "critical": false,
+      "quote": "We run about 180 flags today. The vendor's Growth tier covers up to 500 active flags",
+      "origin": "extracted"
+    },
+    {
+      "id": "A4",
+      "statement": "Product requires percentage rollouts and per\u2011customer targeting, which cannot be achieved with environment\u2011variable flags",
+      "critical": false,
+      "quote": "Product wants percentage rollouts and per-customer targeting",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

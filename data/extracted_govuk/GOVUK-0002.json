@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The GDS PaaS is located in the eu-west-1 (Ireland) region, enabling network peering and resource sharing.",
+      "critical": true,
+      "quote": "This region has 3 availability zones and also contains the GDS PaaS which will allow easier sharing and peering.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "GDS policy mandates a PaaS-first approach, with AWS reserved only for services that cannot run on the PaaS.",
+      "critical": true,
+      "quote": "GDS policy for hosting of GDS internal services is PaaS first and AWS for anything that can not be run on the PaaS.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The current infrastructure can be migrated to AWS in an 'as-is' manner in the near term without immediate modernization.",
+      "critical": false,
+      "quote": "We will have to migrate our infrastructure from our current hosting provider to Amazon in the near-term \"as-is\" and then iterate on that infrastructure in the medium term",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

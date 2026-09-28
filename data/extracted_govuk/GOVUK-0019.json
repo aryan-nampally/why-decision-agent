@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The current traffic volume to the MySQL databases is low enough to allow them to be grouped on a single instance without capacity issues.",
+      "critical": true,
+      "quote": "Due to the low amount of traffic most of the MySQL databases receive we decided against this due to cost and the number of instances it would require.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The team has a significant existing investment in Puppet for managing database users and databases, making a switch to Terraform providers undesirable at this time.",
+      "critical": true,
+      "quote": "we have a large, existing, investment in using puppet for these tasks",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The centralization of databases is intended to be a temporary measure, as the signon application and database will be converted to PostgreSQL after the initial migration.",
+      "critical": false,
+      "quote": "once the 'lift and shift' is done we will convert the signon application and database to PostgreSQL",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

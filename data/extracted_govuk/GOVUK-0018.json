@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The organization operates within AWS and has access to the Relational Database Service (RDS) for both MySQL and PostgreSQL.",
+      "critical": true,
+      "quote": "AWS offers the [Relational Database Service](https://aws.amazon.com/rds/) (RDS).",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The current database infrastructure is managed by Puppet, which handles server configuration, CRUD actions, users, replication, and backups.",
+      "critical": true,
+      "quote": "Puppet manages every aspect of these instances:\n\n - Server configuration and tuning\n - CRUD actions on databases\n - Users and permissions\n - Replication/clustering\n - Backups",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "Terraform is available and suitable for managing the configuration of RDS instances to replace Puppet's role in server setup.",
+      "critical": false,
+      "quote": "Terraform code would be required to ensure the above is configured correctly.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Failures from carrier APIs are almost always transient and succeed on a second or third attempt",
+      "critical": true,
+      "quote": "Looking at 30 days of logs, failures from carrier APIs are almost always transient, such as network blips and brief 503s during carrier deploys, and succeed on a second or third attempt.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "Northline\u2019s rate limit provides ample headroom for retries under current peak traffic",
+      "critical": true,
+      "quote": "Our heaviest carrier, Northline, allows 100 requests per second per account; our peak traffic to Northline is about 60 requests per second, so there is plenty of headroom for retries.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "Only a small fraction of calls (\u22481.8%) fail, keeping retry overhead low",
+      "critical": false,
+      "quote": "Roughly 1.8% of calls fail, and each failure surfaces to the user as \"carrier unavailable, try again.\"",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

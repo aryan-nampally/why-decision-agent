@@ -1,0 +1,33 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The platform team has sufficient Kafka operational expertise to manage MSK.",
+      "critical": true,
+      "quote": "Two engineers on the platform team, Marcus Oyelaran and Jin Park, have run Kafka in production at previous companies, so we would not be starting from zero on operations.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The system must be able to replay at least seven days of shipment events for all consumers.",
+      "critical": true,
+      "quote": "Tracking, billing and notifications all need to replay the last seven days of shipment events after a bad deploy; last month a billing bug required a manual re\u2011send of 2.3 million events from database snapshots, which took a weekend.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "Kinesis retention cost and limited fan\u2011out make it unsuitable for the required replay window.",
+      "critical": false,
+      "quote": "Kinesis was rejected because extended retention is priced per shard\u2011hour and consumer fan\u2011out is limited without enhanced fan\u2011out.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A4",
+      "statement": "Using SNS/SQS with an S3 archive would still require bespoke replay jobs per consumer, which is undesirable.",
+      "critical": false,
+      "quote": "SNS/SQS with an S3 archive was rejected because replay would still be a bespoke job per consumer.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

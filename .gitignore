@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/store.db
+scratch/
+web/node_modules/
+data/store_govuk.db
+*.db-journal
+web/tsconfig.tsbuildinfo

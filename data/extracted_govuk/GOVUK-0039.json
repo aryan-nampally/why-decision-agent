@@ -1,0 +1,21 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "If a non-GOV.UK domain is flagged as a phishing site, it will cause significant operational disruption, potentially making large parts of GOV.UK inaccessible.",
+      "critical": true,
+      "quote": "At worst, this could cause a major incident, making large parts of GOV.UK inaccessible.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "There are currently existing non-GOV.UK domains (specifically Signon domains) that are publicly routable and in violation of the proposed policy, requiring remediation.",
+      "critical": false,
+      "quote": "A number of Signon domains are currently in violation of this proposal.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": [
+    "dropped ungrounded assumption: \"External security systems, specifically Google's Safe Browsing, actively monitor and flag non-GOV.UK domains that resemble GOV.UK sites or participate in serving GOV.UK content as phishing threats.\" (quote: \"the domain might be flagged as a phishing site by systems such as Google's Safe Browsing technology, which is used by br\")"
+  ]
+}

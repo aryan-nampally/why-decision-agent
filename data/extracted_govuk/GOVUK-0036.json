@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The info-frontend service is the sole consumer of the Backdrop Read and Write APIs within the GovUK environments.",
+      "critical": true,
+      "quote": "The info-frontend is the only service within the GovUK environments that makes connections to the read and write backdrop APIs.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "Fastly is the primary caching layer that resolves traffic for the performance endpoints and interacts with the Backdrop APIs when cache misses occur.",
+      "critical": true,
+      "quote": "Those names will resolve to fastly, which will serve what is required if cached, if it is not cached it will update its cache by hitting the appropriate backdrop endpoints",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The production Backdrop components (database, worker, and APIs) are currently hosted on specific Carrenza infrastructure (performance-mongo cluster and api-1/api-2 nodes) rather than the GovUK PaaS.",
+      "critical": false,
+      "quote": "Backdrop database  (Carrenza performance-mongo cluster)\n  - Backdrop Worker, Read & Write API  (Carrenza api-1 & api-2 nodes)",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

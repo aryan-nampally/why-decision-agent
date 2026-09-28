@@ -1,0 +1,21 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The Carrenza environment already supports serving HTTP requests on port 80, establishing a baseline for feature parity.",
+      "critical": true,
+      "quote": "This functionality exists in the Carrenza environment and we aim to replicate this feature to maintain feature parity.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The Bouncer servers are capable of handling HTTP traffic on port 80 directly, rather than requiring the load balancer to redirect to HTTPS.",
+      "critical": true,
+      "quote": "Add a second listener to the load balancer so that HTTP request on port 80 can be served by the Bouncer servers.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": [
+    "dropped ungrounded assumption: 'The existing infrastructure uses Terraform for managing the load balancer configuration, allowing for declarative changes to listeners.' (quote: 'the terraform plan was changed so that the input to the `aws/lb` terraform module specifies a second listener')"
+  ]
+}

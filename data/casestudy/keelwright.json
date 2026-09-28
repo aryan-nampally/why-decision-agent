@@ -1,0 +1,49 @@
+{
+  "name": "Keelwright Freight",
+  "fictional": true,
+  "tagline": "A mid-size freight-logistics platform: quoting, booking, carrier integrations, tracking and billing for shippers in North America, and since 2025, Europe.",
+  "profile": [
+    ["Founded", "2019 (fictional)"],
+    ["Engineering", "~45 engineers in 6 teams"],
+    ["Customers", "~1,900 shippers; EU launch January 2025"],
+    ["Stack", "AWS (us-east-1, eu-central-1 since 2025), Postgres on RDS, Redis, Kafka on MSK, Keycloak"],
+    ["Decision practice", "Markdown ADRs in each team's repository; postmortems for SEV-1/2; change notes in Slack and ops reviews"]
+  ],
+  "teams": [
+    {"name": "Payments", "people": ["Priya Raman", "Tomás Herrera"], "owns": "ledger, payouts"},
+    {"name": "Pricing", "people": ["Hannah Lee"], "owns": "rate-quote API, quote cache"},
+    {"name": "Platform", "people": ["Marcus Oyelaran", "Jin Park"], "owns": "AWS, Terraform, Kafka, feature flags"},
+    {"name": "Booking & Tracking", "people": ["Sofia Marchetti"], "owns": "booking flow, tracking events"},
+    {"name": "Billing & Finance Systems", "people": ["Dmitri Volkov"], "owns": "invoicing, month-end close"},
+    {"name": "Security", "people": ["Aisha Siddiqui"], "owns": "identity, compliance"}
+  ],
+  "problem": "Keelwright writes ADRs, but the conditions behind them change in other documents written by other people: a capacity review, a Slack announcement, a postmortem. Nobody re-reads a 2023 ADR when finance moves reporting to Snowflake in 2025. Teams keep copying decisions whose reasons have expired.",
+  "story": [
+    {"date": "2023-02", "kind": "decision", "text": "Payments picks PostgreSQL for the ledger because finance runs month-end SQL JOINs directly on it and writes stay under ~1,800/s (ADR-007)."},
+    {"date": "2023-06", "kind": "decision", "text": "Pricing caches quotes in one us-east-1 Redis cluster: every shipper is in North America (ADR-012)."},
+    {"date": "2024-08", "kind": "decision", "text": "Integrations adds 5 retries with exponential backoff to carrier calls: failures look transient (ADR-027)."},
+    {"date": "2024-11", "kind": "incident", "text": "Retry storm against Northline's rate limit takes bookings down for 47 minutes (PM-2024-11)."},
+    {"date": "2025-01", "kind": "change", "text": "EU launch: shippers in Germany, the Netherlands and Poland, priced in EUR (SIG-2025-01)."},
+    {"date": "2025-02", "kind": "incident", "text": "EU shippers get stale, wrong-currency quotes from the us-east-1 cache (PM-2025-02)."},
+    {"date": "2025-05", "kind": "change", "text": "Jin Park moves to Payments; Marcus is the only Kafka operator left (SIG-2025-05)."},
+    {"date": "2025-08", "kind": "change", "text": "Finance moves month-end close to Snowflake; direct queries on the ledger are disabled (SIG-2025-08)."},
+    {"date": "2025-12", "kind": "change", "text": "Cyber Monday: ledger writes peak at 3,140/s (SIG-2025-12)."},
+    {"date": "2026-02", "kind": "change", "text": "Enterprise deals now require SOC 2 Type II (SIG-2026-02)."},
+    {"date": "2026-05", "kind": "change", "text": "Invoice batch overruns its window at 340k invoices a night (SIG-2026-05)."},
+    {"date": "2026-09", "kind": "question", "text": "A new team building the customs-duty ledger asks: 'Postgres, like payments did?'"}
+  ],
+  "dataset": {
+    "adrs": 10,
+    "postmortems": 4,
+    "change_notes": 24,
+    "held_out_for_demo": ["PM-2024-11"],
+    "distractors": "16 routine change notes (CI migrations, upgrades, on-call changes) and 2 unrelated ADRs, so retrieval has to find the relevant change among noise",
+    "construction": [
+      "ADRs follow the MADR template in prose; assumptions are never listed, only implied in Context, as in real ADRs.",
+      "Change notes never name the decision they invalidate (STALE's 'implicit conflict').",
+      "Every record has a real-looking author, date, numbers and, for postmortems, log excerpts.",
+      "At least one decision still fully holds (ADR-019), so REUSE is a real outcome.",
+      "Hand-labelled gold assumptions with verbatim quotes live only in evaluation/, never in the corpus."
+    ]
+  }
+}

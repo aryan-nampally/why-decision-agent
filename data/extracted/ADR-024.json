@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Shared components drift quickly, within weeks of each release",
+      "critical": true,
+      "quote": "Shared components drift within weeks of every release.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "Continuous integration pipelines can rely on remote caching to keep build times acceptable",
+      "critical": true,
+      "quote": "CI must use remote caching to stay fast.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "A single pull request can update a component and propagate the change to all consuming applications",
+      "critical": false,
+      "quote": "one pull request can change a component and every consumer.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

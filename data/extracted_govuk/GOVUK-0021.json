@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The organization operates within the AWS ecosystem and is willing to accept vendor lock-in to utilize native services like ACM and ELB.",
+      "critical": true,
+      "quote": "Technically this may be considered vendor lock-in, but the advantages significantly outweigh the cost.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The deployment infrastructure is managed using Terraform, allowing SSL termination on ELBs to be codified and managed through infrastructure-as-code.",
+      "critical": true,
+      "quote": "Terminate SSL on ELBs means the deployment is managed through Terraform",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The team is willing to accept the manual effort of creating certificates in ACM, as automation for this specific step is not available.",
+      "critical": false,
+      "quote": "We can only manually create certificates in ACM so are unable to automate this process, but we accept the time cost of doing this step.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

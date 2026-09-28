@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "All shippers are located in the United States and Canada (North America)",
+      "critical": true,
+      "quote": "All of our shippers today are in the United States and Canada",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "Carrier rate cards change only a few times per day",
+      "critical": true,
+      "quote": "Carrier rate cards change at most a few times per day",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "Customers consider a quote up to five minutes old acceptable",
+      "critical": false,
+      "quote": "Sales Engineering confirmed that serving a quote up to five minutes old is acceptable to customers",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

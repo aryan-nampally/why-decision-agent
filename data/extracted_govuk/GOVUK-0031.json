@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The team is using Terraform to manage AWS security groups, specifically the `aws_security_group_rule` resource.",
+      "critical": true,
+      "quote": "Each terraform `aws_security_group_rule` requires a name.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "There is an existing set of security group rules with names that do not currently comply with the chosen standard.",
+      "critical": true,
+      "quote": "change all the existing rule names to comply with it",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The security rules primarily use TCP protocol, as non-TCP protocols are treated as an edge case requiring an additional suffix.",
+      "critical": false,
+      "quote": "If the rule uses a protocol other than TCP we will add an additional `_$proto` to the end.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

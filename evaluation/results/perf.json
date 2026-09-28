@@ -1,0 +1,157 @@
+{
+  "run_at": "2026-09-28T11:00:12+00:00",
+  "model": "gpt-oss-120b",
+  "memory_layer": [
+    {
+      "concurrency": 1,
+      "latency_ms": {
+        "n": 40,
+        "p50": 417.1,
+        "p95": 1465.3,
+        "mean": 768.6,
+        "max": 6768.5
+      },
+      "throughput_per_s": 1.3
+    },
+    {
+      "concurrency": 4,
+      "latency_ms": {
+        "n": 40,
+        "p50": 459.0,
+        "p95": 1319.0,
+        "mean": 657.8,
+        "max": 1424.5
+      },
+      "throughput_per_s": 5.83
+    },
+    {
+      "concurrency": 8,
+      "latency_ms": {
+        "n": 40,
+        "p50": 451.5,
+        "p95": 1357.8,
+        "mean": 677.5,
+        "max": 1444.0
+      },
+      "throughput_per_s": 10.01
+    }
+  ],
+  "end_to_end": {
+    "n": 8,
+    "paced_s": 14.0,
+    "stages_ms": {
+      "recall_precedent": {
+        "n": 8,
+        "p50": 516,
+        "p95": 1410,
+        "mean": 797.8,
+        "max": 1410
+      },
+      "recall_changes": {
+        "n": 8,
+        "p50": 2192,
+        "p95": 8426,
+        "mean": 2808.4,
+        "max": 8426
+      },
+      "judge": {
+        "n": 8,
+        "p50": 892,
+        "p95": 1576,
+        "mean": 948.4,
+        "max": 1576
+      },
+      "total": {
+        "n": 8,
+        "p50": 3410.2,
+        "p95": 11180.4,
+        "mean": 4557.4,
+        "max": 11180.4
+      }
+    },
+    "tokens_per_question": {
+      "n": 8,
+      "p50": 2442,
+      "p95": 2573,
+      "mean": 2349.5,
+      "max": 2573
+    },
+    "prompt_tokens_mean": 1825,
+    "completion_tokens_mean": 525,
+    "llm_calls_per_question": 1,
+    "hindsight_recalls_per_question": 5.62,
+    "questions": [
+      {
+        "verdict": "RECONSIDER",
+        "ms": 2843,
+        "prompt_tokens": 2011,
+        "completion_tokens": 562,
+        "llm_calls": 1,
+        "hindsight_recalls": 6
+      },
+      {
+        "verdict": "REUSE",
+        "ms": 3065,
+        "prompt_tokens": 1726,
+        "completion_tokens": 410,
+        "llm_calls": 1,
+        "hindsight_recalls": 5
+      },
+      {
+        "verdict": "REUSE",
+        "ms": 11180,
+        "prompt_tokens": 1703,
+        "completion_tokens": 437,
+        "llm_calls": 1,
+        "hindsight_recalls": 5
+      },
+      {
+        "verdict": "RECONSIDER",
+        "ms": 2717,
+        "prompt_tokens": 1893,
+        "completion_tokens": 539,
+        "llm_calls": 1,
+        "hindsight_recalls": 6
+      },
+      {
+        "verdict": "ADAPT",
+        "ms": 3410,
+        "prompt_tokens": 1853,
+        "completion_tokens": 589,
+        "llm_calls": 1,
+        "hindsight_recalls": 6
+      },
+      {
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "ms": 3263,
+        "prompt_tokens": 1882,
+        "completion_tokens": 566,
+        "llm_calls": 1,
+        "hindsight_recalls": 6
+      },
+      {
+        "verdict": "RECONSIDER",
+        "ms": 3542,
+        "prompt_tokens": 1663,
+        "completion_tokens": 494,
+        "llm_calls": 1,
+        "hindsight_recalls": 5
+      },
+      {
+        "verdict": "RECONSIDER",
+        "ms": 6439,
+        "prompt_tokens": 1868,
+        "completion_tokens": 600,
+        "llm_calls": 1,
+        "hindsight_recalls": 6
+      }
+    ]
+  },
+  "derived": {
+    "tokens_per_question_mean": 2349.5,
+    "note": "On the free tier the LLM requests-per-minute limit, not Hindsight, bounds sustained throughput.",
+    "llm_rpm_limit": 5.0,
+    "max_questions_per_minute": 5.0,
+    "limit_text": "5 requests/min LLM limit"
+  }
+}

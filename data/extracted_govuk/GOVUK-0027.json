@@ -1,0 +1,21 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The cache instances are capable of handling the specific path forwarding logic currently performed by publicapi on frontend-lb.",
+      "critical": true,
+      "quote": "Router on the cache instances forwards all traffic bound for `/api` to frontend-lb, and then publicapi handles the forwarding from there.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The frontend-lb is currently a bottleneck or unnecessary dependency that can be removed once publicapi is relocated.",
+      "critical": false,
+      "quote": "The frontend-lb will be able to be removed from the stack.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": [
+    "dropped ungrounded assumption: \"The publicapi application's routing logic is simple enough to be replicated on cache instances or handled by an Application Load Balancer without significant complexity.\" (quote: 'The configuration for the paths is relatively simple')"
+  ]
+}

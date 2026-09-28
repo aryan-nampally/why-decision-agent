@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The migration to AWS is the driving context for defining the new IP addressing strategy.",
+      "critical": true,
+      "quote": "As part of the migration to AWS we need to define our IP addressing strategy",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The current IP layout is a viable reference point that can be closely approximated to ease the migration process.",
+      "critical": true,
+      "quote": "We will attempt to keep the new IP layout as close as possible to the current one in order to ease migration.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "Security groups are sufficient to maintain the required network isolation levels previously provided by VDC separation.",
+      "critical": false,
+      "quote": "using security groups to maintain our current network isolation",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

@@ -1,0 +1,33 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Monthly active users will stay under 50,000 through 2025, keeping Auth0 costs manageable",
+      "critical": true,
+      "quote": "We have about 18,000 monthly active users across the shipper portal and mobile app, and the growth forecast stays under 50,000 through 2025.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "No current customer contracts require SOC 2 attestation, so compliance\u2011grade audit logging is not mandatory now",
+      "critical": true,
+      "quote": "None of our current customer contracts require SOC 2 attestation, so we accept that Keycloak's default audit logging would need extra work before it could satisfy an auditor.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The team has the capability and resources to operate Keycloak upgrades and manage its Postgres database",
+      "critical": false,
+      "quote": "Bad: we operate Keycloak upgrades and its Postgres database ourselves.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A4",
+      "statement": "Enterprise shippers need SAML federation and UI customization that Cognito cannot provide",
+      "critical": false,
+      "quote": "Cognito was rejected because its SAML federation and hosted UI customisation were too limited for enterprise SSO.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

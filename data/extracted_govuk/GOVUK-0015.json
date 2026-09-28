@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The infrastructure is hosted in AWS, specifically using Route53 for DNS management.",
+      "critical": true,
+      "quote": "All Terraform projects in that stack add records to Route53 zones to expose the service internally and/or externally.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "Internal DNS zones within the same VPC cannot be delegated if the domains overlap, forcing a single-zone approach for internal resolution.",
+      "critical": true,
+      "quote": "For internal domains we cannot replicate the external configuration because it's not possible to do DNS delegation with internal zones in the same VPC when the domains overlap.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "Applications are designed to function correctly only when accessed via the specific publishing domain, not directly across independent infrastructure stacks.",
+      "critical": false,
+      "quote": "Applications will not work correctly across independent stacks, and will only correctly work using the Publishing domain.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

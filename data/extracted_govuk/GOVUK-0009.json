@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The necessary source code repositories are accessible and available for cloning during the bootstrap process.",
+      "critical": true,
+      "quote": "The required repositories are available",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "An Amazon Web Services admin account with sufficient permissions is available to provision infrastructure.",
+      "critical": true,
+      "quote": "An Amazon Web Services admin account is available",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "Backups of existing data can be retrieved to support the restore process within the allowed recovery time.",
+      "critical": false,
+      "quote": "Backups of our data can be retrieved (for the restore process)",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

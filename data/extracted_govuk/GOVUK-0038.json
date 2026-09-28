@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The GOV.UK organization has a strategic mandate to prioritize AWS managed services to reduce operational burden.",
+      "critical": true,
+      "quote": "One architectural strategy principle of TechOps is to make use as much as possible AWS managed services in order to reduce the burden on GOV.UK teams to manage Commercial off-the-shelf (COTS) functionality/services.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The existing MongoDB applications are compatible with the AWS DocumentDB API version 3.6, despite running on older MongoDB versions (2.4.9 and 3.2.7).",
+      "critical": true,
+      "quote": "AWS DocumentDB has been developed to be [compatible](https://docs.aws.amazon.com/documentdb/latest/developerguide/mongo-apis.html) with the open source MongoDB API 3.6. The version of MongoDB that GOV.UK uses is 3.2.7 for Licensify and 2.4.9 for the other apps.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The GOV.UK applications can be modified to support username/password authentication and retrieve credentials from the central credential management system.",
+      "critical": false,
+      "quote": "Hence, the relevant GOV.UK apps should have the ability to retrieve authentication credentials from GOV.UK credential management system and authenticate with AWS DocumentDB. This may require some code changes in some instances.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

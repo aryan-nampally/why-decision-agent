@@ -1,0 +1,208 @@
+{
+  "generated_at": "2026-09-28T10:57:12+00:00",
+  "as_of": "2026-09-28",
+  "model": "gpt-oss-120b",
+  "decisions": [
+    {
+      "id": "ADR-007",
+      "title": "Datastore for the payments ledger",
+      "date": "2023-02-14",
+      "team": "Payments",
+      "verdict": "RECONSIDER",
+      "health": 0.5,
+      "age": "3 years 7 months ago",
+      "headline": "1 critical assumption behind ADR-007 no longer holds.",
+      "broken": [
+        {
+          "id": "A1",
+          "statement": "Write volume will stay within the projected ~1,800 writes/second that a single well\u2011tuned Postgres primary can sustain",
+          "critical": true,
+          "evidence": [
+            "SIG-2025-12"
+          ],
+          "explanation": "Peak ledger writes reached 3,140\u202fwrites/sec in Dec\u202f2025 and FP&A projects 4,500\u202fwrites/sec for next year, far exceeding the 1,800\u202fwrites/sec limit the decision relied on."
+        },
+        {
+          "id": "A3",
+          "statement": "Finance month\u2011end reporting can continue on the same database with only minor query rewrites",
+          "critical": false,
+          "evidence": [
+            "SIG-2025-08"
+          ],
+          "explanation": "Finance month\u2011end reporting has been migrated to Snowflake and direct queries against the production ledger are now disabled, invalidating the assumption that reporting can continue on the same PostgreSQL instance."
+        }
+      ],
+      "failures": [],
+      "assumptions": 4
+    },
+    {
+      "id": "ADR-009",
+      "title": "Infrastructure as code with Terraform",
+      "date": "2023-04-03",
+      "team": "Platform",
+      "verdict": "REUSE",
+      "health": 1.0,
+      "age": "3 years 5 months ago",
+      "headline": "ADR-009 still applies: no recorded change contradicts its assumptions.",
+      "broken": [],
+      "failures": [],
+      "assumptions": 3
+    },
+    {
+      "id": "ADR-012",
+      "title": "Caching strategy for the rate-quote API",
+      "date": "2023-06-20",
+      "team": "Pricing",
+      "verdict": "RECONSIDER",
+      "health": 0.6,
+      "age": "3 years 3 months ago",
+      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
+      "broken": [
+        {
+          "id": "A1",
+          "statement": "All shippers are located in the United States and Canada (North America)",
+          "critical": true,
+          "evidence": [
+            "SIG-2025-01"
+          ],
+          "explanation": "The original assumption that all shippers are in North America is invalidated by the EU launch, which added shippers in Germany, the Netherlands, and Poland."
+        }
+      ],
+      "failures": [
+        "PM-2025-02"
+      ],
+      "assumptions": 3
+    },
+    {
+      "id": "ADR-015",
+      "title": "Event backbone for shipment tracking events",
+      "date": "2023-09-11",
+      "team": "Platform",
+      "verdict": "RECONSIDER",
+      "health": 0.67,
+      "age": "3 years ago",
+      "headline": "1 critical assumption behind ADR-015 no longer holds.",
+      "broken": [
+        {
+          "id": "A1",
+          "statement": "The platform team has sufficient Kafka operational expertise to manage MSK.",
+          "critical": true,
+          "evidence": [
+            "SIG-2025-05",
+            "PM-2025-06"
+          ],
+          "explanation": "Platform team expertise has degraded: Jin Park left the team and only Marcus remains with Kafka experience, and a post\u2011mortem shows the team\u2019s Kafka knowledge now rests on a single person and the runbook lacked coverage for the failure mode."
+        }
+      ],
+      "failures": [],
+      "assumptions": 4
+    },
+    {
+      "id": "ADR-019",
+      "title": "Synchronous REST between booking and pricing",
+      "date": "2024-01-22",
+      "team": "Booking",
+      "verdict": "REUSE",
+      "health": 1.0,
+      "age": "2 years 8 months ago",
+      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
+      "broken": [],
+      "failures": [],
+      "assumptions": 3
+    },
+    {
+      "id": "ADR-021",
+      "title": "Identity provider for shipper and staff logins",
+      "date": "2024-03-05",
+      "team": "Security",
+      "verdict": "RECONSIDER",
+      "health": 0.67,
+      "age": "2 years 6 months ago",
+      "headline": "1 critical assumption behind ADR-021 no longer holds.",
+      "broken": [
+        {
+          "id": "A2",
+          "statement": "No current customer contracts require SOC 2 attestation, so compliance\u2011grade audit logging is not mandatory now",
+          "critical": true,
+          "evidence": [
+            "SIG-2026-02"
+          ],
+          "explanation": "Enterprise prospects now require SOC\u202f2 Type\u202fII attestation, making the original \u201cno SOC\u202f2 required\u201d assumption false."
+        }
+      ],
+      "failures": [],
+      "assumptions": 4
+    },
+    {
+      "id": "ADR-024",
+      "title": "Monorepo for web frontends",
+      "date": "2024-05-13",
+      "team": "Frontend",
+      "verdict": "REUSE",
+      "health": 1.0,
+      "age": "2 years 4 months ago",
+      "headline": "ADR-024 still applies: no recorded change contradicts its assumptions.",
+      "broken": [],
+      "failures": [],
+      "assumptions": 3
+    },
+    {
+      "id": "ADR-027",
+      "title": "Retry policy for carrier API calls",
+      "date": "2024-08-05",
+      "team": "Integrations",
+      "verdict": "REUSE",
+      "health": 1.0,
+      "age": "2 years 1 month ago",
+      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
+      "broken": [],
+      "failures": [],
+      "assumptions": 3
+    },
+    {
+      "id": "ADR-031",
+      "title": "Invoice generation as a nightly batch",
+      "date": "2024-10-14",
+      "team": "Billing",
+      "verdict": "ADAPT",
+      "health": 0.67,
+      "age": "1 year 11 months ago",
+      "headline": "ADR-031 still applies, but 2 supporting conditions changed.",
+      "broken": [
+        {
+          "id": "A3",
+          "statement": "A nightly batch can finish within the 01:00\u201304:00\u202fUTC maintenance window",
+          "critical": false,
+          "evidence": [
+            "SIG-2026-05"
+          ],
+          "explanation": "Signal [SIG-2026-05] reports the nightly invoice batch now runs 5\u202fhours\u202f40\u202fminutes, exceeding the 01:00\u201304:00\u202fUTC maintenance window."
+        },
+        {
+          "id": "A4",
+          "statement": "The nightly invoice volume (~120,000) is within the capacity of a batch process",
+          "critical": false,
+          "evidence": [
+            "SIG-2026-05"
+          ],
+          "explanation": "The same signal [SIG-2026-05] notes the invoice volume has grown to ~340,000, causing the batch to overrun the window, indicating the volume exceeds the batch\u2019s capacity."
+        }
+      ],
+      "failures": [],
+      "assumptions": 4
+    },
+    {
+      "id": "ADR-034",
+      "title": "Managed feature-flag service",
+      "date": "2025-03-03",
+      "team": "Platform",
+      "verdict": "REUSE",
+      "health": 1.0,
+      "age": "1 year 6 months ago",
+      "headline": "ADR-034 still applies: no recorded change contradicts its assumptions.",
+      "broken": [],
+      "failures": [],
+      "assumptions": 4
+    }
+  ]
+}

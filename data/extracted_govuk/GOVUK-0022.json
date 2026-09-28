@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The AWS environments utilize Elastic Load Balancers (ELBs) that provide sufficient load balancing and cluster awareness to replace the local nginx proxy.",
+      "critical": true,
+      "quote": "In the AWS environments these services are behind an ELB so this layer may no longer be required.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "Testing has confirmed that removing the local proxy in AWS does not result in any degradation of service.",
+      "critical": true,
+      "quote": "We've tested the instances in AWS without the local proxies and we have not discovered any degradation of service when using the ELBs.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The primary purpose of the proxy was to support client libraries that lack native cluster awareness or load balancing capabilities.",
+      "critical": false,
+      "quote": "This is for the benefit of applications with client libraries that don't support native cluster awareness or load balancing.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

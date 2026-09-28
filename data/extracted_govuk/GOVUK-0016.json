@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The internal services require DNS records that are strictly isolated from the public internet and not visible outside the local environment.",
+      "critical": true,
+      "quote": "These records should not be visible outside the local environment or stack.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The organization has the budget and administrative capability to purchase and maintain a dedicated domain name that will remain unused in public DNS.",
+      "critical": false,
+      "quote": "We've bought a domain name that will not be connected to the rest of the public DNS system.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The risk of domain expiration and subsequent registration by a third party is considered acceptable because it is a common risk across all domains used by the organization.",
+      "critical": false,
+      "quote": "This risk is however present in all the domains we use.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

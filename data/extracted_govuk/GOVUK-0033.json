@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The migration to AWS requires establishing a VPN connection to the existing Carrenza system.",
+      "critical": true,
+      "quote": "we need to use a VPN to talk to Carrenza",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The previously assigned IP address ranges for Staging and Production conflict with the Carrenza network, preventing direct communication or causing routing issues.",
+      "critical": true,
+      "quote": "the chosen IP addresses conflict",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The migration to AWS is being conducted gradually, implying that the old and new environments must coexist and communicate during the transition.",
+      "critical": false,
+      "quote": "As part of the gradual migration of Staging and Production to AWS",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

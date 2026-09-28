@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The team prefers to keep the Terraform codebase simple rather than adopting more complex lifecycle management mechanisms like CloudFormation or multiple ASGs.",
+      "critical": true,
+      "quote": "Our Terraform will remain simple",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The operational overhead of manually terminating instances is acceptable for the frequency of Launch Configuration changes.",
+      "critical": true,
+      "quote": "Dev time that involves changing the LC may slow slightly or require further automation to enable rapid work on instances",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The system relies on the persistence of Auto Scaling Groups across Launch Configuration changes to maintain state or identity, which is a benefit of the chosen manual termination approach over creating new ASGs.",
+      "critical": false,
+      "quote": "ASGs will persist between LCs",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

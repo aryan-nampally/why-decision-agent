@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Rummager is the only application currently using api-redis.",
+      "critical": true,
+      "quote": "Rummager uses api-redis.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The previous network isolation requirement (different vDC) that necessitated a separate Redis instance is no longer relevant in the current AWS environment.",
+      "critical": true,
+      "quote": "This was traditionally the case because Rummager lived in a different vDC to redis-1/redis-2, but this is no longer a concern in AWS.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The backend-redis instance has sufficient capacity to handle the additional load from Rummager without performance degradation.",
+      "critical": false,
+      "quote": "Most applications use backend-redis",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

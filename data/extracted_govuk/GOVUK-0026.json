@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The environment is AWS, where Elastic Load Balancers (ELBs) are available and sufficient to handle instance autoscaling, making dedicated load balancer tiers less useful.",
+      "critical": true,
+      "quote": "In the Amazon world these are less useful as we also have ELBs in place to handle the autoscaling of instances.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The application servers (frontend/backend hosts) can be made directly available via external ELBs while maintaining security through security group restrictions.",
+      "critical": true,
+      "quote": "add external ELBs to a number of other autoscaling groups (such as the frontend / backend hosts themselves) to make them directly available, but security group restricted.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The application servers are capable of handling load balancer processing tasks, such as generating trace IDs, that were previously performed by the dedicated load balancer tier.",
+      "critical": false,
+      "quote": "Some of the LBs processing, such as trace ids, will be pushed down the stack to the application servers themselves.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

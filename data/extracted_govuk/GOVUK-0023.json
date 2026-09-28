@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The data required to run the Terraform projects is large in volume.",
+      "critical": false,
+      "quote": "We have a large amount of data which is needed to run the Terraform projects.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "A portion of the required data is sensitive and requires encryption and access control.",
+      "critical": true,
+      "quote": "Some of the data we need to use is sensitive (e.g. RDS passwords).",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "It is considered best practice to keep sensitive information encrypted in private repositories to ensure security even if accidentally published.",
+      "critical": true,
+      "quote": "It is considered best practice to keep sensitive information encrypted in private repositories. This means that access can be controlled and the that the data will remain secure, even if it is accidentally published.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

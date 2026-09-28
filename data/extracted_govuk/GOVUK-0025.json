@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "AWS provides an Elasticache service with a Redis engine that supports clustered configurations.",
+      "critical": true,
+      "quote": "AWS provide Elasticache which has a Redis engine, and can be configured to be clustered.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The client-side behavior of the Redis protocol remains unchanged when using Elasticache, preventing vendor lock-in.",
+      "critical": true,
+      "quote": "There is no risk of lock-in because the client side behaviour is not changed.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The team currently manages Redis instances using Puppet code.",
+      "critical": false,
+      "quote": "Traditionally we provisioned our own redis machines in a non-clustered state.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

@@ -1,0 +1,63 @@
+{
+  "_note": "Oracle assumptions, hand-labelled. Used ONLY by the C-oracle condition and for scoring. Quotes are exact substrings of the ADR source.",
+  "ADR-007": [
+    {"id": "A1", "critical": true, "statement": "Finance month-end reporting runs SQL JOINs directly on the ledger primary database.",
+     "quote": "Finance's month-end close runs a set of about 40 SQL reports that JOIN ledger_entries against invoices and customer_accounts directly on the primary database."},
+    {"id": "A2", "critical": true, "statement": "Peak ledger writes stay under roughly 2,000 per second, within a single Postgres primary.",
+     "quote": "The 18-month projection from the FP&A growth model tops out around 1,800 writes per second"},
+    {"id": "A3", "critical": false, "statement": "Payment processing runs only in us-east-1.",
+     "quote": "All payment processing runs in us-east-1, and there is no plan for a second region within the planning horizon."}
+  ],
+  "ADR-009": [
+    {"id": "A1", "critical": false, "statement": "AWS is the only cloud provider.", "quote": "AWS is our only cloud provider today."},
+    {"id": "A2", "critical": false, "statement": "The team already knows HCL.", "quote": "The team already knows HCL from a previous employer"}
+  ],
+  "ADR-012": [
+    {"id": "A1", "critical": true, "statement": "All shippers are in North America, close to us-east-1.",
+     "quote": "All of our shippers today are in the United States and Canada"},
+    {"id": "A2", "critical": false, "statement": "Quotes up to five minutes old are acceptable.",
+     "quote": "serving a quote up to five minutes old is acceptable to customers"},
+    {"id": "A3", "critical": false, "statement": "All prices are in USD, so currency is not needed in the cache key.",
+     "quote": "the cache key does not include currency; all prices are USD today."}
+  ],
+  "ADR-015": [
+    {"id": "A1", "critical": true, "statement": "Consumers need to replay the last seven days of shipment events.",
+     "quote": "Tracking, billing and notifications all need to replay the last seven days of shipment events after a bad deploy"},
+    {"id": "A2", "critical": false, "statement": "At least two platform engineers have production Kafka experience.",
+     "quote": "Two engineers on the platform team, Marcus Oyelaran and Jin Park, have run Kafka in production at previous companies"}
+  ],
+  "ADR-019": [
+    {"id": "A1", "critical": true, "statement": "Pricing p99 latency stays within the 150 ms booking budget.",
+     "quote": "Pricing's /quote endpoint has had a p99 of 95 ms over the last quarter, and the booking flow's budget for the pricing call is 150 ms."},
+    {"id": "A2", "critical": false, "statement": "Pricing has only two synchronous consumers.",
+     "quote": "Pricing has exactly two synchronous consumers today"}
+  ],
+  "ADR-021": [
+    {"id": "A1", "critical": false, "statement": "Monthly active users stay under 50,000.",
+     "quote": "the growth forecast stays under 50,000 through 2025"},
+    {"id": "A2", "critical": true, "statement": "No customer contract requires SOC 2 attestation.",
+     "quote": "None of our current customer contracts require SOC 2 attestation"}
+  ],
+  "ADR-024": [
+    {"id": "A1", "critical": false, "statement": "Three frontends share one design system that drifts across repositories.",
+     "quote": "Shared components drift within weeks of every release."}
+  ],
+  "ADR-027": [
+    {"id": "A1", "critical": true, "statement": "Carrier API failures are transient and succeed on retry.",
+     "quote": "failures from carrier APIs are almost always transient"},
+    {"id": "A2", "critical": false, "statement": "Carrier rate limits leave generous headroom for retries.",
+     "quote": "Our heaviest carrier, Northline, allows 100 requests per second per account; our peak traffic to Northline is about 60 requests per second"}
+  ],
+  "ADR-031": [
+    {"id": "A1", "critical": true, "statement": "Customers accept next-day invoices.",
+     "quote": "Customers currently accept invoices the morning after delivery, and no customer contract requires same-day invoicing."},
+    {"id": "A2", "critical": false, "statement": "The nightly batch fits the 3-hour maintenance window (about 120k invoices).",
+     "quote": "Nightly volume is about 120,000 invoices, and a prototype batch job finishes in 2 hours 10 minutes of the 01:00–04:00 UTC maintenance window."}
+  ],
+  "ADR-034": [
+    {"id": "A1", "critical": false, "statement": "Flag count stays within the Growth tier limit of 500.",
+     "quote": "The vendor's Growth tier covers up to 500 active flags"},
+    {"id": "A2", "critical": false, "statement": "Finance has approved the spend.",
+     "quote": "Finance approved that spend in the FY25 platform budget"}
+  ]
+}

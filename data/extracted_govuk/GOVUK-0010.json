@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The team intends to open-source the Terraform code in the future while keeping implementation details (data) private.",
+      "critical": true,
+      "quote": "We want to separate code from data, so in the future we can open source the code without disclosing our implementation details, maybe keeping the data in a private Github repository",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The team prefers to manage secrets within the same repository and process as the Terraform code, rather than using a separate repository or tooling.",
+      "critical": true,
+      "quote": "We want to be able to encrypt sensitive data in the repository: we want to support sensitive data encryption as part of the same process, without having to manage secrets in a different repository, with different scripts, etc.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The infrastructure is organized into distinct tiers or application stacks that require separation of resources, particularly between different GOV.UK applications.",
+      "critical": false,
+      "quote": "We want to separate Terraform code into different projects, each one managing an infrastructure tier or application stack. This is especially important to separate resources between GOV.UK applications.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

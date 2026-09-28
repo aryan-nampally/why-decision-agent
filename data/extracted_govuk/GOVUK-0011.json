@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "A maintenance window is available and acceptable for the switchover, allowing for data synchronization and DNS changes.",
+      "critical": true,
+      "quote": "a small maintenance window is necessary to sync data and switch DNS",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The organization can afford the increased costs of maintaining full stacks on both the current platform and AWS during the testing phase.",
+      "critical": false,
+      "quote": "During the testing phase, there will be an increase in costs as the full stack is maintained on the current platform as well as a full stack in AWS.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The team lacks the capacity or strict planning discipline to manage a long-term dual-platform operation with separate monitoring and infrastructure.",
+      "critical": true,
+      "quote": "we risk running on two platforms with all the extra work that creates for a long period of time if we don't migrate atomically",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

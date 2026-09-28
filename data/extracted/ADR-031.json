@@ -1,0 +1,33 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Customers accept invoices the morning after delivery and no contract requires same\u2011day invoicing",
+      "critical": true,
+      "quote": "Customers currently accept invoices the morning after delivery, and no customer contract requires same-day invoicing.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The tax engine integration is not idempotent, so replayed events could create duplicate invoices",
+      "critical": true,
+      "quote": "billing's tax engine integration is not idempotent, and replayed events would risk duplicate invoices.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "A nightly batch can finish within the 01:00\u201304:00\u202fUTC maintenance window",
+      "critical": false,
+      "quote": "a prototype batch job finishes in 2 hours 10 minutes of the 01:00\u201304:00 UTC maintenance window.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A4",
+      "statement": "The nightly invoice volume (~120,000) is within the capacity of a batch process",
+      "critical": false,
+      "quote": "Nightly volume is about 120,000 invoices",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

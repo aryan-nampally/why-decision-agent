@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The deployment environment includes legacy systems that require manual deployment steps, making automatic AMI changes disruptive.",
+      "critical": true,
+      "quote": "due to the legacy nature of our deployments it causes issues with machines that need a number of manual deployment steps applied to them. Examples of these include the app servers and the puppet master.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "Security vulnerabilities in older AMI versions can be mitigated by an existing overnight security patching process via Puppet.",
+      "critical": true,
+      "quote": "We'd work around this in the same way we do our other environments; by using the overnight security patching we deploy via puppet.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The team prefers deterministic infrastructure states where changes only occur with explicit intervention, rather than dynamic updates.",
+      "critical": false,
+      "quote": "This has the benefit that we know exactly which version we deploy and it cannot change without our intervention.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

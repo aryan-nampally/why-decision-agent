@@ -1,0 +1,1278 @@
+{
+  "run_at": "2026-09-28T07:30:27+00:00",
+  "model": "qwen/qwen3.8-27b",
+  "as_of": "2022-12-01",
+  "extraction": {
+    "adrs": 38,
+    "assumptions": 109,
+    "critical": 71,
+    "dropped_ungrounded": 3,
+    "no_assumptions": [],
+    "per_adr": {
+      "GOVUK-0001": {
+        "title": "Record architecture decisions",
+        "date": "2017-06-30",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The project involves making architectural decisions that require documentation.",
+            "critical": true,
+            "quote": "We need to record the architectural decisions made on this project.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The team is familiar with or willing to adopt the ADR methodology described by Michael Nygard.",
+            "critical": false,
+            "quote": "We will use Architecture Decision Records, as described by Michael Nygard in [documenting architecture decisions](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions)",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0002": {
+        "title": "Hosting Platforms",
+        "date": "2017-06-30",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The GDS PaaS is located in the eu-west-1 (Ireland) region, enabling network peering and resource sharing.",
+            "critical": true,
+            "quote": "This region has 3 availability zones and also contains the GDS PaaS which will allow easier sharing and peering.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "GDS policy mandates a PaaS-first approach, with AWS reserved only for services that cannot run on the PaaS.",
+            "critical": true,
+            "quote": "GDS policy for hosting of GDS internal services is PaaS first and AWS for anything that can not be run on the PaaS.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The current infrastructure can be migrated to AWS in an 'as-is' manner in the near term without immediate modernization.",
+            "critical": false,
+            "quote": "We will have to migrate our infrastructure from our current hosting provider to Amazon in the near-term \"as-is\" and then iterate on that infrastructure in the medium term",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0003": {
+        "title": "Networking Outline",
+        "date": "2017-06-30",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The migration to AWS is the driving context for defining the new IP addressing strategy.",
+            "critical": true,
+            "quote": "As part of the migration to AWS we need to define our IP addressing strategy",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The current IP layout is a viable reference point that can be closely approximated to ease the migration process.",
+            "critical": true,
+            "quote": "We will attempt to keep the new IP layout as close as possible to the current one in order to ease migration.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "Security groups are sufficient to maintain the required network isolation levels previously provided by VDC separation.",
+            "critical": false,
+            "quote": "using security groups to maintain our current network isolation",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0004": {
+        "title": "DNS definitions for hosts and services",
+        "date": "2017-07-14",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The monitoring system relies on Icinga to communicate with hosts and services.",
+            "critical": true,
+            "quote": "For our current monitoring to work we need Icinga to be able to communicate with hosts and services.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The infrastructure is organized into distinct stacks that require internal service discovery.",
+            "critical": true,
+            "quote": "Each stack will have an internal, private, zone for internal services such as the puppetmaster.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0005": {
+        "title": "Terraform Module Location",
+        "date": "2017-07-04",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The team is currently in a development phase where rapid iteration is prioritized over external reusability.",
+            "critical": true,
+            "quote": "Whilst developing a module we will source it locally (within this repository).",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The modules are not yet considered stable or 'ready' for consumption by other teams or projects.",
+            "critical": true,
+            "quote": "Once we feel our modules \"ready\" we will consider moving them to separate repositories.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The primary consumers of the modules are internal to the current repository/team, so the lack of external accessibility is acceptable.",
+            "critical": false,
+            "quote": "Keeping modules locally will make them harder for others to use but make rapid iteration easier.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0006": {
+        "title": "Puppet architecture",
+        "date": "2017-07-04",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The team's existing operational processes and skills are aligned with a Puppetmaster architecture, making it the path of least resistance for the initial iteration.",
+            "critical": true,
+            "quote": "It matches our current architecture and approach",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The team is willing to accept the operational overhead of managing a central Puppetmaster (including certificate management and potential single points of failure) to avoid creating a new deployment process.",
+            "critical": true,
+            "quote": "We would need to take into account certificate management",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The system's state consistency requirements can be met by a 30-minute check-in interval, which is a characteristic of the Puppetmaster approach.",
+            "critical": false,
+            "quote": "Each machine would \"check in\" to the Puppetmaster every 30 minutes, ensuring a consistent state",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0007": {
+        "title": "Puppet certificate management",
+        "date": "2017-07-04",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The team is currently in a phase of testing with Integration and prioritizing getting the stack up and running over implementing robust certificate management.",
+            "critical": true,
+            "quote": "we're testing this with Integration to concentrate on getting the stack up and running",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The team is willing to accept the operational risk of manual intervention and deployment delays if the Puppetmaster is lost or recreated.",
+            "critical": true,
+            "quote": "accept the loss of certicates",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "A suitable solution for certificate management is not currently present in the existing Puppet code, making immediate implementation difficult or impossible.",
+            "critical": false,
+            "quote": "a solution that is not currently present in our Puppet code",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0008": {
+        "title": "Postgres on Puppetmaster",
+        "date": "2017-07-04",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The team prefers to minimize changes to existing Puppet code and avoid new Terraform provisioning work.",
+            "critical": true,
+            "quote": "This may remove a reasonable amount of puppet code used to configure the database and associated tasks (e.g. backups). It would also require an amount of Terraform work to provision the RDS instance and some updates to the Puppetmaster code to use that instance.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The existing local backup and restore strategies are sufficient and compatible with the local PostgreSQL instance.",
+            "critical": true,
+            "quote": "Currently our Puppetmaster uses a local PostgreSQL instance as its database.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The Puppetmaster is not intended to serve as a test environment for RDS integration.",
+            "critical": false,
+            "quote": "We will not be able to use the Puppetmaster as a test-bed for RDS work.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0009": {
+        "title": "Environment bootstrapping process",
+        "date": "2017-07-04",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The necessary source code repositories are accessible and available for cloning during the bootstrap process.",
+            "critical": true,
+            "quote": "The required repositories are available",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "An Amazon Web Services admin account with sufficient permissions is available to provision infrastructure.",
+            "critical": true,
+            "quote": "An Amazon Web Services admin account is available",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "Backups of existing data can be retrieved to support the restore process within the allowed recovery time.",
+            "critical": false,
+            "quote": "Backups of our data can be retrieved (for the restore process)",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0010": {
+        "title": "Terraform directory structure",
+        "date": "2017-07-04",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The team intends to open-source the Terraform code in the future while keeping implementation details (data) private.",
+            "critical": true,
+            "quote": "We want to separate code from data, so in the future we can open source the code without disclosing our implementation details, maybe keeping the data in a private Github repository",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The team prefers to manage secrets within the same repository and process as the Terraform code, rather than using a separate repository or tooling.",
+            "critical": true,
+            "quote": "We want to be able to encrypt sensitive data in the repository: we want to support sensitive data encryption as part of the same process, without having to manage secrets in a different repository, with different scripts, etc.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The infrastructure is organized into distinct tiers or application stacks that require separation of resources, particularly between different GOV.UK applications.",
+            "critical": false,
+            "quote": "We want to separate Terraform code into different projects, each one managing an infrastructure tier or application stack. This is especially important to separate resources between GOV.UK applications.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0011": {
+        "title": "Migration Strategy",
+        "date": "2017-07-04",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "A maintenance window is available and acceptable for the switchover, allowing for data synchronization and DNS changes.",
+            "critical": true,
+            "quote": "a small maintenance window is necessary to sync data and switch DNS",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The organization can afford the increased costs of maintaining full stacks on both the current platform and AWS during the testing phase.",
+            "critical": false,
+            "quote": "During the testing phase, there will be an increase in costs as the full stack is maintained on the current platform as well as a full stack in AWS.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The team lacks the capacity or strict planning discipline to manage a long-term dual-platform operation with separate monitoring and infrastructure.",
+            "critical": true,
+            "quote": "we risk running on two platforms with all the extra work that creates for a long period of time if we don't migrate atomically",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0012": {
+        "title": "Security Groups in Terraform",
+        "date": "2017-07-05",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "Changes to security group rules occur frequently enough that the cost of regenerating the entire resource (in-line method) is a significant operational concern compared to the boilerplate overhead of separate rules.",
+            "critical": true,
+            "quote": "when ever a rule is changed Terraform will re-generate the entire resource",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The team is willing to accept increased boilerplate and separation between the group resource and the rule resource in exchange for granular updates.",
+            "critical": true,
+            "quote": "there is greater boilerplate and separation between the group resource and the rule resource",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The system does not have heavy cross-referencing of security groups that would make separate files significantly harder to follow.",
+            "critical": false,
+            "quote": "Separate files may be harder to follow if there is heavy cross-referencing of security groups",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0013": {
+        "title": "Userdata provisioning snippets",
+        "date": "2017-07-14",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The provisioning process relies on a user_data script to perform customisation during instance initialisation.",
+            "critical": true,
+            "quote": "Our provisioning process with Terraform uses a user_data script to customise the installation during the instance initialisation.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "There is a significant amount of common customisation logic (e.g., puppet client, updates, disks) that is currently duplicated across projects.",
+            "critical": true,
+            "quote": "Parts of this customisation will be common to most projects, for instance, install the puppet client, apply package updates, add external disks, etc.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The current node_group module architecture supports appending an additional script to a default user_data script.",
+            "critical": false,
+            "quote": "the node_group module takes a parameter for a default user_data script, and optionally accepts another parameter for an additional script that is appended to the default one.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0014": {
+        "title": "Launch Config change propagation process",
+        "date": "2017-07-14",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The team prefers to keep the Terraform codebase simple rather than adopting more complex lifecycle management mechanisms like CloudFormation or multiple ASGs.",
+            "critical": true,
+            "quote": "Our Terraform will remain simple",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The operational overhead of manually terminating instances is acceptable for the frequency of Launch Configuration changes.",
+            "critical": true,
+            "quote": "Dev time that involves changing the LC may slow slightly or require further automation to enable rapid work on instances",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The system relies on the persistence of Auto Scaling Groups across Launch Configuration changes to maintain state or identity, which is a benefit of the chosen manual termination approach over creating new ASGs.",
+            "critical": false,
+            "quote": "ASGs will persist between LCs",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0015": {
+        "title": "DNS infrastructure",
+        "date": "2018-03-06",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The infrastructure is hosted in AWS, specifically using Route53 for DNS management.",
+            "critical": true,
+            "quote": "All Terraform projects in that stack add records to Route53 zones to expose the service internally and/or externally.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "Internal DNS zones within the same VPC cannot be delegated if the domains overlap, forcing a single-zone approach for internal resolution.",
+            "critical": true,
+            "quote": "For internal domains we cannot replicate the external configuration because it's not possible to do DNS delegation with internal zones in the same VPC when the domains overlap.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "Applications are designed to function correctly only when accessed via the specific publishing domain, not directly across independent infrastructure stacks.",
+            "critical": false,
+            "quote": "Applications will not work correctly across independent stacks, and will only correctly work using the Publishing domain.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0016": {
+        "title": "internal DNS zones",
+        "date": "2017-07-19",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The internal services require DNS records that are strictly isolated from the public internet and not visible outside the local environment.",
+            "critical": true,
+            "quote": "These records should not be visible outside the local environment or stack.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The organization has the budget and administrative capability to purchase and maintain a dedicated domain name that will remain unused in public DNS.",
+            "critical": false,
+            "quote": "We've bought a domain name that will not be connected to the rest of the public DNS system.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The risk of domain expiration and subsequent registration by a third party is considered acceptable because it is a common risk across all domains used by the organization.",
+            "critical": false,
+            "quote": "This risk is however present in all the domains we use.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0017": {
+        "title": "Terraform Data Structure",
+        "date": "2017-07-14",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The Terraform projects share a significant amount of similar configuration that is currently repeated across every project and stack.",
+            "critical": true,
+            "quote": "Our various Terraform projects share a significant amount of similar configuration (e.g. remote state buckets, stackname). Under [ADR 10](0010-terraform-directory-structure.md) this is repeated for every project and every stack.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The deployment environment is defined by the target account (e.g., integration, staging) and the stack is a specific collection of projects.",
+            "critical": false,
+            "quote": "`<environment>` is the account being deployed to (e.g. 'integration', 'staging')\n* `<stackname>` is the specific collection of projects (e.g. 'integration-green', 'foo-test')",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "Configuration values can be effectively managed through a hierarchical override system where later files take precedence over earlier ones.",
+            "critical": false,
+            "quote": "The tfvar files will be applied in this order:\n\n* `common/<environment>/common.tfvars`\n* `common/<environment>/<stackname>.tfvars`\n* `<project>/<environment>/common.tfvars`\n* `<project>/<environment>/<stackname>.tfvars`\n* `<project>/<environment>/<stackname>_secrets.tfvars`",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0018": {
+        "title": "Use RDS instead of provisioned EC2 databases",
+        "date": "2017-08-01",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The organization operates within AWS and has access to the Relational Database Service (RDS) for both MySQL and PostgreSQL.",
+            "critical": true,
+            "quote": "AWS offers the [Relational Database Service](https://aws.amazon.com/rds/) (RDS).",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The current database infrastructure is managed by Puppet, which handles server configuration, CRUD actions, users, replication, and backups.",
+            "critical": true,
+            "quote": "Puppet manages every aspect of these instances:\n\n - Server configuration and tuning\n - CRUD actions on databases\n - Users and permissions\n - Replication/clustering\n - Backups",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "Terraform is available and suitable for managing the configuration of RDS instances to replace Puppet's role in server setup.",
+            "critical": false,
+            "quote": "Terraform code would be required to ensure the above is configured correctly.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0019": {
+        "title": "Centralise MySQL Databases",
+        "date": "2017-08-02",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The current traffic volume to the MySQL databases is low enough to allow them to be grouped on a single instance without capacity issues.",
+            "critical": true,
+            "quote": "Due to the low amount of traffic most of the MySQL databases receive we decided against this due to cost and the number of instances it would require.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The team has a significant existing investment in Puppet for managing database users and databases, making a switch to Terraform providers undesirable at this time.",
+            "critical": true,
+            "quote": "we have a large, existing, investment in using puppet for these tasks",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The centralization of databases is intended to be a temporary measure, as the signon application and database will be converted to PostgreSQL after the initial migration.",
+            "critical": false,
+            "quote": "once the 'lift and shift' is done we will convert the signon application and database to PostgreSQL",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0020": {
+        "title": "Merge API PostgreSQL instance into main PostgreSQL instance",
+        "date": "2017-08-07",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The only database currently running on the API PostgreSQL instances is Stagecraft.",
+            "critical": true,
+            "quote": "The only database that runs on API PostgreSQL instances is Stagecraft",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The infrastructure does not have the split of 'vDCs' that would prevent the database from running on the main instance.",
+            "critical": true,
+            "quote": "we do not have the split of \"vDCs\" that we have in our current hosting provider",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The Performance Platform is being migrated away from the current infrastructure, making the database temporary.",
+            "critical": false,
+            "quote": "Work is ongoing to migrate the Performance Platform away from our infrastructure",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0021": {
+        "title": "Use ACM for SSL purchases and terminate certificates on ELBs",
+        "date": "2017-08-14",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The organization operates within the AWS ecosystem and is willing to accept vendor lock-in to utilize native services like ACM and ELB.",
+            "critical": true,
+            "quote": "Technically this may be considered vendor lock-in, but the advantages significantly outweigh the cost.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The deployment infrastructure is managed using Terraform, allowing SSL termination on ELBs to be codified and managed through infrastructure-as-code.",
+            "critical": true,
+            "quote": "Terminate SSL on ELBs means the deployment is managed through Terraform",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The team is willing to accept the manual effort of creating certificates in ACM, as automation for this specific step is not available.",
+            "critical": false,
+            "quote": "We can only manually create certificates in ACM so are unable to automate this process, but we accept the time cost of doing this step.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0022": {
+        "title": "Remove the Elasticsearch proxy",
+        "date": "2017-08-16",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The AWS environments utilize Elastic Load Balancers (ELBs) that provide sufficient load balancing and cluster awareness to replace the local nginx proxy.",
+            "critical": true,
+            "quote": "In the AWS environments these services are behind an ELB so this layer may no longer be required.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "Testing has confirmed that removing the local proxy in AWS does not result in any degradation of service.",
+            "critical": true,
+            "quote": "We've tested the instances in AWS without the local proxies and we have not discovered any degradation of service when using the ELBs.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The primary purpose of the proxy was to support client libraries that lack native cluster awareness or load balancing capabilities.",
+            "critical": false,
+            "quote": "This is for the benefit of applications with client libraries that don't support native cluster awareness or load balancing.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0023": {
+        "title": "Use separate data repository",
+        "date": "2017-08-18",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The data required to run the Terraform projects is large in volume.",
+            "critical": false,
+            "quote": "We have a large amount of data which is needed to run the Terraform projects.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "A portion of the required data is sensitive and requires encryption and access control.",
+            "critical": true,
+            "quote": "Some of the data we need to use is sensitive (e.g. RDS passwords).",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "It is considered best practice to keep sensitive information encrypted in private repositories to ensure security even if accidentally published.",
+            "critical": true,
+            "quote": "It is considered best practice to keep sensitive information encrypted in private repositories. This means that access can be controlled and the that the data will remain secure, even if it is accidentally published.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0024": {
+        "title": "AMI Lookups",
+        "date": "2017-08-29",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The deployment environment includes legacy systems that require manual deployment steps, making automatic AMI changes disruptive.",
+            "critical": true,
+            "quote": "due to the legacy nature of our deployments it causes issues with machines that need a number of manual deployment steps applied to them. Examples of these include the app servers and the puppet master.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "Security vulnerabilities in older AMI versions can be mitigated by an existing overnight security patching process via Puppet.",
+            "critical": true,
+            "quote": "We'd work around this in the same way we do our other environments; by using the overnight security patching we deploy via puppet.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The team prefers deterministic infrastructure states where changes only occur with explicit intervention, rather than dynamic updates.",
+            "critical": false,
+            "quote": "This has the benefit that we know exactly which version we deploy and it cannot change without our intervention.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0025": {
+        "title": "Use Elasticache for Redis",
+        "date": "2017-09-04",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "AWS provides an Elasticache service with a Redis engine that supports clustered configurations.",
+            "critical": true,
+            "quote": "AWS provide Elasticache which has a Redis engine, and can be configured to be clustered.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The client-side behavior of the Redis protocol remains unchanged when using Elasticache, preventing vendor lock-in.",
+            "critical": true,
+            "quote": "There is no risk of lock-in because the client side behaviour is not changed.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The team currently manages Redis instances using Puppet code.",
+            "critical": false,
+            "quote": "Traditionally we provisioned our own redis machines in a non-clustered state.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0026": {
+        "title": "Remove load balancer tier",
+        "date": "2017-08-16",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The environment is AWS, where Elastic Load Balancers (ELBs) are available and sufficient to handle instance autoscaling, making dedicated load balancer tiers less useful.",
+            "critical": true,
+            "quote": "In the Amazon world these are less useful as we also have ELBs in place to handle the autoscaling of instances.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The application servers (frontend/backend hosts) can be made directly available via external ELBs while maintaining security through security group restrictions.",
+            "critical": true,
+            "quote": "add external ELBs to a number of other autoscaling groups (such as the frontend / backend hosts themselves) to make them directly available, but security group restricted.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The application servers are capable of handling load balancer processing tasks, such as generating trace IDs, that were previously performed by the dedicated load balancer tier.",
+            "critical": false,
+            "quote": "Some of the LBs processing, such as trace ids, will be pushed down the stack to the application servers themselves.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0027": {
+        "title": "Move PublicAPI away from frontend-lb",
+        "date": "2017-09-04",
+        "dropped": 1,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The cache instances are capable of handling the specific path forwarding logic currently performed by publicapi on frontend-lb.",
+            "critical": true,
+            "quote": "Router on the cache instances forwards all traffic bound for `/api` to frontend-lb, and then publicapi handles the forwarding from there.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The frontend-lb is currently a bottleneck or unnecessary dependency that can be removed once publicapi is relocated.",
+            "critical": false,
+            "quote": "The frontend-lb will be able to be removed from the stack.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0028": {
+        "title": "Combine api-mongo cluster into mongo cluster",
+        "date": "2017-09-14",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "Content Store is the sole consumer of the api-mongo cluster, meaning no other applications depend on it.",
+            "critical": true,
+            "quote": "The only application that uses the api-mongo cluster is Content Store.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The main application mongo cluster has sufficient capacity to handle the additional load from Content Store without becoming a single point of failure for the entire stack.",
+            "critical": true,
+            "quote": "All other applications use the mongo cluster.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The router-backend cluster must remain independent due to the critical nature of the Router application, implying it cannot be merged with the main mongo cluster.",
+            "critical": false,
+            "quote": "The router-backend cluster is used by Router. This should remain independent due to the critical nature of this application.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0029": {
+        "title": "Combine api-redis into backend-redis",
+        "date": "2017-09-14",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "Rummager is the only application currently using api-redis.",
+            "critical": true,
+            "quote": "Rummager uses api-redis.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The previous network isolation requirement (different vDC) that necessitated a separate Redis instance is no longer relevant in the current AWS environment.",
+            "critical": true,
+            "quote": "This was traditionally the case because Rummager lived in a different vDC to redis-1/redis-2, but this is no longer a concern in AWS.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The backend-redis instance has sufficient capacity to handle the additional load from Rummager without performance degradation.",
+            "critical": false,
+            "quote": "Most applications use backend-redis",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0030": {
+        "title": "Change in architecture to Asset Master",
+        "date": "2017-09-15",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The team is operating in an AWS environment where Elastic File System (EFS) is available and suitable for their use case.",
+            "critical": true,
+            "quote": "In AWS, we have the option to use [Elastic File System (EFS)](https://aws.amazon.com/efs).",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The existing instances (backend, whitehall-backend, asset-slave) are capable of mounting the new filesystem in the same manner as the previous NFS share.",
+            "critical": true,
+            "quote": "Each instance would have to mount this filesystem in the same way as NFS",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The asset-master instance requires direct access to move files within the filesystem after virus scans, necessitating its mount to the shared resource.",
+            "critical": false,
+            "quote": "The asset-master is required to mount because it moves files about the filesystem after running virus scans.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0031": {
+        "title": "Security Groups in Terraform",
+        "date": "2017-11-28",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The team is using Terraform to manage AWS security groups, specifically the `aws_security_group_rule` resource.",
+            "critical": true,
+            "quote": "Each terraform `aws_security_group_rule` requires a name.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "There is an existing set of security group rules with names that do not currently comply with the chosen standard.",
+            "critical": true,
+            "quote": "change all the existing rule names to comply with it",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The security rules primarily use TCP protocol, as non-TCP protocols are treated as an edge case requiring an additional suffix.",
+            "critical": false,
+            "quote": "If the rule uses a protocol other than TCP we will add an additional `_$proto` to the end.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0032": {
+        "title": "transfer artefact binary",
+        "date": "2018-03-26",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The deployment pipeline relies on AWS infrastructure (S3, SNS, Lambda) to facilitate artifact transfer between environments.",
+            "critical": true,
+            "quote": "The binary file (artifact) gets stored in an AWS S3 bucket... We have an AWS SNS Topic... We have an AWS Lambda function",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "Artifacts are generated by executing specific Jenkins jobs in the source environment, which triggers the creation of new objects in S3.",
+            "critical": true,
+            "quote": "We create binary artifacts for applications when we execute the **Deploy_App** Jenkins job... This process requires a new object to be created at the source for the mechanism to be triggered",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The target environment (e.g., Staging) is configured with the necessary AWS resources (S3 bucket, SNS subscription, Lambda function) to receive and process artifacts from the source environment.",
+            "critical": false,
+            "quote": "The **Staging** environment has an AWS S3 bucket... We have an AWS SNS Subscription... We have an AWS Lambda function",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0033": {
+        "title": "Networking Outline",
+        "date": "2018-09-26",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The migration to AWS requires establishing a VPN connection to the existing Carrenza system.",
+            "critical": true,
+            "quote": "we need to use a VPN to talk to Carrenza",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The previously assigned IP address ranges for Staging and Production conflict with the Carrenza network, preventing direct communication or causing routing issues.",
+            "critical": true,
+            "quote": "the chosen IP addresses conflict",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The migration to AWS is being conducted gradually, implying that the old and new environments must coexist and communicate during the transition.",
+            "critical": false,
+            "quote": "As part of the gradual migration of Staging and Production to AWS",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0035": {
+        "title": "Bouncer Public Load Balancer Configuration",
+        "date": "2018-10-22",
+        "dropped": 1,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The Carrenza environment already supports serving HTTP requests on port 80, establishing a baseline for feature parity.",
+            "critical": true,
+            "quote": "This functionality exists in the Carrenza environment and we aim to replicate this feature to maintain feature parity.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The Bouncer servers are capable of handling HTTP traffic on port 80 directly, rather than requiring the load balancer to redirect to HTTPS.",
+            "critical": true,
+            "quote": "Add a second listener to the load balancer so that HTTP request on port 80 can be served by the Bouncer servers.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0036": {
+        "title": "Performance-Platform-And-BackDrop-Architecture",
+        "date": "2019-01-23",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The info-frontend service is the sole consumer of the Backdrop Read and Write APIs within the GovUK environments.",
+            "critical": true,
+            "quote": "The info-frontend is the only service within the GovUK environments that makes connections to the read and write backdrop APIs.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "Fastly is the primary caching layer that resolves traffic for the performance endpoints and interacts with the Backdrop APIs when cache misses occur.",
+            "critical": true,
+            "quote": "Those names will resolve to fastly, which will serve what is required if cached, if it is not cached it will update its cache by hitting the appropriate backdrop endpoints",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The production Backdrop components (database, worker, and APIs) are currently hosted on specific Carrenza infrastructure (performance-mongo cluster and api-1/api-2 nodes) rather than the GovUK PaaS.",
+            "critical": false,
+            "quote": "Backdrop database  (Carrenza performance-mongo cluster)\n  - Backdrop Worker, Read & Write API  (Carrenza api-1 & api-2 nodes)",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0037": {
+        "title": "ALB Health Checks",
+        "date": "2019-06-24",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The platform uses Nginx with a default Vhost that can be configured to proxy health check requests to specific upstream applications.",
+            "critical": true,
+            "quote": "Typically, an application instance runs Nginx with a server_name based Vhost per application. Each application Vhost proxies the requests to the local port where the application listens.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "Applications are deployed in a way that allows for a specific, consistent health check path to be defined and used by both the load balancer and monitoring tools.",
+            "critical": true,
+            "quote": "This health check path is configured in the default Vhost to proxy the request to the upstream application, and rewrites the request to match the application health check path that is also used in Icinga checks.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The ALB can be configured with routing rules based on the Host header to direct traffic to specific target groups for each application.",
+            "critical": false,
+            "quote": "The ALB includes routing rules based on Host header, and redirects the traffic to the application target group when the Host header matches the value `<<app-name>.*`",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0038": {
+        "title": "Mongo Replacement by DocumentDB",
+        "date": "2019-10-17",
+        "dropped": 0,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "The GOV.UK organization has a strategic mandate to prioritize AWS managed services to reduce operational burden.",
+            "critical": true,
+            "quote": "One architectural strategy principle of TechOps is to make use as much as possible AWS managed services in order to reduce the burden on GOV.UK teams to manage Commercial off-the-shelf (COTS) functionality/services.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "The existing MongoDB applications are compatible with the AWS DocumentDB API version 3.6, despite running on older MongoDB versions (2.4.9 and 3.2.7).",
+            "critical": true,
+            "quote": "AWS DocumentDB has been developed to be [compatible](https://docs.aws.amazon.com/documentdb/latest/developerguide/mongo-apis.html) with the open source MongoDB API 3.6. The version of MongoDB that GOV.UK uses is 3.2.7 for Licensify and 2.4.9 for the other apps.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A3",
+            "statement": "The GOV.UK applications can be modified to support username/password authentication and retrieve credentials from the central credential management system.",
+            "critical": false,
+            "quote": "Hence, the relevant GOV.UK apps should have the ability to retrieve authentication credentials from GOV.UK credential management system and authenticate with AWS DocumentDB. This may require some code changes in some instances.",
+            "origin": "extracted"
+          }
+        ]
+      },
+      "GOVUK-0039": {
+        "title": "Non-GOV.UK domain policy",
+        "date": "2022-10-10",
+        "dropped": 1,
+        "assumptions": [
+          {
+            "id": "A1",
+            "statement": "If a non-GOV.UK domain is flagged as a phishing site, it will cause significant operational disruption, potentially making large parts of GOV.UK inaccessible.",
+            "critical": true,
+            "quote": "At worst, this could cause a major incident, making large parts of GOV.UK inaccessible.",
+            "origin": "extracted"
+          },
+          {
+            "id": "A2",
+            "statement": "There are currently existing non-GOV.UK domains (specifically Signon domains) that are publicly routable and in violation of the proposed policy, requiring remediation.",
+            "critical": false,
+            "quote": "A number of Signon domains are currently in violation of this proposal.",
+            "origin": "extracted"
+          }
+        ]
+      }
+    }
+  },
+  "rows": [
+    {
+      "decision": "GOVUK-0004",
+      "title": "DNS definitions for hosts and services",
+      "date": "2017-07-14",
+      "changed_later": true,
+      "changed_by": "GOVUK-0015",
+      "history": "explicitly superseded by ADR 15 (DNS infrastructure)",
+      "verdict": "ADAPT",
+      "flagged": true,
+      "cites_changing_record": true,
+      "cited": [
+        "GOVUK-0015",
+        "GOVUK-0016",
+        "GOVUK-0033"
+      ],
+      "ms": 2538,
+      "broken": [],
+      "warnings": [],
+      "reflect": {
+        "verdict": "ADAPT",
+        "flagged": true,
+        "mentions_changing_record": true,
+        "answer": "GOVUK-0004 is not wrong, but it is incomplete when viewed in isolation. It served as a necessary point-in-time decision for early monitoring requirements. The strategy has been adapted into the more comprehensive framework established by GOVUK-0015."
+      }
+    },
+    {
+      "decision": "GOVUK-0003",
+      "title": "Networking Outline",
+      "date": "2017-06-30",
+      "changed_later": true,
+      "changed_by": "GOVUK-0033",
+      "history": "explicitly, in part, superseded by ADR 33 (IP ranges conflict with the Carrenza VPN)",
+      "verdict": "RECONSIDER",
+      "flagged": true,
+      "cites_changing_record": true,
+      "cited": [
+        "GOVUK-0012",
+        "GOVUK-0026",
+        "GOVUK-0033",
+        "GOVUK-0038"
+      ],
+      "ms": 3371,
+      "broken": [
+        {
+          "id": "A2",
+          "statement": "The current IP layout is a viable reference point that can be closely approximated to ease the migration process.",
+          "quote": "We will attempt to keep the new IP layout as close as possible to the current one in order to ease migration.",
+          "explanation": "The assumption that the new IP layout could closely approximate the current one to ease migration is no longer true. Evidence [GOVUK-0033] (2018-09-26) states that the IP addresses chosen in GOVUK-0003 'conflict' with the Carrenza environment due to the need for a VPN, and explicitly supersedes GOVUK-0003 by assigning new IP ranges that do not match the original plan.",
+          "evidence": [
+            "GOVUK-0033"
+          ]
+        }
+      ],
+      "warnings": [],
+      "reflect": {
+        "verdict": "ADAPT",
+        "flagged": true,
+        "mentions_changing_record": false,
+        "answer": "The original intent of providing isolated, predictable networking for environments remains the correct approach, but the specific IP ranges had to be adapted to accommodate the reality of a multi-provider transition period requiring cross-environment VPN connectivity."
+      }
+    },
+    {
+      "decision": "GOVUK-0028",
+      "title": "Combine api-mongo cluster into mongo cluster",
+      "date": "2017-09-14",
+      "changed_later": true,
+      "changed_by": "GOVUK-0038",
+      "history": "implicitly reversed: ADR 38 moves Mongo apps, naming Content Store, to DocumentDB",
+      "verdict": "RECONSIDER",
+      "flagged": true,
+      "cites_changing_record": true,
+      "cited": [
+        "GOVUK-0038"
+      ],
+      "ms": 3303,
+      "broken": [
+        {
+          "id": "A2",
+          "statement": "The main application mongo cluster has sufficient capacity to handle the additional load from Content Store without becoming a single point of failure for the entire stack.",
+          "quote": "All other applications use the mongo cluster.",
+          "explanation": "Evidence [GOVUK-0038] (2019-10-17) indicates that the architectural strategy has shifted to replacing MongoDB with AWS DocumentDB. It states that GOV.UK uses MongoDB for a number of apps and outlines a strategy to use AWS services. This implies that the long-term viability of relying on a standard 'main application mongo cluster' for capacity and SPOF concerns is superseded by the migration to DocumentDB, which changes the capacity and failure domain characteristics assumed in 2017.",
+          "evidence": [
+            "GOVUK-0038"
+          ]
+        }
+      ],
+      "warnings": [],
+      "reflect": {
+        "verdict": "RECONSIDER",
+        "flagged": true,
+        "mentions_changing_record": false,
+        "answer": "The decision to combine clusters as described in GOVUK-0028 is RECONSIDER. The transition to AWS DocumentDB renders the manual consolidation of EC2-based clusters obsolete, as DocumentDB provides native, managed scalability and high availability, and mandates different authentication standards."
+      }
+    },
+    {
+      "decision": "GOVUK-0021",
+      "title": "Use ACM for SSL purchases and terminate certificates on ELBs",
+      "date": "2017-08-14",
+      "changed_later": false,
+      "changed_by": null,
+      "history": "not revisited in the record",
+      "verdict": "REUSE",
+      "flagged": false,
+      "cites_changing_record": false,
+      "cited": [
+        "GOVUK-0023",
+        "GOVUK-0025",
+        "GOVUK-0030",
+        "GOVUK-0031",
+        "GOVUK-0037"
+      ],
+      "ms": 17599,
+      "broken": [],
+      "warnings": [],
+      "reflect": {
+        "verdict": "REUSE",
+        "flagged": false,
+        "mentions_changing_record": false,
+        "answer": "The decision to use ACM and ELB-based SSL termination is considered REUSE. The architectural pattern has proven effective, and there is no evidence in the retrieved organizational memory suggesting a failure of this approach or a shift away from AWS-managed certificate and load balancer services. The underlying principle of delegating SSL termination to the managed load balancing tier remains the "
+      }
+    },
+    {
+      "decision": "GOVUK-0022",
+      "title": "Remove the Elasticsearch proxy",
+      "date": "2017-08-16",
+      "changed_later": false,
+      "changed_by": null,
+      "history": "not revisited in the record",
+      "verdict": "REUSE",
+      "flagged": false,
+      "cites_changing_record": false,
+      "cited": [
+        "GOVUK-0037",
+        "GOVUK-0038"
+      ],
+      "ms": 23341,
+      "broken": [],
+      "warnings": [],
+      "reflect": {
+        "verdict": "REUSE",
+        "flagged": false,
+        "mentions_changing_record": false,
+        "answer": "The decision to remove the local Elasticsearch proxy is still the correct approach. The conditions it relied upon\u2014the utilization of AWS ELBs to provide load balancing and cluster awareness\u2014persist, and the move continues to be viewed as a beneficial simplification of the platform\u2019s networking architecture."
+      }
+    },
+    {
+      "decision": "GOVUK-0024",
+      "title": "AMI Lookups",
+      "date": "2017-08-29",
+      "changed_later": false,
+      "changed_by": null,
+      "history": "not revisited in the record",
+      "verdict": "RECONSIDER",
+      "flagged": true,
+      "cites_changing_record": false,
+      "cited": [
+        "GOVUK-0015",
+        "GOVUK-0025",
+        "GOVUK-0030",
+        "GOVUK-0033",
+        "GOVUK-0037",
+        "GOVUK-0038"
+      ],
+      "ms": 24665,
+      "broken": [
+        {
+          "id": "A1",
+          "statement": "The deployment environment includes legacy systems that require manual deployment steps, making automatic AMI changes disruptive.",
+          "quote": "due to the legacy nature of our deployments it causes issues with machines that need a number of manual deployment steps applied to them. Examples of these include the app servers and the puppet master.",
+          "explanation": "The assumption that the environment includes legacy systems requiring manual deployment steps (like app servers and puppet master) is no longer valid. Evidence [GOVUK-0038] (2019-10-17) explicitly identifies Licensify as a 'legacy service' and initiates its replacement, while [GOVUK-0030] (2017-09-15) and [GOVUK-0025] (2017-09-04) show the migration of core infrastructure (Asset Master, Redis) to managed AWS services (EFS, Elasticache), removing the need for manual management of those specific legacy-style instances. The platform has moved toward managed services and modernized architectures, reducing the scope of 'legacy' manual deployments that originally justified the override.",
+          "evidence": [
+            "GOVUK-0038",
+            "GOVUK-0030",
+            "GOVUK-0025"
+          ]
+        }
+      ],
+      "warnings": [],
+      "reflect": {
+        "verdict": "RECONSIDER",
+        "flagged": true,
+        "mentions_changing_record": false,
+        "answer": "The decision to hardcode AMI names in GOVUK-0024 is a candidate for RECONSIDER. The primary conditions that necessitated this decision have been largely mitigated by the platform's evolution toward managed services and automated provisioning. Maintaining hardcoded AMI names introduces the risk of running auto-scaling groups with older, less secure, or outdated AMI versions for extended periods."
+      }
+    },
+    {
+      "decision": "GOVUK-0025",
+      "title": "Use Elasticache for Redis",
+      "date": "2017-09-04",
+      "changed_later": false,
+      "changed_by": null,
+      "history": "not revisited in the record",
+      "verdict": "REUSE",
+      "flagged": false,
+      "cites_changing_record": false,
+      "cited": [
+        "GOVUK-0029",
+        "GOVUK-0030"
+      ],
+      "ms": 27411,
+      "broken": [],
+      "warnings": [],
+      "reflect": {
+        "verdict": "REUSE",
+        "flagged": false,
+        "mentions_changing_record": false,
+        "answer": "The decision to use AWS ElastiCache for Redis remains the correct approach for the GOV.UK Platform as it aligns with the broader, ongoing strategy of utilizing managed services to minimize operational maintenance and infrastructure drift. The conditions regarding the benefits of reducing custom Puppet code and avoiding manual infrastructure management still hold today. The subsequent consolidation"
+      }
+    },
+    {
+      "decision": "GOVUK-0029",
+      "title": "Combine api-redis into backend-redis",
+      "date": "2017-09-14",
+      "changed_later": false,
+      "changed_by": null,
+      "history": "not revisited in the record",
+      "verdict": "REUSE",
+      "flagged": false,
+      "cites_changing_record": false,
+      "cited": [
+        "GOVUK-0031",
+        "GOVUK-0033"
+      ],
+      "ms": 20493,
+      "broken": [],
+      "warnings": [],
+      "reflect": {
+        "verdict": "RECONSIDER",
+        "flagged": true,
+        "mentions_changing_record": false,
+        "answer": "The decision to consolidate multiple Redis instances into a single ElastiCache instance (GOVUK-0029) should be re-evaluated because it introduced a single point of failure. While the original justification regarding vDC separation is no longer relevant in the current AWS environment, the cost-saving strategy must now be weighed against modern reliability requirements and infrastructure isolation p"
+      }
+    }
+  ]
+}

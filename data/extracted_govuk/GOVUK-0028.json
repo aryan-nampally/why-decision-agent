@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Content Store is the sole consumer of the api-mongo cluster, meaning no other applications depend on it.",
+      "critical": true,
+      "quote": "The only application that uses the api-mongo cluster is Content Store.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The main application mongo cluster has sufficient capacity to handle the additional load from Content Store without becoming a single point of failure for the entire stack.",
+      "critical": true,
+      "quote": "All other applications use the mongo cluster.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The router-backend cluster must remain independent due to the critical nature of the Router application, implying it cannot be merged with the main mongo cluster.",
+      "critical": false,
+      "quote": "The router-backend cluster is used by Router. This should remain independent due to the critical nature of this application.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

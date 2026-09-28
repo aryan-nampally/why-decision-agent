@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The team is currently in a development phase where rapid iteration is prioritized over external reusability.",
+      "critical": true,
+      "quote": "Whilst developing a module we will source it locally (within this repository).",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The modules are not yet considered stable or 'ready' for consumption by other teams or projects.",
+      "critical": true,
+      "quote": "Once we feel our modules \"ready\" we will consider moving them to separate repositories.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The primary consumers of the modules are internal to the current repository/team, so the lack of external accessibility is acceptable.",
+      "critical": false,
+      "quote": "Keeping modules locally will make them harder for others to use but make rapid iteration easier.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

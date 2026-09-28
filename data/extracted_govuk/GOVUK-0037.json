@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The platform uses Nginx with a default Vhost that can be configured to proxy health check requests to specific upstream applications.",
+      "critical": true,
+      "quote": "Typically, an application instance runs Nginx with a server_name based Vhost per application. Each application Vhost proxies the requests to the local port where the application listens.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "Applications are deployed in a way that allows for a specific, consistent health check path to be defined and used by both the load balancer and monitoring tools.",
+      "critical": true,
+      "quote": "This health check path is configured in the default Vhost to proxy the request to the upstream application, and rewrites the request to match the application health check path that is also used in Icinga checks.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The ALB can be configured with routing rules based on the Host header to direct traffic to specific target groups for each application.",
+      "critical": false,
+      "quote": "The ALB includes routing rules based on Host header, and redirects the traffic to the application target group when the Host header matches the value `<<app-name>.*`",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

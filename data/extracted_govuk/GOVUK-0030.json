@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The team is operating in an AWS environment where Elastic File System (EFS) is available and suitable for their use case.",
+      "critical": true,
+      "quote": "In AWS, we have the option to use [Elastic File System (EFS)](https://aws.amazon.com/efs).",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The existing instances (backend, whitehall-backend, asset-slave) are capable of mounting the new filesystem in the same manner as the previous NFS share.",
+      "critical": true,
+      "quote": "Each instance would have to mount this filesystem in the same way as NFS",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The asset-master instance requires direct access to move files within the filesystem after virus scans, necessitating its mount to the shared resource.",
+      "critical": false,
+      "quote": "The asset-master is required to mount because it moves files about the filesystem after running virus scans.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

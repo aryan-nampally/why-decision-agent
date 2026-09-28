@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The only database currently running on the API PostgreSQL instances is Stagecraft.",
+      "critical": true,
+      "quote": "The only database that runs on API PostgreSQL instances is Stagecraft",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The infrastructure does not have the split of 'vDCs' that would prevent the database from running on the main instance.",
+      "critical": true,
+      "quote": "we do not have the split of \"vDCs\" that we have in our current hosting provider",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The Performance Platform is being migrated away from the current infrastructure, making the database temporary.",
+      "critical": false,
+      "quote": "Work is ongoing to migrate the Performance Platform away from our infrastructure",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The team prefers to minimize changes to existing Puppet code and avoid new Terraform provisioning work.",
+      "critical": true,
+      "quote": "This may remove a reasonable amount of puppet code used to configure the database and associated tasks (e.g. backups). It would also require an amount of Terraform work to provision the RDS instance and some updates to the Puppetmaster code to use that instance.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The existing local backup and restore strategies are sufficient and compatible with the local PostgreSQL instance.",
+      "critical": true,
+      "quote": "Currently our Puppetmaster uses a local PostgreSQL instance as its database.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The Puppetmaster is not intended to serve as a test environment for RDS integration.",
+      "critical": false,
+      "quote": "We will not be able to use the Puppetmaster as a test-bed for RDS work.",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

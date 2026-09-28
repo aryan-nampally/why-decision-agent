@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "Changes to security group rules occur frequently enough that the cost of regenerating the entire resource (in-line method) is a significant operational concern compared to the boilerplate overhead of separate rules.",
+      "critical": true,
+      "quote": "when ever a rule is changed Terraform will re-generate the entire resource",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The team is willing to accept increased boilerplate and separation between the group resource and the rule resource in exchange for granular updates.",
+      "critical": true,
+      "quote": "there is greater boilerplate and separation between the group resource and the rule resource",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The system does not have heavy cross-referencing of security groups that would make separate files significantly harder to follow.",
+      "critical": false,
+      "quote": "Separate files may be harder to follow if there is heavy cross-referencing of security groups",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

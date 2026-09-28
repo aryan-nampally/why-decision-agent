@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The Terraform projects share a significant amount of similar configuration that is currently repeated across every project and stack.",
+      "critical": true,
+      "quote": "Our various Terraform projects share a significant amount of similar configuration (e.g. remote state buckets, stackname). Under [ADR 10](0010-terraform-directory-structure.md) this is repeated for every project and every stack.",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The deployment environment is defined by the target account (e.g., integration, staging) and the stack is a specific collection of projects.",
+      "critical": false,
+      "quote": "`<environment>` is the account being deployed to (e.g. 'integration', 'staging')\n* `<stackname>` is the specific collection of projects (e.g. 'integration-green', 'foo-test')",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "Configuration values can be effectively managed through a hierarchical override system where later files take precedence over earlier ones.",
+      "critical": false,
+      "quote": "The tfvar files will be applied in this order:\n\n* `common/<environment>/common.tfvars`\n* `common/<environment>/<stackname>.tfvars`\n* `<project>/<environment>/common.tfvars`\n* `<project>/<environment>/<stackname>.tfvars`\n* `<project>/<environment>/<stackname>_secrets.tfvars`",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}

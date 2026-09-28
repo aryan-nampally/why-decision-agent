@@ -1,0 +1,26 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "statement": "The team's existing operational processes and skills are aligned with a Puppetmaster architecture, making it the path of least resistance for the initial iteration.",
+      "critical": true,
+      "quote": "It matches our current architecture and approach",
+      "origin": "extracted"
+    },
+    {
+      "id": "A2",
+      "statement": "The team is willing to accept the operational overhead of managing a central Puppetmaster (including certificate management and potential single points of failure) to avoid creating a new deployment process.",
+      "critical": true,
+      "quote": "We would need to take into account certificate management",
+      "origin": "extracted"
+    },
+    {
+      "id": "A3",
+      "statement": "The system's state consistency requirements can be met by a 30-minute check-in interval, which is a characteristic of the Puppetmaster approach.",
+      "critical": false,
+      "quote": "Each machine would \"check in\" to the Puppetmaster every 30 minutes, ensuring a consistent state",
+      "origin": "extracted"
+    }
+  ],
+  "warnings": []
+}
