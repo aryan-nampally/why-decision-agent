@@ -1,6 +1,6 @@
-# WHY benchmark results — 2026-09-28T12:03:31+00:00
+# WHY benchmark results — 2026-09-28T12:30:05+00:00
 
-Judge/baseline model `gpt-oss-120b` · assumption extraction `openai/gpt-oss-120b (cached in data/extracted/)` · B3 uses Hindsight's own reflect model · commit `9c2d1a2` · 26 cases · one run per condition · pilot scale; intervals are Wilson 95%.
+Judge/baseline model `gpt-oss-120b` · assumption extraction `openai/gpt-oss-120b (cached in data/extracted/)` · B3 uses Hindsight's own reflect model · commit `6fcafad` · 26 cases · one run per condition · pilot scale; intervals are Wilson 95%.
 
 ## All cases
 
