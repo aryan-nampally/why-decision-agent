@@ -7,7 +7,7 @@ I built WHY to close it for engineering decisions: it stores each ADR's assumpti
 
 → Extract assumptions from ADR prose; keep only those quoted verbatim.
 
-→ Retain records with their real dates. Only later evidence counts.
+→ Retain records with real dates. Only later evidence counts.
 
 → The LLM labels assumptions. Code picks the verdict and deletes invented citations.
 
