@@ -9,7 +9,7 @@ Never name the event, or use its name as a hashtag, in any title, body or commen
 - Talking head plus screen is preferred: a small webcam corner in OBS is enough.
 - Thumbnail: the Nano Banana prompt at the bottom of the script, with your photo attached.
 - Title: pick one from the script's title ideas.
-- Description: the repo link https://github.com/aryan-nampally/WHY-decision_agent and https://github.com/vectorize-io/hindsight
+- Description: the repo link https://github.com/aryan-nampally/why-decision-agent and https://github.com/vectorize-io/hindsight
 
 ## 2. Article (Medium, Dev.to, Hashnode, Substack or LinkedIn Article)
 
@@ -32,9 +32,9 @@ Never name the event, or use its name as a hashtag, in any title, body or commen
 
 ## 5. Submission form
 
-- GitHub repo: https://github.com/aryan-nampally/WHY-decision_agent
+- GitHub repo: https://github.com/aryan-nampally/why-decision-agent
 - Demo video: the YouTube URL
-- Hindsight explanation: https://github.com/aryan-nampally/WHY-decision_agent/blob/main/HINDSIGHT.md
+- Hindsight explanation: https://github.com/aryan-nampally/why-decision-agent/blob/main/HINDSIGHT.md
 - Article URL, LinkedIn post URL, Reddit post URL
 
 ## 6. Live demo to judges

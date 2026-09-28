@@ -113,4 +113,4 @@ If a change was never written down, WHY can't know. It labels those assumptions 
 - [Hindsight on GitHub](https://github.com/vectorize-io/hindsight): the agent memory layer used here
 - [Hindsight documentation](https://hindsight.vectorize.io/) for retain, recall and reflect
 - [What is agent memory?](https://vectorize.io/what-is-agent-memory) from Vectorize
-- WHY source code: https://github.com/aryan-nampally/WHY-decision_agent
+- WHY source code: https://github.com/aryan-nampally/why-decision-agent

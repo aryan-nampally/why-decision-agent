@@ -15,6 +15,6 @@ Before/after, same model: "reuse Postgres" without memory; RECONSIDER with WHY, 
 
 26 test questions: 8 right without memory, 23 with WHY.
 
-https://github.com/aryan-nampally/WHY-decision_agent
+https://github.com/aryan-nampally/why-decision-agent
 
 #AIAgents #AgentMemory #Hindsight #LLM
