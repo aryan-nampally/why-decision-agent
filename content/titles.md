@@ -1,20 +1,20 @@
-I gave Hindsight our ADRs and it found five dead decisions
-Our 2023 database decision was right. Hindsight showed why it isn't now
-Why I store assumptions, not decisions, in Hindsight agent memory
-The ADR said Postgres. Hindsight remembered why that stopped being true
-I built an agent that notices when engineering decisions expire, using Hindsight
-How I made Hindsight recall the change nobody linked to the decision
-Retrieval found the old decision. Hindsight memory found why it was wrong
-What GOV.UK's real ADRs taught me about memory with Hindsight
-I let an LLM judge assumptions, but code decides the verdict
-Same question, different answer: agent memory with Hindsight and dated evidence
-Why my Hindsight agent ignores evidence older than the decision
-Building tripwires for architecture decisions with Hindsight memory
+The ADR said Postgres. Hindsight remembered why it expired
+I gave Hindsight our ADRs. Five decisions had expired.
+Our 2023 decision was right. Hindsight showed it isn't now
+I built an agent that notices expired decisions with Hindsight
+Why I store assumptions, not decisions, in Hindsight
+My Hindsight agent ignores evidence older than the decision
+I let the LLM judge; code decides the verdict
+Same question, different answer: Hindsight memory after a postmortem
+How I stopped my Hindsight agent inventing citations
+Architecture decisions have a half-life. Hindsight tracks it.
+What a retry storm taught my Hindsight agent
 I tested two-stage recall in Hindsight. The simple version tied.
-Memory without dates made my agent confidently wrong. Hindsight fixed that.
-How I stopped an LLM inventing citations in a Hindsight agent
-Architecture decisions have a half-life. I built Hindsight memory for it.
-What a retry storm taught my Hindsight agent about old decisions
-I asked Hindsight whether our decisions still hold. Five didn't.
-From ADRs to assumption checks: building decision memory on Hindsight
-The bug wasn't retrieval. My Hindsight agent needed to know when facts happened.
+Dates made my Hindsight agent stop being confidently wrong
+Building tripwires for architecture decisions with Hindsight memory
+From ADRs to assumption checks with Hindsight
+Retrieval found the old decision. Hindsight memory found what changed.
+What GOV.UK's real ADRs taught me about Hindsight memory
+The ablation that killed my favorite Hindsight idea
+Hindsight reflect scored 17/26. My decision layer scored 23.
+Why my Hindsight agent says "no change recorded", never "confirmed"

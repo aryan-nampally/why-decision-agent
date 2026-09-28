@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
@@ -20,7 +21,13 @@ from .schema import (AcceptRequest, AskRequest, AskResponse, DecisionRecord, Ing
 from .store import Store
 
 WEB = ROOT / "web" / "dist"  # React build (cd web && npm run build)
-app = FastAPI(title="WHY — state-aware decision memory")
+@asynccontextmanager
+async def _lifespan(_: FastAPI):
+    yield
+    await memory.aclose()  # close Hindsight's HTTP session on shutdown
+
+
+app = FastAPI(title="WHY — state-aware decision memory", lifespan=_lifespan)
 store = Store()
 pipeline = Pipeline(store)
 

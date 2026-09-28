@@ -27,7 +27,7 @@ from math import comb, sqrt
 from pathlib import Path
 
 from scripts.seed import seed
-from src import baseline, learn, llm
+from src import baseline, learn, llm, memory
 from src.config import HOLDBACK, ROOT
 from src.ingest import load_file
 from src.reasoning import Pipeline, oracle_assumptions
@@ -265,7 +265,7 @@ async def main(only: list[str], reseed: bool = False, report_only: bool = False)
     rows = list(done.values())
     report = {"run_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "model": llm.current_model(),
               "extraction_model": "openai/gpt-oss-120b (cached in data/extracted/)", "note": stopped,
-              "git_commit": subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True,
+              "git_commit": subprocess.run(["git", "describe", "--always", "--dirty"], capture_output=True, text=True,
                                            cwd=ROOT).stdout.strip() or None,
               "n_cases": len(cases), "conditions": {}, "incomplete": {}, "tripwire": trip, "rows": rows,
               "models": {c: sorted({r.get("model") or "—" for r in rows if r["condition"] == c}) for c in CONDITIONS}}
@@ -335,4 +335,4 @@ if __name__ == "__main__":
     a = ap.parse_args()
     if a.model:
         llm.use_model(a.model)
-    asyncio.run(main(a.only, a.reseed, a.report_only))
+    asyncio.run(memory.closing(main(a.only, a.reseed, a.report_only)))

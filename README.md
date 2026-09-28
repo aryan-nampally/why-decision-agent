@@ -19,6 +19,8 @@ Without memory, the same model answers "the expected 1.2k writes per second is w
 
 ![WHY answering the Postgres question: live agent orchestration, then the verdict](docs/img/agent.png)
 
+**How Hindsight memory is used:** [HINDSIGHT.md](HINDSIGHT.md) (retain with real dates, tag-scoped recall per stage, `reflect` as a baseline, and the measured effect of memory).
+
 > Keelwright Freight is a **fictional** company. Its ADRs, postmortems and change notes in `data/` are synthetic, written to read like real engineering records.
 
 ## What it does
@@ -51,7 +53,7 @@ Design rules that keep it auditable:
 
 - **Assumptions are recovered, not hand-written.** ADRs are prose. `src/ingest.py` extracts the premises each decision depends on, and keeps an assumption only if its supporting quote appears verbatim in the source.
 - **Only later evidence counts.** Evidence dated before the decision was part of its context and cannot invalidate it.
-- **The LLM judges; code decides.** The model labels each assumption HOLDS / BROKEN / UNKNOWN with citations. Code drops citations it was never given, downgrades uncited BROKEN claims, and applies the verdict rules in `src/rules.py`. Adding contradicting evidence can never make WHY *more* confident in reuse (tested exhaustively in `tests/test_rules.py`).
+- **The LLM judges; code decides.** The model labels each assumption HOLDS / BROKEN / UNKNOWN with citations. Code drops citations it was never given, downgrades uncited BROKEN claims, and applies the verdict rules in `src/rules.py`. The rules are monotone: a worse assumption status can never produce a more confident verdict (tested over every combination in `tests/test_rules.py`). This guarantees the rule layer, not the LLM's judgement that feeds it.
 - **Fail safe.** If the model's output is invalid after one retry, every assumption becomes UNKNOWN, which yields ADAPT, never REUSE.
 - **An UNKNOWN must point at something.** The judge may call an assumption UNKNOWN only when evidence addresses it ambiguously. An UNKNOWN that cites no evidence means nothing in memory addresses it, so it is recorded as *no change recorded*. (A failed or missing judgement is never settled this way, so it stays UNKNOWN.)
 
@@ -153,10 +155,16 @@ web/          React + TypeScript UI (Vite); built to web/dist and served by Fast
 data/corpus/  adrs/, postmortems/, signals/   (synthetic)      data/holdback/  ingested live in the demo
 data/real/    govuk-aws/  38 real GOV.UK ADRs (MIT), imported by scripts/import_govuk.py
 evaluation/   cases.json, gold_assumptions.json, run_benchmark.py, results/
-scripts/      seed.py
-tests/        test_rules.py, test_ingest.py, test_api.py
+scripts/      seed.py, import_govuk.py, casestudy_health.py
+tests/        test_rules.py, test_ingest.py, test_api.py, test_pipeline.py
+content/      article, LinkedIn post, video script, titles, publishing checklist
+evaluation/results/README.md   which result file is which
 ```
 
 ## Links
 
 - Hindsight: [GitHub](https://github.com/vectorize-io/hindsight) · [Docs](https://hindsight.vectorize.io/) · [What is agent memory?](https://vectorize.io/what-is-agent-memory)
+
+## License
+
+MIT, see [LICENSE](LICENSE). The GOV.UK ADRs in `data/real/govuk-aws/` are © Crown copyright, MIT-licensed by alphagov; see their NOTICE.md.

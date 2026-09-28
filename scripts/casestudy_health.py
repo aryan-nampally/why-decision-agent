@@ -11,7 +11,7 @@ import asyncio
 import json
 from datetime import date, datetime, timezone
 
-from src import llm
+from src import llm, memory
 from src.config import DATA
 from src.reasoning import Pipeline
 from src.schema import DecisionRecord, Status
@@ -49,4 +49,4 @@ async def main(model: str | None) -> None:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default=None)
-    asyncio.run(main(ap.parse_args().model))
+    asyncio.run(memory.closing(main(ap.parse_args().model)))

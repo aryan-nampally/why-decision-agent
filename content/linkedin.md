@@ -1,18 +1,19 @@
-Your ADRs remember what you decided. They forget why it was right.
+Your ADRs remember what you decided.
+They forget why it was right.
 
-I built WHY, an agent that stores the assumptions behind engineering decisions in Hindsight agent memory and checks if they still hold.
+I built WHY: it stores the assumptions behind engineering decisions in Hindsight agent memory and checks if they still hold.
 
-What changed its behavior:
+What worked:
 
-→ Recall by assumption, not question. "Finance runs JOINs on the ledger" finds the Snowflake migration; "should we use Postgres?" doesn't.
+→ Extract assumptions from ADR prose. Keep one only if its quote is verbatim.
 
-→ Only evidence dated after the decision counts.
+→ Retain every record with its real date. Only evidence from after a decision counts.
 
 → The LLM labels each assumption. Code picks the verdict and deletes invented citations.
 
-Without memory: "reuse Postgres." With WHY: RECONSIDER, 2 assumptions broken, both cited.
+Before/after, same model: "reuse Postgres" without memory; RECONSIDER with WHY, citing a 3,140 writes/s peak and a Snowflake migration.
 
-Same model, 26 test questions: 23/26 right with WHY, 8/26 without memory. On GOV.UK's real ADRs it recovered 109 assumptions straight from the prose.
+26 test questions: 8 right without memory, 23 with WHY.
 
 https://github.com/aryan-nampally/WHY-decision_agent
 

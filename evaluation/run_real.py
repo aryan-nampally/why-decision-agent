@@ -163,4 +163,4 @@ if __name__ == "__main__":
     a = ap.parse_args()
     if a.model:
         llm.use_model(a.model)
-    asyncio.run(main(not a.no_reflect))
+    asyncio.run(memory.closing(main(not a.no_reflect)))

@@ -43,6 +43,22 @@ def client() -> Hindsight:
     return _client
 
 
+async def aclose() -> None:
+    """Close the Hindsight client's HTTP session (avoids "Unclosed client session" warnings at exit)."""
+    global _client
+    if _client is not None:
+        await _client.aclose()
+        _client = None
+
+
+async def closing(coro):
+    """Run a script's top-level coroutine, then close the Hindsight client."""
+    try:
+        return await coro
+    finally:
+        await aclose()
+
+
 async def reset_bank(bank_id: str = BANK_ID, name: str = "WHY — Keelwright decisions", mission: str = BANK_MISSION) -> None:
     c = client()
     try:

@@ -29,7 +29,7 @@ export default function ResearchPage() {
         <h2>What is new here</h2>
         <ol>
           <li><b>A decision-state layer on top of agent memory.</b> Decisions carry the assumptions they depended on, recovered from prose and grounded in verbatim quotes. Only evidence dated after a decision may invalidate it. Code checks every citation and applies deterministic verdict rules.</li>
-          <li><b>Guarantees you can test.</b> Adding contradicting evidence can never make WHY more confident in reuse (checked exhaustively in the test suite); a hallucinated citation can never create a broken assumption; a model failure can never produce REUSE.</li>
+          <li><b>Guarantees you can test.</b> The verdict rules are monotone: a worse assumption status can never yield a more confident verdict (checked over every combination in the test suite; this covers the rules, not the LLM's judgement); a hallucinated citation can never create a broken assumption; a model failure can never produce REUSE.</li>
           <li><b>Proactive tripwires.</b> A recorded change is checked against every past decision's assumptions: memory warns before anyone asks.</li>
           <li><b>An evaluation of behaviour change, on real history.</b> We score whether the verdict changes correctly (false reuse, flips, premise-laden questions), and run a retrospective on GOV.UK's real 2017–2022 decisions, where ground truth is what GOV.UK itself later superseded.</li>
         </ol>

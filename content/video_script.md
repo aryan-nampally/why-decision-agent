@@ -6,7 +6,7 @@
 
 ## 0:00–0:30 · Intro (camera or voice over the Agent page)
 
-**Say:** "Hi, I'm [NAME]. I built WHY, an agent that remembers why engineering decisions were made, and notices when the reasons stop being true. Teams write architecture decision records. What they don't write down is when the world those decisions depended on changes. That happens in other documents, by other people, years later."
+**Say:** "Hi, I'm Aryan. I built WHY, an agent that remembers why engineering decisions were made, and notices when the reasons stop being true. Teams write architecture decision records. What they don't write down is when the world those decisions depended on changes. That happens in other documents, by other people, years later."
 
 **Show:** Agent page, empty. Hover the four tabs briefly.
 

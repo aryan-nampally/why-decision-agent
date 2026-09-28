@@ -1,40 +1,40 @@
-# The ADR said Postgres. Hindsight remembered why that stopped being true
+# The ADR said Postgres. Hindsight remembered why it expired
 
-In February 2023 our payments team chose PostgreSQL for the ledger, for two good reasons: finance ran its month-end reports as SQL JOINs directly on that database, and peak writes were projected to stay under about 1,800 per second. By December 2025 both reasons were gone. Finance had moved to Snowflake in August, and Cyber Monday pushed the ledger to 3,140 writes per second. Neither change mentioned the ADR. So when a new team asked "should the customs-duty ledger use Postgres, like payments did?", the honest answer lived in three documents written by three different people over three years, and nobody was going to read all of them.
+In February 2023 a payments team chose PostgreSQL for its ledger, for two good reasons: finance ran month-end reports as SQL JOINs directly on that database, and peak writes were projected to stay under about 1,800 per second. By December 2025 both reasons were gone. Finance had moved to Snowflake in August, and Cyber Monday pushed the ledger to 3,140 writes per second. Neither change mentioned the ADR. So when a new team asked "should the customs-duty ledger use Postgres, like payments did?", the honest answer lived in three documents, written by three people, over three years.
 
-I built an agent called WHY for exactly that question. It doesn't just remember what we decided. It remembers the conditions each decision depended on, and checks whether they still hold before anyone reuses it.
+That team belongs to Keelwright Freight, the logistics company whose engineering history I use throughout this post. It's fictional; I wrote its 37 records to read like real ones, and I test on real GOV.UK decisions further down. The problem is real in every company I know: we record *what* we decided, and nobody notices when the reasons expire.
 
-![WHY answering the Postgres question, with the orchestration trace](docs/img/agent.png)
+I built WHY for that question. It remembers the conditions each decision depended on, and checks whether they still hold before anyone reuses it.
+
+![WHY answering the Postgres question: verdict first, then the agent's trace](docs/img/agent.png)
 
 ## What it does
 
-You ask an engineering question. WHY answers with one of four verdicts: **REUSE**, **ADAPT**, **RECONSIDER** or **INSUFFICIENT_EVIDENCE**. It shows the past decision it matched, each assumption that decision relied on (with the sentence from the ADR it came from), what has changed since, and which rule produced the verdict.
+Ask an engineering question and WHY answers **REUSE**, **ADAPT**, **RECONSIDER** or **INSUFFICIENT_EVIDENCE**, showing the past decision it matched, each assumption with the sentence it came from, what changed since, and the rule that fired.
 
-It also runs the other way. Record a change, for example "we're consolidating production into eu-central-1", and WHY checks every past decision's assumptions and warns you about the ones that change breaks.
+It also runs the other way. Record a change, such as "we're consolidating production into eu-central-1", and WHY warns you which past decisions assumed otherwise. Nobody has to ask.
 
-The memory layer is [Hindsight](https://github.com/vectorize-io/hindsight). ADRs, postmortems and change notes are all retained there. Everything that decides *what is relevant* goes through Hindsight recall; a small SQLite store only turns a recalled record ID back into the full document.
+The memory is [Hindsight](https://github.com/vectorize-io/hindsight). ADRs, postmortems and change notes are all retained there, and every answer starts with a Hindsight recall. A small SQLite store only turns a recalled record ID back into the full document.
 
-## The core idea: assumptions are the retrieval keys
+## Assumptions are the unit of memory
 
-My first version did the obvious thing: recall memories similar to the question, hand them to the model, ask for a verdict. It found ADR-007 every time. It almost never found the Snowflake migration, because a note about month-end reporting isn't similar to a question about choosing a database.
+Real ADRs don't list their assumptions; they're buried in the Context section. At ingest, WHY asks an LLM to extract them, and keeps one only if its supporting quote appears **verbatim** in the source. The model may elide with "...", but every fragment has to match. I learned the hard way that this check must normalize typography: my first run dropped the two most important assumptions because the model wrote "month‑end" with a non-breaking hyphen.
 
-What *is* similar to both is the assumption in between: "finance reporting runs SQL JOINs directly on the ledger database." So WHY recalls in two steps. First it finds the precedent decision. Then it loads the assumptions that decision depended on, and recalls once per assumption, restricted to change notes and postmortems.
+Assumptions then become search queries. The change that breaks a decision rarely looks like the question: a note about month-end reporting isn't similar to "should we use Postgres?". The assumption in between, "finance reporting runs SQL JOINs directly on the ledger database", is similar to both. So after finding the precedent, WHY recalls once per assumption, scoped to change notes and postmortems:
 
 ```python
-# src/reasoning.py: stage 2, one Hindsight recall per assumption
+# src/reasoning.py: one Hindsight recall per assumption
 queries = [f"{a.statement}. ({rec.title})" for a in assumptions]
 results = await asyncio.gather(*(
     memory.recall(q, ["signal", "postmortem"], stage=f"change:{i}", bank_id=self.bank)
     for i, q in enumerate(queries)))
 ```
 
-Where do the assumptions come from? Real ADRs don't list them; they're buried in the Context section. WHY extracts them with an LLM at ingest time and keeps one only if its supporting quote appears **verbatim** in the source. The model is allowed to elide with "...", but every fragment has to match. I learned the hard way that this check needs to normalize typography: my first run dropped the two most important assumptions because the model wrote "month‑end" with a non-breaking hyphen.
+I expected this to be the big win. It wasn't, and I'll come back to why.
 
-## Time is a first-class field, not metadata
+## Time is a field, not metadata
 
-A fact is only evidence against a decision if it happened *after* the decision. Something written in 2022 was part of the world the 2023 decision was made in, so it can't invalidate it. That one line is what makes the system temporal.
-
-Hindsight makes this easy because `retain` takes a timestamp. Every record goes in with its real historical date, its ID as `document_id`, and a kind tag so recall can be scoped:
+A fact only counts against a decision if it happened *after* the decision. A 2022 note was part of the world the 2023 decision was made in, so it can't invalidate it. Hindsight makes this easy because `retain` takes a timestamp. Every record goes in with its real date, its ID as `document_id`, and a kind tag that lets recall be scoped:
 
 ```python
 # src/memory.py
@@ -47,11 +47,9 @@ await client().aretain(
 )
 ```
 
-One trap: Hindsight's extracted facts carry their own occurrence ranges, and a date like 2024-03-12 can come back as "March 2024". For the admissibility check I compare against the canonical record's date, not the fact's.
-
 ## The model judges; code decides
 
-I don't let the LLM pick the verdict. It makes one narrow judgment: for each assumption, is it HOLDS, BROKEN or UNKNOWN, and which evidence IDs show that? Then code takes over. It removes any cited ID that was never provided, downgrades a BROKEN claim that has no valid citation left, and applies fixed rules:
+The LLM never picks the verdict. It makes one narrow judgment per assumption: HOLDS, BROKEN or UNKNOWN, citing evidence IDs. Then code takes over. It deletes citations to evidence it never supplied, downgrades a BROKEN claim left without evidence, and applies fixed rules:
 
 ```python
 # src/rules.py
@@ -63,9 +61,9 @@ if not evaluation_complete or any((not c.critical and c.status == Status.BROKEN)
 return Verdict.REUSE
 ```
 
-Because the rules are plain code, I can test properties instead of hoping for them. One test walks every combination of assumption states and checks that adding contradicting evidence never makes WHY *more* willing to reuse a decision. Another caught a real bug: when the model call failed and every assumption was non-critical, the old rules returned REUSE. A failed evaluation now can never produce REUSE. The same discipline runs the other way: the model sometimes called an assumption UNKNOWN while citing nothing, which made WHY hedge on decisions nothing had challenged. An UNKNOWN now has to point at the evidence that makes it unclear; otherwise it means "no change recorded".
+Plain rules can be tested exhaustively. One test walks every combination of assumption states and checks that a worse status never yields a more confident verdict. Another caught a real bug: when the model call failed and every assumption was non-critical, the old rules returned REUSE. Now a failed evaluation can't.
 
-The UI shows all of this live: which step is Hindsight, which is the model, which is code, what each recall found, which citations were cut, and the exact rule that fired, e.g. `critical A1 BROKEN → RECONSIDER`.
+The discipline cuts both ways. The model sometimes called an assumption UNKNOWN while citing nothing, so WHY hedged on decisions nothing had challenged. Now an UNKNOWN has to point at the evidence that makes it unclear; otherwise it means "no change recorded".
 
 ## What happens in practice
 
@@ -73,43 +71,46 @@ Same question, same model, with and without memory:
 
 > **Without memory:** "Yes, PostgreSQL should work for the customs-duty ledger as it did for the payments ledger; the expected 1.2k writes per second is within its proven capacity, so you can reuse the same approach." → REUSE
 >
-> **With WHY:** ADR-007, decided 3 years 7 months ago. A1 *write volume stays near 1,800/s*: BROKEN, peak hit 3,140/s (Dec 2025). A3 *finance reporting runs on the same database*: BROKEN, moved to Snowflake (Aug 2025). A2 *single region*: HOLDS, the EU launch kept the ledger in us-east-1. → RECONSIDER
+> **With WHY:** ADR-007, decided 3 years 7 months ago. *Write volume stays near 1,800/s*: BROKEN, peak hit 3,140/s in December 2025. *Finance reporting runs on the same database*: BROKEN, moved to Snowflake in August 2025. *Single region*: HOLDS. → RECONSIDER
 
-The learning loop is the part I like most. Ask whether a new integration should reuse our carrier retry policy (5 retries, exponential backoff) and WHY says REUSE, because nothing in memory contradicts it. Ingest the postmortem of a 47-minute outage caused by a retry storm against a carrier's rate limit, ask the identical question, and the answer becomes RECONSIDER, citing the postmortem. Same question, different answer, because memory changed.
+The part I like most is watching it learn. Ask whether a new integration should reuse the carrier retry policy (5 retries, exponential backoff) and WHY says REUSE: nothing in memory contradicts it. Retain the postmortem of a 47-minute outage caused by a retry storm against a carrier's rate limit, ask the identical question, and the answer becomes RECONSIDER, citing the outage. Same question, different answer, because memory changed.
 
-![Decision health board for the case-study company](docs/img/health.png)
+![Decision health board: WHY checks every active decision](docs/img/health.png)
 
-I also ran it across a whole decision log. For the fictional company in the demo, Keelwright Freight, WHY flagged 5 of 10 active decisions as no longer resting on the conditions they were made under.
+Run across Keelwright's whole decision log, WHY flagged 5 of its 10 active decisions as no longer resting on the conditions they were made under.
 
-## Does it hold up on decisions I didn't write?
+## The numbers, including the ones I didn't expect
 
-That was the question that bothered me most, since I wrote the demo company's records myself. So I ran WHY on the 38 architecture decision records GOV.UK published between 2017 and 2022 in [alphagov/govuk-aws](https://github.com/alphagov/govuk-aws). Each decision is evaluated using only records dated after it. The ground truth is GOV.UK's own history: which decisions it later superseded or reversed. I stripped the "superseded by" notes that were added to old records afterwards, so the answer couldn't leak.
+I wrote 26 questions with the correct verdict fixed in advance, and scored exact matches; no LLM grades anything. Every contestant uses the same model.
 
-- The extractor recovered **109 grounded assumptions** from 38 real ADRs; only **3** were dropped for not being verbatim.
-- The retrospective is where I have to be careful. On 8 decisions (3 GOV.UK later reversed, 5 it never touched), the result swung with the model. With the same model as my benchmark, WHY caught **1 of 3** reversals, citing the right record, and left **all 5** untouched decisions alone. With a different model it caught 2 of 3, but it also flagged 4 decisions nobody ever changed. An earlier run of mine showed 3 of 3; I'm not quoting that as the result, because it didn't survive re-running.
-- The most interesting case is one no link ever pointed to: a 2017 decision to put Content Store on the shared Mongo cluster, implicitly reversed by a 2019 ADR moving Mongo apps to DocumentDB. One model finds it by recalling on the assumption; the other doesn't.
+- **No memory:** 8 of 26 right, and it recommended a decision whose reasons had expired in 4 of 16 cases.
+- **Recalled memories pasted into the prompt:** 13 of 26.
+- **Hindsight's own `reflect`:** 17 of 26, a strong baseline.
+- **WHY:** 23 of 26 (vs no memory, p = 0.0003), no false alarms on the 7 still-valid decisions, and the right answer both before and after the postmortem in all 3 pairs.
 
-So extraction transfers to prose other engineers wrote. Judging a real, sparse decision history is still the open problem, and 8 cases can't separate WHY from the model it runs on.
+WHY's lead over `reflect` is not statistically significant with 26 questions. Its three misses all disappear when it's given hand-written assumptions, so extraction is where the remaining errors come from.
 
-On a 26-question controlled benchmark over the demo company, the same model with no memory reused a stale decision in **4 of 16** cases where it shouldn't have, and got 8 of 26 verdicts right. WHY, on the same model, got **23 of 26** right (p = 0.0003) and changed its answer correctly in all 3 before/after-postmortem pairs. Handing the model recalled memories without the decision structure scored 13 of 26. Hindsight's own `reflect` scored 17 of 26: behind WHY, but not significantly with this few questions. WHY's three misses all disappear when it is given hand-written assumptions, so extraction is where the remaining errors come from.
+Then the surprise. A variant that makes **one** question-keyed recall, instead of one per assumption, also scored 23 of 26. It missed the Snowflake note on one of the two Postgres questions and found it on the other. With 37 records, one recall already finds most of what matters. The per-assumption recall is still what makes the trace readable, but the accuracy comes from the decision layer: assumptions, dates, grounded citations and fixed rules.
 
-Performance: a question takes a median of **3.4 seconds** end to end, with 1 LLM call, about 2,350 tokens and 5–6 Hindsight recalls. Recall itself is around 450 ms and scaled from 1.3 to 10 recalls per second as I raised concurrency from 1 to 8. On a free LLM tier the request-rate limit is the bottleneck, not memory. That's also why the tripwire judges all candidate decisions in one LLM call instead of one call each.
+Real data was humbling too. On GOV.UK's 38 published ADRs from [alphagov/govuk-aws](https://github.com/alphagov/govuk-aws), extraction held up: 109 assumptions grounded in verbatim quotes, only 3 rejected. Judging which decisions GOV.UK later reversed did not. On 8 decisions, the model I benchmarked caught 1 of 3 reversals and left all 5 untouched decisions alone; another model caught 2 of 3 but flagged 4 decisions nobody changed. I report both runs. Eight cases can't yet separate WHY from the model it runs on.
+
+A question takes a median of **3.4 seconds** end to end, with one LLM call and five or six Hindsight recalls. Memory isn't the bottleneck: recall throughput rose from 1.3 to 10 per second as concurrency went from 1 to 8.
 
 ## What I learned
 
-1. **Store the conditions, not just the decision.** The decision text is what everyone retrieves. The assumptions are what change.
-2. **Dates are part of the evidence.** Filtering to "recorded after the decision" removed a whole class of wrong answers, and it only works because Hindsight retains real timestamps.
-3. **Let code have the last word.** A narrow LLM judgment plus deterministic rules gave me behavior I could test and explain, and a place to catch invented citations.
-4. **Measure the behavior, not the retrieval.** My evaluation asks whether the verdict changes correctly: false reuse, flips after new evidence, questions that assume the old answer ("like payments did, right?").
-5. **Report the result that surprised you.** My ablation with a single question-keyed recall scored as well as the two-stage version on this corpus (23 of 26 each). With 37 records, one recall already finds most of what matters. The value I can defend is the decision layer on top of memory, not a cleverer retriever.
+1. **Store the conditions, not just the decision.** Everyone retrieves the decision. The assumptions are what change.
+2. **Dates are evidence.** "Recorded after the decision" removes a whole class of wrong answers, and it only works because Hindsight retains real timestamps.
+3. **Let code have the last word.** A narrow LLM judgment plus fixed rules gave me behavior I could test, explain, and audit for invented citations.
+4. **Measure the decision, not the retrieval.** Scoring verdicts, flips and leading questions ("like payments did, right?") told me more than any recall metric.
+5. **Run the ablation you don't want to run.** Mine showed my favorite idea wasn't where the accuracy came from, which was worth knowing before I claimed it.
 
 ## Limitations
 
-The extractor finds the right premises but sometimes rates a minor one as critical, which turns an ADAPT into a RECONSIDER. It is the main source of wrong verdicts. And if a change was never written down anywhere, WHY can't know about it: it labels those assumptions "no change recorded", never "confirmed", so the gap is at least visible.
+If a change was never written down, WHY can't know. It labels those assumptions "no change recorded", never "confirmed", so the gap is at least visible.
 
 ## Links
 
-- [Hindsight on GitHub](https://github.com/vectorize-io/hindsight), the agent memory layer used here
+- [Hindsight on GitHub](https://github.com/vectorize-io/hindsight): the agent memory layer used here
 - [Hindsight documentation](https://hindsight.vectorize.io/) for retain, recall and reflect
 - [What is agent memory?](https://vectorize.io/what-is-agent-memory) from Vectorize
 - WHY source code: https://github.com/aryan-nampally/WHY-decision_agent

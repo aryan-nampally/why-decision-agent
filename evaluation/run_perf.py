@@ -143,4 +143,4 @@ if __name__ == "__main__":
     ap.add_argument("--rpm", type=float, default=0, help="LLM requests-per-minute limit, if that binds instead (Cerebras free: 5)")
     ap.add_argument("--pace", type=float, default=25.0, help="seconds between end-to-end questions (0 = back-to-back)")
     a = ap.parse_args()
-    asyncio.run(main(a.model, a.e2e, a.tpm, a.pace, a.rpm))
+    asyncio.run(memory.closing(main(a.model, a.e2e, a.tpm, a.pace, a.rpm)))

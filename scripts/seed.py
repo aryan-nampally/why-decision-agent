@@ -67,4 +67,4 @@ if __name__ == "__main__":
     ap.add_argument("--extract", action="store_true")
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
-    asyncio.run(extract_only(args.force) if args.extract else seed())
+    asyncio.run(memory.closing(extract_only(args.force) if args.extract else seed()))
