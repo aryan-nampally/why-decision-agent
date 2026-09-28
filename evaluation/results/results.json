@@ -1,181 +1,29 @@
 {
-  "run_at": "2026-09-28T11:15:55+00:00",
+  "run_at": "2026-09-28T12:03:31+00:00",
   "model": "gpt-oss-120b",
   "extraction_model": "openai/gpt-oss-120b (cached in data/extracted/)",
   "note": null,
-  "git_commit": null,
+  "git_commit": "9c2d1a2",
   "n_cases": 26,
   "conditions": {
     "C": {
       "all": {
         "verdict_accuracy": {
-          "x": 21,
+          "x": 23,
           "n": 26,
-          "rate": 0.808,
+          "rate": 0.885,
           "ci95": [
-            0.621,
-            0.915
+            0.71,
+            0.96
           ]
         },
         "precedent_hit@1": {
-          "x": 22,
+          "x": 23,
           "n": 23,
-          "rate": 0.957,
-          "ci95": [
-            0.79,
-            0.992
-          ]
-        },
-        "false_reuse_rate": {
-          "x": 0,
-          "n": 16,
-          "rate": 0.0,
-          "ci95": [
-            0.0,
-            0.194
-          ]
-        },
-        "false_reconsider_rate": {
-          "x": 1,
-          "n": 7,
-          "rate": 0.143,
-          "ci95": [
-            0.026,
-            0.513
-          ]
-        },
-        "repeat_error_rate": {
-          "x": 0,
-          "n": 3,
-          "rate": 0.0,
-          "ci95": [
-            0.0,
-            0.562
-          ]
-        },
-        "premise_accuracy": {
-          "x": 4,
-          "n": 6,
-          "rate": 0.667,
-          "ci95": [
-            0.3,
-            0.903
-          ]
-        },
-        "median_ms": 13324,
-        "errors": 0,
-        "flip_accuracy": {
-          "x": 1,
-          "n": 3,
-          "rate": 0.333,
-          "ci95": [
-            0.061,
-            0.792
-          ]
-        },
-        "assumption_detection": {
-          "tp": 19,
-          "predicted": 22,
-          "gold": 23,
-          "precision": 0.864,
-          "recall": 0.826,
-          "f1": 0.844
-        }
-      },
-      "test_split": {
-        "verdict_accuracy": {
-          "x": 18,
-          "n": 21,
-          "rate": 0.857,
-          "ci95": [
-            0.654,
-            0.95
-          ]
-        },
-        "precedent_hit@1": {
-          "x": 19,
-          "n": 19,
           "rate": 1.0,
           "ci95": [
-            0.832,
+            0.857,
             1.0
-          ]
-        },
-        "false_reuse_rate": {
-          "x": 0,
-          "n": 14,
-          "rate": 0.0,
-          "ci95": [
-            0.0,
-            0.215
-          ]
-        },
-        "false_reconsider_rate": {
-          "x": 0,
-          "n": 5,
-          "rate": 0.0,
-          "ci95": [
-            -0.0,
-            0.434
-          ]
-        },
-        "repeat_error_rate": {
-          "x": 0,
-          "n": 2,
-          "rate": 0.0,
-          "ci95": [
-            0.0,
-            0.658
-          ]
-        },
-        "premise_accuracy": {
-          "x": 2,
-          "n": 3,
-          "rate": 0.667,
-          "ci95": [
-            0.208,
-            0.939
-          ]
-        },
-        "median_ms": 13324,
-        "errors": 0,
-        "flip_accuracy": {
-          "x": 1,
-          "n": 1,
-          "rate": 1.0,
-          "ci95": [
-            0.207,
-            1.0
-          ]
-        },
-        "assumption_detection": {
-          "tp": 16,
-          "predicted": 17,
-          "gold": 19,
-          "precision": 0.941,
-          "recall": 0.842,
-          "f1": 0.889
-        }
-      }
-    },
-    "C-oracle": {
-      "all": {
-        "verdict_accuracy": {
-          "x": 22,
-          "n": 26,
-          "rate": 0.846,
-          "ci95": [
-            0.665,
-            0.939
-          ]
-        },
-        "precedent_hit@1": {
-          "x": 22,
-          "n": 23,
-          "rate": 0.957,
-          "ci95": [
-            0.79,
-            0.992
           ]
         },
         "false_reuse_rate": {
@@ -188,12 +36,12 @@
           ]
         },
         "false_reconsider_rate": {
-          "x": 1,
+          "x": 0,
           "n": 7,
-          "rate": 0.143,
+          "rate": 0.0,
           "ci95": [
-            0.026,
-            0.513
+            0.0,
+            0.354
           ]
         },
         "repeat_error_rate": {
@@ -214,34 +62,34 @@
             0.97
           ]
         },
-        "median_ms": 13298,
+        "median_ms": 13358,
         "errors": 0,
         "flip_accuracy": {
-          "x": 1,
+          "x": 3,
           "n": 3,
-          "rate": 0.333,
+          "rate": 1.0,
           "ci95": [
-            0.061,
-            0.792
+            0.438,
+            1.0
           ]
         },
         "assumption_detection": {
-          "tp": 21,
-          "predicted": 23,
+          "tp": 18,
+          "predicted": 20,
           "gold": 23,
-          "precision": 0.913,
-          "recall": 0.913,
-          "f1": 0.913
+          "precision": 0.9,
+          "recall": 0.783,
+          "f1": 0.837
         }
       },
       "test_split": {
         "verdict_accuracy": {
-          "x": 19,
+          "x": 18,
           "n": 21,
-          "rate": 0.905,
+          "rate": 0.857,
           "ci95": [
-            0.711,
-            0.973
+            0.654,
+            0.95
           ]
         },
         "precedent_hit@1": {
@@ -281,15 +129,15 @@
           ]
         },
         "premise_accuracy": {
-          "x": 3,
+          "x": 2,
           "n": 3,
-          "rate": 1.0,
+          "rate": 0.667,
           "ci95": [
-            0.438,
-            1.0
+            0.208,
+            0.939
           ]
         },
-        "median_ms": 13303,
+        "median_ms": 13370,
         "errors": 0,
         "flip_accuracy": {
           "x": 1,
@@ -301,12 +149,164 @@
           ]
         },
         "assumption_detection": {
-          "tp": 17,
-          "predicted": 17,
+          "tp": 15,
+          "predicted": 16,
+          "gold": 19,
+          "precision": 0.938,
+          "recall": 0.789,
+          "f1": 0.857
+        }
+      }
+    },
+    "C-oracle": {
+      "all": {
+        "verdict_accuracy": {
+          "x": 25,
+          "n": 26,
+          "rate": 0.962,
+          "ci95": [
+            0.811,
+            0.993
+          ]
+        },
+        "precedent_hit@1": {
+          "x": 23,
+          "n": 23,
+          "rate": 1.0,
+          "ci95": [
+            0.857,
+            1.0
+          ]
+        },
+        "false_reuse_rate": {
+          "x": 0,
+          "n": 16,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.194
+          ]
+        },
+        "false_reconsider_rate": {
+          "x": 0,
+          "n": 7,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.354
+          ]
+        },
+        "repeat_error_rate": {
+          "x": 0,
+          "n": 3,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.562
+          ]
+        },
+        "premise_accuracy": {
+          "x": 6,
+          "n": 6,
+          "rate": 1.0,
+          "ci95": [
+            0.61,
+            1.0
+          ]
+        },
+        "median_ms": 13287,
+        "errors": 0,
+        "flip_accuracy": {
+          "x": 2,
+          "n": 3,
+          "rate": 0.667,
+          "ci95": [
+            0.208,
+            0.939
+          ]
+        },
+        "assumption_detection": {
+          "tp": 22,
+          "predicted": 22,
+          "gold": 23,
+          "precision": 1.0,
+          "recall": 0.957,
+          "f1": 0.978
+        }
+      },
+      "test_split": {
+        "verdict_accuracy": {
+          "x": 20,
+          "n": 21,
+          "rate": 0.952,
+          "ci95": [
+            0.773,
+            0.992
+          ]
+        },
+        "precedent_hit@1": {
+          "x": 19,
+          "n": 19,
+          "rate": 1.0,
+          "ci95": [
+            0.832,
+            1.0
+          ]
+        },
+        "false_reuse_rate": {
+          "x": 0,
+          "n": 14,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.215
+          ]
+        },
+        "false_reconsider_rate": {
+          "x": 0,
+          "n": 5,
+          "rate": 0.0,
+          "ci95": [
+            -0.0,
+            0.434
+          ]
+        },
+        "repeat_error_rate": {
+          "x": 0,
+          "n": 2,
+          "rate": 0.0,
+          "ci95": [
+            0.0,
+            0.658
+          ]
+        },
+        "premise_accuracy": {
+          "x": 3,
+          "n": 3,
+          "rate": 1.0,
+          "ci95": [
+            0.438,
+            1.0
+          ]
+        },
+        "median_ms": 13274,
+        "errors": 0,
+        "flip_accuracy": {
+          "x": 1,
+          "n": 1,
+          "rate": 1.0,
+          "ci95": [
+            0.207,
+            1.0
+          ]
+        },
+        "assumption_detection": {
+          "tp": 18,
+          "predicted": 18,
           "gold": 19,
           "precision": 1.0,
-          "recall": 0.895,
-          "f1": 0.944
+          "recall": 0.947,
+          "f1": 0.973
         }
       }
     },
@@ -873,21 +873,21 @@
     "C-1stage": {
       "all": {
         "verdict_accuracy": {
-          "x": 22,
+          "x": 23,
           "n": 26,
-          "rate": 0.846,
+          "rate": 0.885,
           "ci95": [
-            0.665,
-            0.939
+            0.71,
+            0.96
           ]
         },
         "precedent_hit@1": {
-          "x": 22,
+          "x": 23,
           "n": 23,
-          "rate": 0.957,
+          "rate": 1.0,
           "ci95": [
-            0.79,
-            0.992
+            0.857,
+            1.0
           ]
         },
         "false_reuse_rate": {
@@ -900,12 +900,12 @@
           ]
         },
         "false_reconsider_rate": {
-          "x": 1,
+          "x": 0,
           "n": 7,
-          "rate": 0.143,
+          "rate": 0.0,
           "ci95": [
-            0.026,
-            0.513
+            0.0,
+            0.354
           ]
         },
         "repeat_error_rate": {
@@ -926,24 +926,24 @@
             0.97
           ]
         },
-        "median_ms": 13597,
+        "median_ms": 13347,
         "errors": 0,
         "flip_accuracy": {
-          "x": 2,
+          "x": 3,
           "n": 3,
-          "rate": 0.667,
+          "rate": 1.0,
           "ci95": [
-            0.208,
-            0.939
+            0.438,
+            1.0
           ]
         },
         "assumption_detection": {
           "tp": 19,
-          "predicted": 21,
+          "predicted": 20,
           "gold": 23,
-          "precision": 0.905,
+          "precision": 0.95,
           "recall": 0.826,
-          "f1": 0.864
+          "f1": 0.884
         }
       },
       "test_split": {
@@ -1001,7 +1001,7 @@
             0.939
           ]
         },
-        "median_ms": 13597,
+        "median_ms": 13368,
         "errors": 0,
         "flip_accuracy": {
           "x": 1,
@@ -1719,36 +1719,6 @@
     },
     {
       "case": "C01",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-007",
-      "broken": [
-        "?A3",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 15,
-      "headline": "1 critical assumption behind ADR-007 no longer holds.",
-      "ms": 2412
-    },
-    {
-      "case": "C01",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-007",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "2 critical assumptions behind ADR-007 no longer hold.",
-      "ms": 13044
-    },
-    {
-      "case": "C01",
       "condition": "B2",
       "model": "gpt-oss-120b",
       "verdict": "REUSE",
@@ -1767,51 +1737,6 @@
       "broken": null,
       "answer": "Yes, PostgreSQL should work for the customs\u2011duty ledger as it did for the payments ledger; the expected 1.2k writes per second is within its proven capacity, so you can reuse the same approach.",
       "ms": 13294
-    },
-    {
-      "case": "C01",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-007",
-      "broken": [
-        "?A3",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-007 no longer holds.",
-      "ms": 13994
-    },
-    {
-      "case": "C02",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-007",
-      "broken": [
-        "?A3",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 15,
-      "headline": "1 critical assumption behind ADR-007 no longer holds.",
-      "ms": 13520
-    },
-    {
-      "case": "C02",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-007",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "2 critical assumptions behind ADR-007 no longer hold.",
-      "ms": 12849
     },
     {
       "case": "C02",
@@ -1836,49 +1761,6 @@
       "broken": null,
       "answer": "A single Postgres primary on RDS may struggle with the write\u2011intensive, high\u2011availability demands of ledger data in the carrier\u2011payouts rebuild. Consider a multi\u2011AZ cluster, read replicas, or a purpose\u2011built distributed ledger store to ensure durability, scaling, and fault tolerance.",
       "ms": 13294
-    },
-    {
-      "case": "C02",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-007",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-007 no longer holds.",
-      "ms": 13659
-    },
-    {
-      "case": "C03",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-012",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
-      "ms": 13187
-    },
-    {
-      "case": "C03",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-012",
-      "broken": [
-        "A1",
-        "A3"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
-      "ms": 13364
     },
     {
       "case": "C03",
@@ -1906,49 +1788,6 @@
       "ms": 13293
     },
     {
-      "case": "C03",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-012",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
-      "ms": 13545
-    },
-    {
-      "case": "C04",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-012",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
-      "ms": 13444
-    },
-    {
-      "case": "C04",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-012",
-      "broken": [
-        "A1",
-        "A3"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
-      "ms": 13348
-    },
-    {
       "case": "C04",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -1973,48 +1812,6 @@
       "ms": 13272
     },
     {
-      "case": "C04",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-012",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
-      "ms": 13660
-    },
-    {
-      "case": "C05",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-015",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 15,
-      "headline": "1 critical assumption behind ADR-015 no longer holds.",
-      "ms": 13294
-    },
-    {
-      "case": "C05",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-015",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-015 still applies, but 1 supporting condition changed.",
-      "ms": 13476
-    },
-    {
       "case": "C05",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2034,48 +1831,6 @@
       "broken": null,
       "answer": "Yes, the returns team can reuse the same MSK (Managed Streaming for Kafka) setup that shipment tracking uses for its event stream, as the requirements are similar.",
       "ms": 12794
-    },
-    {
-      "case": "C05",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-015",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-015 no longer holds.",
-      "ms": 13502
-    },
-    {
-      "case": "C06",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-015",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 15,
-      "headline": "1 critical assumption behind ADR-015 no longer holds.",
-      "ms": 13265
-    },
-    {
-      "case": "C06",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-015",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-015 still applies, but 1 supporting condition changed.",
-      "ms": 13340
     },
     {
       "case": "C06",
@@ -2102,49 +1857,6 @@
       "ms": 13205
     },
     {
-      "case": "C06",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-015",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-015 no longer holds.",
-      "ms": 13579
-    },
-    {
-      "case": "C07",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-012",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
-      "ms": 13338
-    },
-    {
-      "case": "C07",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-012",
-      "broken": [
-        "A1",
-        "A3"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
-      "ms": 13324
-    },
-    {
       "case": "C07",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2166,44 +1878,6 @@
       "ms": 12572
     },
     {
-      "case": "C07",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-012",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
-      "ms": 13567
-    },
-    {
-      "case": "C08",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-019",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13324
-    },
-    {
-      "case": "C08",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-019",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13206
-    },
-    {
       "case": "C08",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2223,44 +1897,6 @@
       "broken": null,
       "answer": "You can invoke the customs\u2011duty service synchronously during booking, but you should add timeout handling and fallback logic to avoid blocking the booking flow if the service is slow or unavailable. Consider wrapping the call in a retry or circuit\u2011breaker pattern and optionally falling back to an asynchronous update if the response exceeds your latency SLA.",
       "ms": 13278
-    },
-    {
-      "case": "C08",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-019",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13535
-    },
-    {
-      "case": "C09",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-019",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "1 critical assumption behind ADR-019 no longer holds.",
-      "ms": 13405
-    },
-    {
-      "case": "C09",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-019",
-      "broken": [],
-      "grounding_removals": 1,
-      "n_evidence": 9,
-      "headline": "ADR-019 likely applies, but a critical condition cannot be confirmed.",
-      "ms": 13509
     },
     {
       "case": "C09",
@@ -2286,48 +1922,6 @@
       "ms": 13286
     },
     {
-      "case": "C09",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-019",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-019 no longer holds.",
-      "ms": 13722
-    },
-    {
-      "case": "C10",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-021",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 14,
-      "headline": "1 critical assumption behind ADR-021 no longer holds.",
-      "ms": 13185
-    },
-    {
-      "case": "C10",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-021",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "1 critical assumption behind ADR-021 no longer holds.",
-      "ms": 13303
-    },
-    {
       "case": "C10",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2349,48 +1943,6 @@
       "ms": 13430
     },
     {
-      "case": "C10",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-021",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-021 no longer holds.",
-      "ms": 13416
-    },
-    {
-      "case": "C11",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-021",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 14,
-      "headline": "1 critical assumption behind ADR-021 no longer holds.",
-      "ms": 13455
-    },
-    {
-      "case": "C11",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-021",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "1 critical assumption behind ADR-021 no longer holds.",
-      "ms": 13109
-    },
-    {
       "case": "C11",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2410,44 +1962,6 @@
       "broken": null,
       "answer": "Yes, you can reuse the existing Keycloak configuration for the partner portal just as you did for the shipper portal, assuming the same authentication requirements apply.",
       "ms": 13339
-    },
-    {
-      "case": "C11",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-021",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-021 no longer holds.",
-      "ms": 13597
-    },
-    {
-      "case": "C12",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-027",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "ADR-027 likely applies, but a critical condition cannot be confirmed.",
-      "ms": 13979
-    },
-    {
-      "case": "C12",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-027",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-027 likely applies, but a critical condition cannot be confirmed.",
-      "ms": 13156
     },
     {
       "case": "C12",
@@ -2473,42 +1987,6 @@
       "ms": 13107
     },
     {
-      "case": "C12",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-027",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13543
-    },
-    {
-      "case": "C13",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-027",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13341
-    },
-    {
-      "case": "C13",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-027",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13220
-    },
-    {
       "case": "C13",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2530,46 +2008,6 @@
       "ms": 13303
     },
     {
-      "case": "C13",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-027",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13497
-    },
-    {
-      "case": "C14",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-031",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 15,
-      "headline": "ADR-031 still applies, but 2 supporting conditions changed.",
-      "ms": 13439
-    },
-    {
-      "case": "C14",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-031",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-031 still applies, but 1 supporting condition changed.",
-      "ms": 13277
-    },
-    {
       "case": "C14",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2589,48 +2027,6 @@
       "broken": null,
       "answer": "Credit notes can be produced in the same nightly batch as invoices, but you should adjust the batch logic to handle negative line items, ensure proper tax reversal, and flag them for downstream accounting reconciliation.",
       "ms": 13269
-    },
-    {
-      "case": "C14",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-031",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-031 still applies, but 2 supporting conditions changed.",
-      "ms": 13696
-    },
-    {
-      "case": "C15",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-031",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 15,
-      "headline": "ADR-031 still applies, but 2 supporting conditions changed.",
-      "ms": 13235
-    },
-    {
-      "case": "C15",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-031",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-031 still applies, but 1 supporting condition changed.",
-      "ms": 13308
     },
     {
       "case": "C15",
@@ -2658,46 +2054,6 @@
       "ms": 13536
     },
     {
-      "case": "C15",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-031",
-      "broken": [
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-031 still applies, but 2 supporting conditions changed.",
-      "ms": 13543
-    },
-    {
-      "case": "C16",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-034",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 13,
-      "headline": "ADR-034 still applies, but 1 supporting condition changed.",
-      "ms": 13261
-    },
-    {
-      "case": "C16",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-034",
-      "broken": [],
-      "grounding_removals": 1,
-      "n_evidence": 9,
-      "headline": "ADR-034 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13168
-    },
-    {
       "case": "C16",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2721,44 +2077,6 @@
       "ms": 13413
     },
     {
-      "case": "C16",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-034",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-034 still applies, but 1 supporting condition changed.",
-      "ms": 13613
-    },
-    {
-      "case": "C17",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-034",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 13,
-      "headline": "ADR-034 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13190
-    },
-    {
-      "case": "C17",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-034",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-034 still applies: no recorded change contradicts its assumptions.",
-      "ms": 14112
-    },
-    {
       "case": "C17",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2778,42 +2096,6 @@
       "broken": null,
       "answer": "Use the same managed feature\u2011flag service as a baseline, but adapt it for the driver app\u2019s specific needs (e.g., offline support, mobile\u2011specific flags) to ensure consistent rollout while handling its unique constraints.",
       "ms": 13390
-    },
-    {
-      "case": "C17",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-034",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-034 still applies: no recorded change contradicts its assumptions.",
-      "ms": 14423
-    },
-    {
-      "case": "C18",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-009",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "ADR-009 still applies: no recorded change contradicts its assumptions.",
-      "ms": 12366
-    },
-    {
-      "case": "C18",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-009",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-009 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13366
     },
     {
       "case": "C18",
@@ -2837,42 +2119,6 @@
       "ms": 13222
     },
     {
-      "case": "C18",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-009",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-009 still applies: no recorded change contradicts its assumptions.",
-      "ms": 14498
-    },
-    {
-      "case": "C19",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-024",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "ADR-024 still applies: no recorded change contradicts its assumptions.",
-      "ms": 12441
-    },
-    {
-      "case": "C19",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-024",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-024 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13146
-    },
-    {
       "case": "C19",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -2892,46 +2138,6 @@
       "broken": null,
       "answer": "It can live in the frontend monorepo, but you should adapt the repo structure to accommodate the dashboard\u2019s specific dependencies, build pipeline, and deployment cadence to avoid bloating the monorepo.",
       "ms": 13290
-    },
-    {
-      "case": "C19",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "REUSE",
-      "precedent": "ADR-024",
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "ADR-024 still applies: no recorded change contradicts its assumptions.",
-      "ms": 13677
-    },
-    {
-      "case": "C20",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-009",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "1 critical assumption behind ADR-009 no longer holds.",
-      "ms": 13187
-    },
-    {
-      "case": "C20",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "ADAPT",
-      "precedent": "ADR-009",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "ADR-009 still applies, but 1 supporting condition changed.",
-      "ms": 13393
     },
     {
       "case": "C20",
@@ -2955,44 +2161,6 @@
       "ms": 13212
     },
     {
-      "case": "C20",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-009",
-      "broken": [
-        "A1"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "1 critical assumption behind ADR-009 no longer holds.",
-      "ms": 13607
-    },
-    {
-      "case": "C21",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "INSUFFICIENT_EVIDENCE",
-      "precedent": null,
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 0,
-      "headline": "Closest memory (ADR-021: Identity provider for shipper and staff logins) does not address this question.",
-      "ms": 13324
-    },
-    {
-      "case": "C21",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "INSUFFICIENT_EVIDENCE",
-      "precedent": null,
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 0,
-      "headline": "Closest memory (ADR-021: Identity provider for shipper and staff logins) does not address this question.",
-      "ms": 13230
-    },
-    {
       "case": "C21",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -3012,42 +2180,6 @@
       "broken": null,
       "answer": "Without details on your team's expertise, performance requirements, and integration needs, I can't recommend React Native vs. Flutter. Provide more context to evaluate the best fit.",
       "ms": 13248
-    },
-    {
-      "case": "C21",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "INSUFFICIENT_EVIDENCE",
-      "precedent": null,
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 0,
-      "headline": "Closest memory (ADR-021: Identity provider for shipper and staff logins) does not address this question.",
-      "ms": 13540
-    },
-    {
-      "case": "C22",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "INSUFFICIENT_EVIDENCE",
-      "precedent": null,
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 0,
-      "headline": "Closest memory (ADR-021: Identity provider for shipper and staff logins) does not address this question.",
-      "ms": 13506
-    },
-    {
-      "case": "C22",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "INSUFFICIENT_EVIDENCE",
-      "precedent": null,
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 0,
-      "headline": "Closest memory (ADR-021: Identity provider for shipper and staff logins) does not address this question.",
-      "ms": 13093
     },
     {
       "case": "C22",
@@ -3071,42 +2203,6 @@
       "ms": 13277
     },
     {
-      "case": "C22",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "INSUFFICIENT_EVIDENCE",
-      "precedent": null,
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 0,
-      "headline": "Closest memory (ADR-021: Identity provider for shipper and staff logins) does not address this question.",
-      "ms": 13533
-    },
-    {
-      "case": "C23",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "INSUFFICIENT_EVIDENCE",
-      "precedent": null,
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 0,
-      "headline": "Closest memory (ADR-012: Caching strategy for the rate-quote API) does not address this question.",
-      "ms": 13345
-    },
-    {
-      "case": "C23",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "INSUFFICIENT_EVIDENCE",
-      "precedent": null,
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 0,
-      "headline": "Closest memory (ADR-012: Caching strategy for the rate-quote API) does not address this question.",
-      "ms": 13473
-    },
-    {
       "case": "C23",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -3126,48 +2222,6 @@
       "broken": null,
       "answer": "Without data on our current API performance, shipper requirements, and team expertise, we can't determine if GraphQL is the right fit. Gather metrics and stakeholder input before deciding.",
       "ms": 13464
-    },
-    {
-      "case": "C23",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "INSUFFICIENT_EVIDENCE",
-      "precedent": null,
-      "broken": [],
-      "grounding_removals": 0,
-      "n_evidence": 0,
-      "headline": "Closest memory (ADR-012: Caching strategy for the rate-quote API) does not address this question.",
-      "ms": 13348
-    },
-    {
-      "case": "C24",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-027",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
-      "ms": 3247
-    },
-    {
-      "case": "C24",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-027",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "1 critical assumption behind ADR-027 no longer holds; PM-2024-11 records this approach failing.",
-      "ms": 13054
     },
     {
       "case": "C24",
@@ -3192,51 +2246,6 @@
       "broken": null,
       "answer": "Yes\u2014apply the same exponential backoff with up to 5 retries for the customs\u2011broker integration, mirroring the carrier integration\u2019s proven resilience strategy.",
       "ms": 13234
-    },
-    {
-      "case": "C24",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-027",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
-      "ms": 13697
-    },
-    {
-      "case": "C25",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-027",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
-      "ms": 13364
-    },
-    {
-      "case": "C25",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-027",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "1 critical assumption behind ADR-027 no longer holds; PM-2024-11 records this approach failing.",
-      "ms": 13298
     },
     {
       "case": "C25",
@@ -3264,51 +2273,6 @@
       "ms": 13298
     },
     {
-      "case": "C25",
-      "condition": "C-1stage",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-027",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 6,
-      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
-      "ms": 13584
-    },
-    {
-      "case": "C26",
-      "condition": "C",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-027",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 12,
-      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
-      "ms": 13607
-    },
-    {
-      "case": "C26",
-      "condition": "C-oracle",
-      "model": "gpt-oss-120b",
-      "verdict": "RECONSIDER",
-      "precedent": "ADR-027",
-      "broken": [
-        "A1",
-        "A2"
-      ],
-      "grounding_removals": 0,
-      "n_evidence": 9,
-      "headline": "1 critical assumption behind ADR-027 no longer holds; PM-2024-11 records this approach failing.",
-      "ms": 12961
-    },
-    {
       "case": "C26",
       "condition": "B2",
       "model": "gpt-oss-120b",
@@ -3334,6 +2298,1035 @@
       "ms": 13240
     },
     {
+      "case": "C01",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-007",
+      "broken": [
+        "?A3",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 15,
+      "headline": "1 critical assumption behind ADR-007 no longer holds.",
+      "ms": 2967
+    },
+    {
+      "case": "C01",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-007",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "2 critical assumptions behind ADR-007 no longer hold.",
+      "ms": 14485
+    },
+    {
+      "case": "C01",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-007",
+      "broken": [
+        "?A3",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-007 no longer holds.",
+      "ms": 11973
+    },
+    {
+      "case": "C02",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-007",
+      "broken": [
+        "?A3",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 15,
+      "headline": "1 critical assumption behind ADR-007 no longer holds.",
+      "ms": 13464
+    },
+    {
+      "case": "C02",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-007",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "2 critical assumptions behind ADR-007 no longer hold.",
+      "ms": 13213
+    },
+    {
+      "case": "C02",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-007",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-007 no longer holds.",
+      "ms": 14430
+    },
+    {
+      "case": "C03",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-012",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
+      "ms": 12199
+    },
+    {
+      "case": "C03",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-012",
+      "broken": [
+        "A1",
+        "A3"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
+      "ms": 13602
+    },
+    {
+      "case": "C03",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-012",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
+      "ms": 13087
+    },
+    {
+      "case": "C04",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-012",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
+      "ms": 13338
+    },
+    {
+      "case": "C04",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-012",
+      "broken": [
+        "A1",
+        "A3"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
+      "ms": 13312
+    },
+    {
+      "case": "C04",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-012",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-012 no longer holds; PM-2025-02 records this approach failing.",
+      "ms": 13373
+    },
+    {
+      "case": "C05",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-015",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 15,
+      "headline": "1 critical assumption behind ADR-015 no longer holds.",
+      "ms": 13452
+    },
+    {
+      "case": "C05",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-015",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-015 still applies, but 1 supporting condition changed.",
+      "ms": 13274
+    },
+    {
+      "case": "C05",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-015",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-015 no longer holds.",
+      "ms": 13368
+    },
+    {
+      "case": "C06",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-015",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 15,
+      "headline": "1 critical assumption behind ADR-015 no longer holds.",
+      "ms": 13627
+    },
+    {
+      "case": "C06",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-015",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-015 still applies, but 1 supporting condition changed.",
+      "ms": 12958
+    },
+    {
+      "case": "C06",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-015",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-015 no longer holds.",
+      "ms": 13385
+    },
+    {
+      "case": "C07",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-019",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13337
+    },
+    {
+      "case": "C07",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-019",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13352
+    },
+    {
+      "case": "C07",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-019",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13346
+    },
+    {
+      "case": "C08",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-019",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13443
+    },
+    {
+      "case": "C08",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-019",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13168
+    },
+    {
+      "case": "C08",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-019",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-019 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13407
+    },
+    {
+      "case": "C09",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-019",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "1 critical assumption behind ADR-019 no longer holds.",
+      "ms": 13524
+    },
+    {
+      "case": "C09",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-019",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-019 likely applies, but a critical condition cannot be confirmed.",
+      "ms": 13422
+    },
+    {
+      "case": "C09",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-019",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-019 no longer holds.",
+      "ms": 13202
+    },
+    {
+      "case": "C10",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-021",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 14,
+      "headline": "1 critical assumption behind ADR-021 no longer holds.",
+      "ms": 13315
+    },
+    {
+      "case": "C10",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-021",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "1 critical assumption behind ADR-021 no longer holds.",
+      "ms": 13363
+    },
+    {
+      "case": "C10",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-021",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-021 no longer holds.",
+      "ms": 13285
+    },
+    {
+      "case": "C11",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-021",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 14,
+      "headline": "1 critical assumption behind ADR-021 no longer holds.",
+      "ms": 13269
+    },
+    {
+      "case": "C11",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-021",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "1 critical assumption behind ADR-021 no longer holds.",
+      "ms": 14421
+    },
+    {
+      "case": "C11",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-021",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-021 no longer holds.",
+      "ms": 12332
+    },
+    {
+      "case": "C12",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-027",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13435
+    },
+    {
+      "case": "C12",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-027",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13258
+    },
+    {
+      "case": "C12",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-027",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13205
+    },
+    {
+      "case": "C13",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-027",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13644
+    },
+    {
+      "case": "C13",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-027",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13458
+    },
+    {
+      "case": "C13",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-027",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-027 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13520
+    },
+    {
+      "case": "C14",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-031",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 15,
+      "headline": "ADR-031 still applies, but 2 supporting conditions changed.",
+      "ms": 12859
+    },
+    {
+      "case": "C14",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-031",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-031 still applies, but 1 supporting condition changed.",
+      "ms": 13229
+    },
+    {
+      "case": "C14",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-031",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-031 still applies, but 2 supporting conditions changed.",
+      "ms": 13643
+    },
+    {
+      "case": "C15",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-031",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 15,
+      "headline": "ADR-031 still applies, but 2 supporting conditions changed.",
+      "ms": 13108
+    },
+    {
+      "case": "C15",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-031",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-031 still applies, but 1 supporting condition changed.",
+      "ms": 13663
+    },
+    {
+      "case": "C15",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-031",
+      "broken": [
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-031 still applies, but 2 supporting conditions changed.",
+      "ms": 13065
+    },
+    {
+      "case": "C16",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-034",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 13,
+      "headline": "ADR-034 still applies, but 1 supporting condition changed.",
+      "ms": 13325
+    },
+    {
+      "case": "C16",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-034",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-034 still applies, but 1 supporting condition changed.",
+      "ms": 13189
+    },
+    {
+      "case": "C16",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-034",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-034 still applies, but 1 supporting condition changed.",
+      "ms": 13464
+    },
+    {
+      "case": "C17",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-034",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 13,
+      "headline": "ADR-034 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13482
+    },
+    {
+      "case": "C17",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-034",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-034 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13160
+    },
+    {
+      "case": "C17",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-034",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-034 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13548
+    },
+    {
+      "case": "C18",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-009",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "ADR-009 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13151
+    },
+    {
+      "case": "C18",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-009",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-009 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13287
+    },
+    {
+      "case": "C18",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-009",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-009 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13318
+    },
+    {
+      "case": "C19",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-024",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "ADR-024 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13393
+    },
+    {
+      "case": "C19",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-024",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-024 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13261
+    },
+    {
+      "case": "C19",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-024",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "ADR-024 still applies: no recorded change contradicts its assumptions.",
+      "ms": 13578
+    },
+    {
+      "case": "C20",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "REUSE",
+      "precedent": "ADR-009",
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "ADR-009 still applies: no recorded change contradicts its assumptions.",
+      "ms": 14530
+    },
+    {
+      "case": "C20",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "ADAPT",
+      "precedent": "ADR-009",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "ADR-009 still applies, but 1 supporting condition changed.",
+      "ms": 12246
+    },
+    {
+      "case": "C20",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-009",
+      "broken": [
+        "A1"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "1 critical assumption behind ADR-009 no longer holds.",
+      "ms": 13106
+    },
+    {
+      "case": "C21",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "precedent": null,
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 0,
+      "headline": "Closest memory (ADR-021: Identity provider for shipper and staff logins) does not address this question.",
+      "ms": 13358
+    },
+    {
+      "case": "C21",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "precedent": null,
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 0,
+      "headline": "Closest memory (ADR-021: Identity provider for shipper and staff logins) does not address this question.",
+      "ms": 13301
+    },
+    {
+      "case": "C21",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "precedent": null,
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 0,
+      "headline": "Closest memory (ADR-021: Identity provider for shipper and staff logins) does not address this question.",
+      "ms": 13337
+    },
+    {
+      "case": "C22",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "precedent": null,
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 0,
+      "headline": "Closest memory (ADR-007: Datastore for the payments ledger) does not address this question.",
+      "ms": 13531
+    },
+    {
+      "case": "C22",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "precedent": null,
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 0,
+      "headline": "Closest memory (ADR-007: Datastore for the payments ledger) does not address this question.",
+      "ms": 13169
+    },
+    {
+      "case": "C22",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "precedent": null,
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 0,
+      "headline": "Closest memory (ADR-007: Datastore for the payments ledger) does not address this question.",
+      "ms": 13347
+    },
+    {
+      "case": "C23",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "precedent": null,
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 0,
+      "headline": "Closest memory (ADR-024: Monorepo for web frontends) does not address this question.",
+      "ms": 13370
+    },
+    {
+      "case": "C23",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "precedent": null,
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 0,
+      "headline": "Closest memory (ADR-024: Monorepo for web frontends) does not address this question.",
+      "ms": 13178
+    },
+    {
+      "case": "C23",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "INSUFFICIENT_EVIDENCE",
+      "precedent": null,
+      "broken": [],
+      "grounding_removals": 0,
+      "n_evidence": 0,
+      "headline": "Closest memory (ADR-024: Monorepo for web frontends) does not address this question.",
+      "ms": 13418
+    },
+    {
+      "case": "C24",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-027",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
+      "ms": 11344
+    },
+    {
+      "case": "C24",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-027",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "1 critical assumption behind ADR-027 no longer holds; PM-2024-11 records this approach failing.",
+      "ms": 13736
+    },
+    {
+      "case": "C24",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-027",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
+      "ms": 12844
+    },
+    {
+      "case": "C25",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-027",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
+      "ms": 13224
+    },
+    {
+      "case": "C25",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-027",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "1 critical assumption behind ADR-027 no longer holds; PM-2024-11 records this approach failing.",
+      "ms": 13279
+    },
+    {
+      "case": "C25",
+      "condition": "C-1stage",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-027",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 6,
+      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
+      "ms": 13366
+    },
+    {
+      "case": "C26",
+      "condition": "C",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-027",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 12,
+      "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
+      "ms": 13358
+    },
+    {
+      "case": "C26",
+      "condition": "C-oracle",
+      "model": "gpt-oss-120b",
+      "verdict": "RECONSIDER",
+      "precedent": "ADR-027",
+      "broken": [
+        "A1",
+        "A2"
+      ],
+      "grounding_removals": 0,
+      "n_evidence": 9,
+      "headline": "1 critical assumption behind ADR-027 no longer holds; PM-2024-11 records this approach failing.",
+      "ms": 13931
+    },
+    {
       "case": "C26",
       "condition": "C-1stage",
       "model": "gpt-oss-120b",
@@ -3346,7 +3339,7 @@
       "grounding_removals": 0,
       "n_evidence": 6,
       "headline": "2 critical assumptions behind ADR-027 no longer hold; PM-2024-11 records this approach failing.",
-      "ms": 13637
+      "ms": 12698
     }
   ],
   "models": {
@@ -3375,31 +3368,31 @@
   "mcnemar_vs_C": {
     "C-oracle": {
       "other_right_C_wrong": 3,
-      "C_right_other_wrong": 2,
-      "p": 1.0
+      "C_right_other_wrong": 1,
+      "p": 0.625
     },
     "B3": {
-      "other_right_C_wrong": 4,
-      "C_right_other_wrong": 8,
-      "p": 0.3877
+      "other_right_C_wrong": 3,
+      "C_right_other_wrong": 9,
+      "p": 0.146
     },
     "B2": {
-      "other_right_C_wrong": 2,
-      "C_right_other_wrong": 10,
-      "p": 0.0386
+      "other_right_C_wrong": 1,
+      "C_right_other_wrong": 11,
+      "p": 0.0063
     },
     "A": {
-      "other_right_C_wrong": 2,
-      "C_right_other_wrong": 15,
-      "p": 0.0023
+      "other_right_C_wrong": 1,
+      "C_right_other_wrong": 16,
+      "p": 0.0003
     },
     "ALWAYS-R": {
       "other_right_C_wrong": 0,
-      "C_right_other_wrong": 11,
-      "p": 0.001
+      "C_right_other_wrong": 13,
+      "p": 0.0002
     },
     "C-1stage": {
-      "other_right_C_wrong": 1,
+      "other_right_C_wrong": 0,
       "C_right_other_wrong": 0,
       "p": 1.0
     }

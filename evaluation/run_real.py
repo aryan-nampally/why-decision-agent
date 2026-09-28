@@ -28,6 +28,7 @@ BANK = "why-govuk-real"
 SRC = DATA / "real" / "govuk-aws"
 CACHE = DATA / "extracted_govuk"
 TODAY = date(2022, 12, 1)
+EXTRACTION_MODEL = "qwen/qwen3.8-27b"
 MISSION = ("Organizational memory for GOV.UK's hosting platform. Remember infrastructure decisions, the conditions they "
            "relied on, and later decisions that changed them, so earlier decisions can be re-evaluated.")
 
@@ -110,7 +111,7 @@ def render(stats: dict, rows: list[dict], model: str) -> str:
     t = [r for r in rows if r["changed_later"]]
     c = [r for r in rows if not r["changed_later"]]
     L = ["# Real-data track — GOV.UK architecture decisions (2017–2022)", "",
-         f"Source: [alphagov/govuk-aws](https://github.com/alphagov/govuk-aws) (MIT). Model `{model}`. Evaluated as of {TODAY}. "
+         f"Source: [alphagov/govuk-aws](https://github.com/alphagov/govuk-aws) (MIT). Judge model `{model}`; assumptions extracted with `{EXTRACTION_MODEL}` (cached in data/extracted_govuk). Evaluated as of {TODAY}. "
          "Evidence for each decision = only ADRs dated after it. Pilot scale.", "",
          "## 1. Assumption extraction on real prose", "",
          f"- ADRs: {stats['adrs']} · grounded assumptions kept: {stats['assumptions']} ({stats['critical']} marked critical) · "
@@ -147,7 +148,7 @@ async def main(with_reflect: bool) -> None:
     rows = await evaluate(store, with_reflect)
     out = ROOT / "evaluation" / "results"
     out.mkdir(exist_ok=True)
-    report = {"run_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "model": llm.current_model(),
+    report = {"run_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "model": llm.current_model(), "extraction_model": EXTRACTION_MODEL,
               "as_of": TODAY.isoformat(), "extraction": stats, "rows": rows}
     (out / "real_govuk.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     md = render(stats, rows, llm.current_model())

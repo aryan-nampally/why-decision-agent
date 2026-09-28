@@ -53,6 +53,7 @@ Design rules that keep it auditable:
 - **Only later evidence counts.** Evidence dated before the decision was part of its context and cannot invalidate it.
 - **The LLM judges; code decides.** The model labels each assumption HOLDS / BROKEN / UNKNOWN with citations. Code drops citations it was never given, downgrades uncited BROKEN claims, and applies the verdict rules in `src/rules.py`. Adding contradicting evidence can never make WHY *more* confident in reuse (tested exhaustively in `tests/test_rules.py`).
 - **Fail safe.** If the model's output is invalid after one retry, every assumption becomes UNKNOWN, which yields ADAPT, never REUSE.
+- **An UNKNOWN must point at something.** The judge may call an assumption UNKNOWN only when evidence addresses it ambiguously. An UNKNOWN that cites no evidence means nothing in memory addresses it, so it is recorded as *no change recorded*. (A failed or missing judgement is never settled this way, so it stays UNKNOWN.)
 
 See [HINDSIGHT.md](HINDSIGHT.md) for exactly how Hindsight memory is used.
 
@@ -82,34 +83,40 @@ Tests (no network): `python -m pytest -q tests` · UI development with hot reloa
 
 ![Evaluation page](docs/img/evaluation.png)
 
-`python -m evaluation.run_benchmark` runs 26 questions and 5 tripwire scenarios against seven conditions and writes `evaluation/results/results.{json,md}`. Scoring is exact-match against hand-written labels in `evaluation/cases.json`; no LLM grades anything.
+**The question we test:** when the reasons behind a past decision have changed, does the agent change its advice, and does it stay quiet when nothing changed? We score the *decision*, not whether the right document was retrieved.
 
-| Condition | What it is |
-|---|---|
-| A | same model, no memory |
-| B2 | Hindsight recall over the same bank, top facts in the prompt, no decision structure |
-| B3 | Hindsight `reflect` with a structured output schema |
-| C | WHY (assumptions extracted from prose) |
-| C-oracle | WHY with hand-labelled assumptions |
-| C-1stage | WHY with a single question-keyed recall |
-| ALWAYS-R | always answers RECONSIDER (shows why false-reuse rate alone is not enough) |
+**How the test works** (`python -m evaluation.run_benchmark`):
 
-Results (all conditions on `gpt-oss-120b` via Cerebras; `reflect` uses Hindsight's own model; one run each):
+- **The exam.** 26 questions an engineer at the fictional Keelwright Freight might ask, e.g. *"Should we use Postgres like payments did?"*. The correct verdict for each was written in `evaluation/cases.json` before anything was run.
+- **Five kinds of question.** *Stale decision*: a key reason broke, so the answer is reconsider (7 questions). *Partly changed*: adapt (6). *Still valid*: reuse (7). *No precedent* (3). *After a new postmortem*: asked again after a retry-storm postmortem is added mid-test, and the answer must change (3). Six are leading questions ("…like the shipper portal, right?").
+- **The contestants.** Seven ways of answering over the same 37-record memory, every LLM contestant on the same model (`gpt-oss-120b` via Cerebras).
+- **The marking.** Exact match against the answer key. No LLM grades anything.
 
-| Condition | Verdict accuracy | False reuse ↓ | False reconsider ↓ | Flip after new evidence | Test split only |
-|---|---|---|---|---|---|
-| **C — WHY** | **21/26 (81%)** | **0/16** | 1/7 | 1/3 | **18/21** |
-| C-oracle | 22/26 (85%) | 1/16 | 1/7 | 1/3 | 19/21 |
-| C-1stage (ablation) | 22/26 (85%) | 0/16 | 1/7 | 2/3 | 18/21 |
-| B3 — Hindsight `reflect` | 17/26 (65%) | 0/16 | 0/7 | 0/3 | 15/21 |
-| B2 — recall → LLM | 13/26 (50%) | 4/16 | 0/7 | 1/3 | 11/21 |
-| A — no memory | 8/26 (31%) | 4/16 | 1/7 | 0/3 | 6/21 |
-| ALWAYS-R | 10/26 (39%) | 0/16 | 7/7 | 0/3 | 8/21 |
+| Contestant | What it is | Correct answers | Reused a stale decision ↓ | False alarm ↓ |
+|---|---|---|---|---|
+| **WHY** | full agent: extracted assumptions, per-assumption recall, date filter, rule-based verdict | **23/26 (88%)** | 1/16 | **0/7** |
+| WHY + hand-written assumptions | same agent with human-written assumptions: measures extraction mistakes | 25/26 (96%) | 0/16 | 0/7 |
+| WHY, single recall | one question-keyed recall instead of one per assumption: tests two-stage recall | 23/26 (88%) | 0/16 | 0/7 |
+| Hindsight `reflect` | Hindsight's built-in reasoning over the same bank (its own model) | 17/26 (65%) | 0/16 | 0/7 |
+| Memories pasted into the LLM | top 15 recalled memories in the prompt, no decision structure | 13/26 (50%) | 4/16 | 0/7 |
+| No memory | the same LLM, question only | 8/26 (31%) | 4/16 | 1/7 |
+| Always says "reconsider" | a dummy: shows why "reused a stale decision" alone can be gamed | 10/26 (39%) | 0/16 | 7/7 |
 
-- Paired exact McNemar vs WHY: no memory p = 0.002, recall → LLM p = 0.039, `reflect` p = 0.39 (not significant), ablation p = 1.0.
-- Tripwire (5 recorded changes, which past assumptions do they break?): precision 0.50, recall 0.83.
-- Performance (`python -m evaluation.run_perf`): median **3.4 s** per question end to end (0.9 s of it the LLM), 1 LLM call, ~2,350 tokens and 5.6 Hindsight recalls per question. Hindsight recall p50 ≈ 0.45 s; throughput 1.3 → 5.8 → 10.0 recalls/s at concurrency 1 → 4 → 8.
-- Honest reading: memory with decision structure clearly beats no memory and flat recall; it beats `reflect` on this set but not significantly; the single-recall ablation ties the two-stage method. Full tables: `evaluation/results/results.md`.
+*Reused a stale decision* = said "reuse" when the right answer was adapt or reconsider (16 such questions). *False alarm* = said "reconsider" when the decision was still valid (7 such questions).
+
+**What the numbers say**
+
+1. **Structured memory beats no memory:** 23/26 vs 8/26 (exact McNemar p = 0.0003). Pasting recalled memories into the model isn't enough either: 13/26 (p = 0.006).
+2. **It learns:** asked the same question before and after a retry-storm postmortem is added, WHY gave the right answer both times in 3 of 3 pairs. No memory: 0 of 3.
+3. **Hindsight `reflect` is a strong baseline:** 17/26, and it never reused a stale decision. WHY is 6 questions ahead, but with 26 questions that gap is not statistically significant (p = 0.15).
+4. **The decision layer does the work, not the retriever:** the single-recall variant ties WHY (23 vs 23).
+5. **Where WHY fails:** 3 misses. C05 and C06: it said *reconsider* where *adapt* was right, because extraction rated a minor assumption critical. C20: it said *reuse* where *adapt* was right. All three are answered correctly with hand-written assumptions (25/26 overall), so assumption extraction is the main source of error. Every answer is in the per-question grid on the Evaluation page.
+
+**Tripwire:** we record 5 changes (e.g. "Northline cuts our rate limit to 40 requests/s"). WHY caught 5 of the 6 assumption breakages on the answer key (83% recall); 5 of its 10 alerts were on the key (50% precision).
+
+**Speed and cost** (`python -m evaluation.run_perf`): a median of **3.4 s** from question to verdict, of which 0.9 s is the LLM. One LLM call, ~2,350 tokens and 5.6 Hindsight recalls per question. Hindsight recall takes ~0.45 s and scaled from 1.3 to 10 recalls/s as concurrency rose from 1 to 8, so memory isn't the bottleneck; the free-tier LLM rate limit is.
+
+Full tables: [`evaluation/results/results.md`](evaluation/results/results.md). The Evaluation page in the app shows every question and every contestant's answer.
 
 ### Real-data track: GOV.UK's published decisions
 
@@ -118,18 +125,24 @@ Synthetic data can't answer "does this work on decisions someone else wrote?", s
 1. **Extraction on real prose** — recover grounded assumptions from ADRs written by GOV.UK engineers.
 2. **Retrospective** — evaluate decisions as of December 2022 using only *later* ADRs as evidence. Targets are decisions GOV.UK itself later superseded or reversed; controls are decisions its record never revisits. The ground truth is GOV.UK's own history. The "Superseded by" notes later added to old records are stripped on import so the answer cannot leak.
 
-Results (`evaluation/results/real_govuk.md`, model `qwen3.8-27b`):
+Results (`evaluation/results/real_govuk.md` and `real_govuk_runs.json`):
 
-- **109 grounded assumptions** extracted from 38 real ADRs; only 3 dropped because the quote was not verbatim.
-- Decisions GOV.UK later changed: WHY flagged **3/3**, citing the record that changed them **3/3** (Hindsight `reflect`: flagged 3/3, named the changing record 1/3). One of the three, the 2017 Content Store → shared Mongo decision, was only reversed implicitly by a 2019 DocumentDB ADR.
-- Decisions never revisited: WHY left **4/5** alone (`reflect`: 3/5).
-- 8 cases: a pilot, not a benchmark.
+- **Extraction transfers to real prose:** 109 grounded assumptions from 38 ADRs written by GOV.UK engineers; only 3 rejected because the quote wasn't verbatim. This held in every run.
+- **The retrospective is unstable at this size**, so every run is reported:
+
+| Run | Changed decisions flagged, citing the right record | Untouched decisions left alone |
+|---|---|---|
+| **gpt-oss-120b (same model as the benchmark), current code** | 1/3 | 5/5 |
+| qwen-3.8-27b, current code | 2/3 | 1/5 |
+| qwen3.8-27b, earlier code | 3/3 | 4/5 |
+
+Hindsight `reflect` on the same bank flagged all 3 changed decisions but named the record that changed them in 0 of 3, and left 4 of 5 untouched ones alone. With 8 decisions, one model is cautious and another eager; this pilot can't yet separate WHY from the model it runs on. The case worth reading is GOVUK-0028: a 2017 decision reversed only implicitly by a 2019 DocumentDB ADR, which qwen finds by recalling on the assumption and gpt-oss-120b misses.
 
 ## Limitations
 
-- **Small, synthetic pilot.** 26 questions over one fictional organization, one run per condition. Differences are reported with confidence intervals and a paired significance test; most are not significant at this scale.
+- **Small, synthetic pilot.** 26 questions over one fictional organization, one run per contestant. The real-data (GOV.UK) retrospective is smaller still, and its verdicts vary with the model. Differences are reported with confidence intervals and a paired significance test; most are not significant at this scale.
 - **The author wrote both the data and the labels.** Demo questions used during development are marked `split: dev` and results are also reported on the untouched test split.
-- **Assumption extraction is the weak link.** It recovers most premises, but its "critical" labels can disagree with a human's, which changes verdicts. C vs C-oracle measures that gap.
+- **Assumption extraction is the weak link.** It recovers most premises, but its "critical" labels can disagree with a human's, which changes verdicts. Comparing WHY with the hand-written-assumptions variant measures that gap.
 - **Inertia.** An assumption nothing in memory talks about is treated as still holding (shown as *no change recorded*). If the invalidating change was never written down, WHY cannot know.
 
 ## Repository layout

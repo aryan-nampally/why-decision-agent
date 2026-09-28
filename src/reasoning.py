@@ -243,7 +243,9 @@ class Pipeline:
         await ev("judge", "llm", "done", ms=timings["judge"], relevant=relevant, ok=complete,
                  statuses=[{"id": c.assumption_id, "status": c.status.value, "evidence": c.evidence_ids} for c in checks])
         provided = {e.id for e in evidence} | {"USER"}
+        checks, sw = rules.settle_uncited_unknowns(checks, provided, set(judged) & set(by_id))
         checks, gw = rules.ground(checks, provided)
+        gw = sw + gw
         warnings += gw
         await ev("ground", "code", "done", provided=len(provided), changes=gw)
 

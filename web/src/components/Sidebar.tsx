@@ -85,7 +85,14 @@ export function NewDocuments({ docs, onIngested }: { docs: HoldbackDoc[]; onInge
   );
 }
 
-export function Timeline({ items, fresh }: { items: TimelineItem[]; fresh: Set<string> }) {
+export function Timeline({ items, fresh, onReset }: { items: TimelineItem[]; fresh: Set<string>; onReset: () => void }) {
+  const [arm, setArm] = useState(false);
+  const [busy, setBusy] = useState(false);
+  async function reset() {
+    if (!arm) { setArm(true); setTimeout(() => setArm(false), 4000); return; }
+    setBusy(true);
+    try { await api.resetDemo(); onReset(); } finally { setBusy(false); setArm(false); }
+  }
   return (
     <div className="card">
       <h3>Organizational memory <span className="muted">({items.length})</span></h3>
@@ -97,6 +104,9 @@ export function Timeline({ items, fresh }: { items: TimelineItem[]; fresh: Set<s
           </div>
         ))}
       </div>
+      <button type="button" className="linkbtn" disabled={busy} onClick={reset}>
+        {busy ? "Rebuilding the memory bank (about 40 s)…" : arm ? "Click again to reset the demo memory" : "Reset demo memory"}
+      </button>
     </div>
   );
 }

@@ -63,7 +63,7 @@ if not evaluation_complete or any((not c.critical and c.status == Status.BROKEN)
 return Verdict.REUSE
 ```
 
-Because the rules are plain code, I can test properties instead of hoping for them. One test walks every combination of assumption states and checks that adding contradicting evidence never makes WHY *more* willing to reuse a decision. Another caught a real bug: when the model call failed and every assumption was non-critical, the old rules returned REUSE. A failed evaluation now can never produce REUSE.
+Because the rules are plain code, I can test properties instead of hoping for them. One test walks every combination of assumption states and checks that adding contradicting evidence never makes WHY *more* willing to reuse a decision. Another caught a real bug: when the model call failed and every assumption was non-critical, the old rules returned REUSE. A failed evaluation now can never produce REUSE. The same discipline runs the other way: the model sometimes called an assumption UNKNOWN while citing nothing, which made WHY hedge on decisions nothing had challenged. An UNKNOWN now has to point at the evidence that makes it unclear; otherwise it means "no change recorded".
 
 The UI shows all of this live: which step is Hindsight, which is the model, which is code, what each recall found, which citations were cut, and the exact rule that fired, e.g. `critical A1 BROKEN → RECONSIDER`.
 
@@ -86,13 +86,12 @@ I also ran it across a whole decision log. For the fictional company in the demo
 That was the question that bothered me most, since I wrote the demo company's records myself. So I ran WHY on the 38 architecture decision records GOV.UK published between 2017 and 2022 in [alphagov/govuk-aws](https://github.com/alphagov/govuk-aws). Each decision is evaluated using only records dated after it. The ground truth is GOV.UK's own history: which decisions it later superseded or reversed. I stripped the "superseded by" notes that were added to old records afterwards, so the answer couldn't leak.
 
 - The extractor recovered **109 grounded assumptions** from 38 real ADRs; only **3** were dropped for not being verbatim.
-- WHY flagged **3 of 3** decisions GOV.UK later changed, each time **citing the record that changed it**. Hindsight's built-in `reflect` also flagged all three but named the changing record in only 1 of 3.
-- One of those was never linked in the record at all: a 2017 decision to point Content Store at the shared Mongo cluster, implicitly reversed by a 2019 decision to move Mongo apps, Content Store included, to DocumentDB.
-- It left **4 of 5** decisions GOV.UK never revisited alone.
+- The retrospective is where I have to be careful. On 8 decisions (3 GOV.UK later reversed, 5 it never touched), the result swung with the model. With the same model as my benchmark, WHY caught **1 of 3** reversals, citing the right record, and left **all 5** untouched decisions alone. With a different model it caught 2 of 3, but it also flagged 4 decisions nobody ever changed. An earlier run of mine showed 3 of 3; I'm not quoting that as the result, because it didn't survive re-running.
+- The most interesting case is one no link ever pointed to: a 2017 decision to put Content Store on the shared Mongo cluster, implicitly reversed by a 2019 ADR moving Mongo apps to DocumentDB. One model finds it by recalling on the assumption; the other doesn't.
 
-Eight cases is a pilot, not a proof, but the decisions were written by other engineers and history is the answer key.
+So extraction transfers to prose other engineers wrote. Judging a real, sparse decision history is still the open problem, and 8 cases can't separate WHY from the model it runs on.
 
-On a 26-question controlled benchmark over the demo company, the same model with no memory reused a stale decision in **4 of 16** cases where it shouldn't have. WHY, on the same model, reused **none** and got **21 of 26** verdicts right, against 8 of 26 without memory and 13 of 26 when the model was simply handed recalled memories (p = 0.002 and 0.04). Hindsight's own `reflect` scored 17 of 26, behind WHY but not significantly at this size, and it got none of the three before/after flips right. WHY's weak spot is the mirror image: 1 of 7 times it cried wolf.
+On a 26-question controlled benchmark over the demo company, the same model with no memory reused a stale decision in **4 of 16** cases where it shouldn't have, and got 8 of 26 verdicts right. WHY, on the same model, got **23 of 26** right (p = 0.0003) and changed its answer correctly in all 3 before/after-postmortem pairs. Handing the model recalled memories without the decision structure scored 13 of 26. Hindsight's own `reflect` scored 17 of 26: behind WHY, but not significantly with this few questions. WHY's three misses all disappear when it is given hand-written assumptions, so extraction is where the remaining errors come from.
 
 Performance: a question takes a median of **3.4 seconds** end to end, with 1 LLM call, about 2,350 tokens and 5–6 Hindsight recalls. Recall itself is around 450 ms and scaled from 1.3 to 10 recalls per second as I raised concurrency from 1 to 8. On a free LLM tier the request-rate limit is the bottleneck, not memory. That's also why the tripwire judges all candidate decisions in one LLM call instead of one call each.
 
@@ -102,7 +101,7 @@ Performance: a question takes a median of **3.4 seconds** end to end, with 1 LLM
 2. **Dates are part of the evidence.** Filtering to "recorded after the decision" removed a whole class of wrong answers, and it only works because Hindsight retains real timestamps.
 3. **Let code have the last word.** A narrow LLM judgment plus deterministic rules gave me behavior I could test and explain, and a place to catch invented citations.
 4. **Measure the behavior, not the retrieval.** My evaluation asks whether the verdict changes correctly: false reuse, flips after new evidence, questions that assume the old answer ("like payments did, right?").
-5. **Report the result that surprised you.** My ablation with a single question-keyed recall scored as well as the two-stage version on this corpus (22 vs 21 of 26). With 37 records, one recall already finds most of what matters. The value I can defend is the decision layer on top of memory, not a cleverer retriever.
+5. **Report the result that surprised you.** My ablation with a single question-keyed recall scored as well as the two-stage version on this corpus (23 of 26 each). With 37 records, one recall already finds most of what matters. The value I can defend is the decision layer on top of memory, not a cleverer retriever.
 
 ## Limitations
 

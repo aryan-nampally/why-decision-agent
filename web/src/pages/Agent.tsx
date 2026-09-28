@@ -127,12 +127,13 @@ export default function AgentPage() {
 
           {events.length === 0 && !result && !busy && <HowItWorks />}
 
+          {result && <VerdictBanner r={result} />}
+          {result && off && <NoMemory off={off} />}
+
           {events.length > 0 && <Orchestration events={events} live={busy} />}
 
           {result && (
             <>
-              <VerdictBanner r={result} />
-              {off && <NoMemory off={off} />}
               <div className="thennow">
                 <Then r={result} />
                 <div className="bridge"><span>{result.decision_age ? `${result.decision_age.replace(/ ago$/, "")} later` : "today"}</span></div>
@@ -149,7 +150,7 @@ export default function AgentPage() {
         <aside>
           <RecordChange onRetained={(id) => refresh(id)} />
           <NewDocuments docs={holdback} onIngested={(id) => refresh(id)} />
-          <Timeline items={timeline} fresh={fresh} />
+          <Timeline items={timeline} fresh={fresh} onReset={() => { setResult(null); setEvents([]); setOff(null); setStatus({ msg: "Demo memory restored to its starting state." }); refresh(); }} />
         </aside>
       </main>
     </>

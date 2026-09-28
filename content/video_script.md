@@ -10,25 +10,21 @@
 
 **Show:** Agent page, empty. Hover the four tabs briefly.
 
-## 0:30–1:00 · The problem: no memory
+## 0:30–1:30 · Ask, and watch the agent work
 
-**Do:** Click the chip **"Postgres for a new ledger?"** (keep *compare with no memory* ticked).
+**Do:** Click the chip **"Postgres for a new ledger?"** (keep *compare with no memory* ticked). Scroll down a little so the *Agent orchestration* panel is in view while it runs.
 
-**Say (while the orchestration runs):** "A new team is building a customs-duty ledger and asks: should we use Postgres, like the payments team did? First, the same model without memory…"
-
-**Show:** Point at the grey *Same question, same model, no memory* card: **REUSE — "1.2k writes per second is well within Postgres' capabilities."** "Sounds reasonable. It's wrong."
-
-## 1:00–2:00 · With memory: watch the orchestration
-
-**Show:** Scroll to *Agent orchestration*. Walk the six steps top to bottom.
-
-**Say:**
+**Say (while the steps light up):** "A new team is building a customs-duty ledger and asks: should we use Postgres, like the payments team did? Watch what the agent does."
 - "Step one is Hindsight: it recalls the precedent, ADR-007, from February 2023."
-- "Step two: the assumptions that decision depended on, extracted from the ADR's own text. Each one has a quote."
-- "Step three is Hindsight again, but it searches once *per assumption*. The question never mentions Snowflake, but the assumption about finance reporting does, so that's what finds the migration. And look: a 2022 note is struck out, because evidence from before the decision can't invalidate it."
-- "Step four is the only place the model decides anything: holds or broken, with citations. Step five, code checks those citations. Step six, a fixed rule: critical assumption broken, reconsider."
+- "Step two: the conditions that decision depended on, extracted from the ADR's own text, each with a quote."
+- "Step three is Hindsight again, but it searches once *per assumption*. The question never mentions Snowflake, but the assumption about finance reporting does, so that's what finds the migration. And that struck-out 2022 note is older than the decision, so it isn't allowed to count against it."
+- "Step four is the only place the model decides anything: holds or broken, with citations. Step five, code checks those citations. Step six, a fixed rule: a critical assumption broke, so reconsider."
 
-**Show:** Verdict banner **RECONSIDER**, then the *Now* card: A1 BROKEN (3,140 writes/s), A3 BROKEN (Snowflake).
+## 1:30–2:00 · The answer, with and without memory
+
+**Show:** Scroll back to the top: the **RECONSIDER** stamp, then the grey card underneath.
+
+**Say:** "Same question, same model, no memory: *reuse it, 1.2k writes a second is well within capacity*. Sounds reasonable. It's wrong. With memory: reconsider. Writes hit 3,140 a second last Cyber Monday, and finance moved its reporting to Snowflake." Point at the *Now* column: A1 and A3 BROKEN, each with its evidence chip.
 
 ## 2:00–2:30 · It learns: same question, different answer
 
@@ -42,7 +38,7 @@
 
 **Say:** "Nobody asked a question. Memory checked the past decisions and flagged ADR-007: the payments ledger assumed a single region, us-east-1."
 
-**Show (quick):** *Evaluation* tab: the GOV.UK table, "3/3 real reversals caught, citing the record that changed them".
+**Show (quick):** *Evaluation* tab. Point at the top numbers (23/26 with WHY vs 8/26 without memory), then scroll to the per-question grid: "every answer from every method, green or red."
 
 ## 2:50–3:00 · Takeaway
 

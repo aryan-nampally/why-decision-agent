@@ -163,7 +163,8 @@ async def evaluation():
     res = ROOT / "evaluation" / "results"
     bench = _json(res / "results.json")
     cases = _json(ROOT / "evaluation" / "cases.json")
-    return {"benchmark": bench, "cases": cases, "real": _json(res / "real_govuk.json"), "perf": _json(res / "perf.json")}
+    return {"benchmark": bench, "cases": cases, "real": _json(res / "real_govuk.json"),
+            "real_runs": _json(res / "real_govuk_runs.json"), "perf": _json(res / "perf.json")}
 
 
 @app.post("/api/demo/reset")

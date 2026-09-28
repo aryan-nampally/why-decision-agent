@@ -69,6 +69,22 @@ def ground(checks: list[AssumptionCheck], provided_ids: set[str]) -> tuple[list[
     return out, warnings
 
 
+def settle_uncited_unknowns(checks: list[AssumptionCheck], provided_ids: set[str],
+                            judged_ids: set[str]) -> tuple[list[AssumptionCheck], list[str]]:
+    """The judge's protocol: UNKNOWN means evidence addresses the assumption but is ambiguous; no evidence at all
+    means HOLDS. A judged UNKNOWN that cites no provided evidence is therefore "no change recorded".
+    Only assumptions the judge actually returned are settled, so a failed or omitted judgement stays UNKNOWN
+    (fail-safe), and this runs before ground(), so a BROKEN claim without evidence still becomes UNKNOWN."""
+    out, warnings = [], []
+    for c in checks:
+        if (c.assumption_id in judged_ids and c.status == Status.UNKNOWN
+                and not any(e in provided_ids for e in c.evidence_ids)):
+            warnings.append(f"{c.assumption_id}: UNKNOWN with no cited evidence, treated as no change recorded")
+            c = c.model_copy(update={"status": Status.HOLDS, "evidence_ids": []})
+        out.append(c)
+    return out, warnings
+
+
 def health(checks: list[AssumptionCheck]) -> float | None:
     """Display-only gauge (§5.7): critical weight 2, other 1; UNKNOWN counts half."""
     if not checks:

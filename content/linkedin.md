@@ -12,7 +12,7 @@ What changed its behavior:
 
 Without memory: "reuse Postgres." With WHY: RECONSIDER, 2 assumptions broken, both cited.
 
-On GOV.UK's real 2017–22 ADRs it caught 3/3 later reversals, citing the record that changed them.
+Same model, 26 test questions: 23/26 right with WHY, 8/26 without memory. On GOV.UK's real ADRs it recovered 109 assumptions straight from the prose.
 
 https://github.com/aryan-nampally/WHY-decision_agent
 

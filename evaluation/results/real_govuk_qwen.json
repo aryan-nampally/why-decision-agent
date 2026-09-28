@@ -1,7 +1,6 @@
 {
-  "run_at": "2026-09-28T12:08:54+00:00",
-  "model": "gpt-oss-120b",
-  "extraction_model": "qwen/qwen3.8-27b",
+  "run_at": "2026-09-28T07:30:27+00:00",
+  "model": "qwen/qwen3.8-27b",
   "as_of": "2022-12-01",
   "extraction": {
     "adrs": 38,
@@ -1049,20 +1048,22 @@
       "changed_later": true,
       "changed_by": "GOVUK-0015",
       "history": "explicitly superseded by ADR 15 (DNS infrastructure)",
-      "verdict": "REUSE",
-      "flagged": false,
-      "cites_changing_record": false,
+      "verdict": "ADAPT",
+      "flagged": true,
+      "cites_changing_record": true,
       "cited": [
-        "GOVUK-0016"
+        "GOVUK-0015",
+        "GOVUK-0016",
+        "GOVUK-0033"
       ],
-      "ms": 4550,
+      "ms": 2538,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "ADAPT",
         "flagged": true,
-        "mentions_changing_record": false,
-        "answer": "The original approach of using specific internal DNS zones is still a fundamental part of the platform's networking, but it has been adapted to a much larger, more structured framework. The decision is not reconsidered in the sense of being rejected, but it is no longer the definitive guide for DNS on the platform; it has been subsumed by the broader infrastructure standards defined in later ADRs."
+        "mentions_changing_record": true,
+        "answer": "GOVUK-0004 is not wrong, but it is incomplete when viewed in isolation. It served as a necessary point-in-time decision for early monitoring requirements. The strategy has been adapted into the more comprehensive framework established by GOVUK-0015."
       }
     },
     {
@@ -1076,15 +1077,18 @@
       "flagged": true,
       "cites_changing_record": true,
       "cited": [
-        "GOVUK-0033"
+        "GOVUK-0012",
+        "GOVUK-0026",
+        "GOVUK-0033",
+        "GOVUK-0038"
       ],
-      "ms": 4602,
+      "ms": 3371,
       "broken": [
         {
           "id": "A2",
           "statement": "The current IP layout is a viable reference point that can be closely approximated to ease the migration process.",
           "quote": "We will attempt to keep the new IP layout as close as possible to the current one in order to ease migration.",
-          "explanation": "GOVUK-0033 (2018-09-26) explicitly supersedes the original networking outline and states that the previously chosen IP address ranges conflict with the VPN needed for Carrenza, meaning the original IP layout is no longer viable.",
+          "explanation": "The assumption that the new IP layout could closely approximate the current one to ease migration is no longer true. Evidence [GOVUK-0033] (2018-09-26) states that the IP addresses chosen in GOVUK-0003 'conflict' with the Carrenza environment due to the need for a VPN, and explicitly supersedes GOVUK-0003 by assigning new IP ranges that do not match the original plan.",
           "evidence": [
             "GOVUK-0033"
           ]
@@ -1095,7 +1099,7 @@
         "verdict": "ADAPT",
         "flagged": true,
         "mentions_changing_record": false,
-        "answer": "The networking outline in GOVUK-0003 requires an ADAPT verdict. While the core IP assignment strategy and environmental isolation principles (VPC-per-environment) formed the basis for the infrastructure, the platform's network architecture has been modified by subsequent decisions (such as changes to load balancer tiers and DNS infrastructure). The original 'Networking Outline' serves as the found"
+        "answer": "The original intent of providing isolated, predictable networking for environments remains the correct approach, but the specific IP ranges had to be adapted to accommodate the reality of a multi-provider transition period requiring cross-environment VPN connectivity."
       }
     },
     {
@@ -1105,18 +1109,30 @@
       "changed_later": true,
       "changed_by": "GOVUK-0038",
       "history": "implicitly reversed: ADR 38 moves Mongo apps, naming Content Store, to DocumentDB",
-      "verdict": "REUSE",
-      "flagged": false,
-      "cites_changing_record": false,
-      "cited": [],
-      "ms": 2656,
-      "broken": [],
+      "verdict": "RECONSIDER",
+      "flagged": true,
+      "cites_changing_record": true,
+      "cited": [
+        "GOVUK-0038"
+      ],
+      "ms": 3303,
+      "broken": [
+        {
+          "id": "A2",
+          "statement": "The main application mongo cluster has sufficient capacity to handle the additional load from Content Store without becoming a single point of failure for the entire stack.",
+          "quote": "All other applications use the mongo cluster.",
+          "explanation": "Evidence [GOVUK-0038] (2019-10-17) indicates that the architectural strategy has shifted to replacing MongoDB with AWS DocumentDB. It states that GOV.UK uses MongoDB for a number of apps and outlines a strategy to use AWS services. This implies that the long-term viability of relying on a standard 'main application mongo cluster' for capacity and SPOF concerns is superseded by the migration to DocumentDB, which changes the capacity and failure domain characteristics assumed in 2017.",
+          "evidence": [
+            "GOVUK-0038"
+          ]
+        }
+      ],
       "warnings": [],
       "reflect": {
         "verdict": "RECONSIDER",
         "flagged": true,
         "mentions_changing_record": false,
-        "answer": "The conditions relied upon in GOVUK-0028 (manual MongoDB cluster management on EC2 and the need to minimize instance counts to save costs) have been rendered obsolete by the shift to managed cloud database services. The 'single point of failure' concern for MongoDB is now managed through the adoption of AWS DocumentDB, which replaces the manual clustering approach that necessitated the original co"
+        "answer": "The decision to combine clusters as described in GOVUK-0028 is RECONSIDER. The transition to AWS DocumentDB renders the manual consolidation of EC2-based clusters obsolete, as DocumentDB provides native, managed scalability and high availability, and mandates different authentication standards."
       }
     },
     {
@@ -1130,16 +1146,20 @@
       "flagged": false,
       "cites_changing_record": false,
       "cited": [
-        "GOVUK-0026"
+        "GOVUK-0023",
+        "GOVUK-0025",
+        "GOVUK-0030",
+        "GOVUK-0031",
+        "GOVUK-0037"
       ],
-      "ms": 6247,
+      "ms": 17599,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "REUSE",
         "flagged": false,
         "mentions_changing_record": false,
-        "answer": "The decision in GOVUK-0021 remains the appropriate approach for GOV.UK as it successfully replaced manual certificate management with AWS-managed services, simplifying infrastructure deployment. The operational advantages continue to outweigh trade-offs like vendor lock-in, and the reliance on ELBs/ALBs remains consistent with the platform's strategy."
+        "answer": "The decision to use ACM and ELB-based SSL termination is considered REUSE. The architectural pattern has proven effective, and there is no evidence in the retrieved organizational memory suggesting a failure of this approach or a shift away from AWS-managed certificate and load balancer services. The underlying principle of delegating SSL termination to the managed load balancing tier remains the "
       }
     },
     {
@@ -1152,15 +1172,18 @@
       "verdict": "REUSE",
       "flagged": false,
       "cites_changing_record": false,
-      "cited": [],
-      "ms": 7514,
+      "cited": [
+        "GOVUK-0037",
+        "GOVUK-0038"
+      ],
+      "ms": 23341,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "REUSE",
         "flagged": false,
         "mentions_changing_record": false,
-        "answer": "The decision documented in GOVUK-0022 ('Remove the Elasticsearch proxy') to replace local nginx-based Elasticsearch proxies with AWS Elastic Load Balancers (ELBs) remains the appropriate approach for GOV.UK today. The architectural rationale remains sound and consistent with current platform standards."
+        "answer": "The decision to remove the local Elasticsearch proxy is still the correct approach. The conditions it relied upon\u2014the utilization of AWS ELBs to provide load balancing and cluster awareness\u2014persist, and the move continues to be viewed as a beneficial simplification of the platform\u2019s networking architecture."
       }
     },
     {
@@ -1170,18 +1193,37 @@
       "changed_later": false,
       "changed_by": null,
       "history": "not revisited in the record",
-      "verdict": "REUSE",
-      "flagged": false,
+      "verdict": "RECONSIDER",
+      "flagged": true,
       "cites_changing_record": false,
-      "cited": [],
-      "ms": 6147,
-      "broken": [],
+      "cited": [
+        "GOVUK-0015",
+        "GOVUK-0025",
+        "GOVUK-0030",
+        "GOVUK-0033",
+        "GOVUK-0037",
+        "GOVUK-0038"
+      ],
+      "ms": 24665,
+      "broken": [
+        {
+          "id": "A1",
+          "statement": "The deployment environment includes legacy systems that require manual deployment steps, making automatic AMI changes disruptive.",
+          "quote": "due to the legacy nature of our deployments it causes issues with machines that need a number of manual deployment steps applied to them. Examples of these include the app servers and the puppet master.",
+          "explanation": "The assumption that the environment includes legacy systems requiring manual deployment steps (like app servers and puppet master) is no longer valid. Evidence [GOVUK-0038] (2019-10-17) explicitly identifies Licensify as a 'legacy service' and initiates its replacement, while [GOVUK-0030] (2017-09-15) and [GOVUK-0025] (2017-09-04) show the migration of core infrastructure (Asset Master, Redis) to managed AWS services (EFS, Elasticache), removing the need for manual management of those specific legacy-style instances. The platform has moved toward managed services and modernized architectures, reducing the scope of 'legacy' manual deployments that originally justified the override.",
+          "evidence": [
+            "GOVUK-0038",
+            "GOVUK-0030",
+            "GOVUK-0025"
+          ]
+        }
+      ],
       "warnings": [],
       "reflect": {
-        "verdict": "REUSE",
-        "flagged": false,
+        "verdict": "RECONSIDER",
+        "flagged": true,
         "mentions_changing_record": false,
-        "answer": "The approach of pinning AMI versions remains a valid and necessary architectural constraint to prioritize infrastructure stability and prevent disruptive resource recreation in environments with legacy deployment dependencies, provided that the underlying patching mechanism (Puppet) remains the primary method for maintaining instance security."
+        "answer": "The decision to hardcode AMI names in GOVUK-0024 is a candidate for RECONSIDER. The primary conditions that necessitated this decision have been largely mitigated by the platform's evolution toward managed services and automated provisioning. Maintaining hardcoded AMI names introduces the risk of running auto-scaling groups with older, less secure, or outdated AMI versions for extended periods."
       }
     },
     {
@@ -1194,15 +1236,18 @@
       "verdict": "REUSE",
       "flagged": false,
       "cites_changing_record": false,
-      "cited": [],
-      "ms": 9979,
+      "cited": [
+        "GOVUK-0029",
+        "GOVUK-0030"
+      ],
+      "ms": 27411,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "REUSE",
         "flagged": false,
         "mentions_changing_record": false,
-        "answer": "The decision to use AWS ElastiCache for Redis remains active and consistent with the GOV.UK TechOps strategy of leveraging managed services to reduce operational overhead and Puppet management. No evidence suggests the decision has failed or that the underlying conditions have changed."
+        "answer": "The decision to use AWS ElastiCache for Redis remains the correct approach for the GOV.UK Platform as it aligns with the broader, ongoing strategy of utilizing managed services to minimize operational maintenance and infrastructure drift. The conditions regarding the benefits of reducing custom Puppet code and avoiding manual infrastructure management still hold today. The subsequent consolidation"
       }
     },
     {
@@ -1215,15 +1260,18 @@
       "verdict": "REUSE",
       "flagged": false,
       "cites_changing_record": false,
-      "cited": [],
-      "ms": 8220,
+      "cited": [
+        "GOVUK-0031",
+        "GOVUK-0033"
+      ],
+      "ms": 20493,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "RECONSIDER",
         "flagged": true,
         "mentions_changing_record": false,
-        "answer": "The decision to combine api-redis and backend-redis should be re-evaluated because the original justification was tied to specific, potentially outdated service requirements (Rummager), and the consolidation increased the risk of issues propagating across dependent applications."
+        "answer": "The decision to consolidate multiple Redis instances into a single ElastiCache instance (GOVUK-0029) should be re-evaluated because it introduced a single point of failure. While the original justification regarding vDC separation is no longer relevant in the current AWS environment, the cost-saving strategy must now be weighed against modern reliability requirements and infrastructure isolation p"
       }
     }
   ]

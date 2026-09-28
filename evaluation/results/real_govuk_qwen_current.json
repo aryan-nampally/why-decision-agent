@@ -1,6 +1,6 @@
 {
-  "run_at": "2026-09-28T12:08:54+00:00",
-  "model": "gpt-oss-120b",
+  "run_at": "2026-09-28T12:12:39+00:00",
+  "model": "qwen-3.8-27b",
   "extraction_model": "qwen/qwen3.8-27b",
   "as_of": "2022-12-01",
   "extraction": {
@@ -1051,18 +1051,19 @@
       "history": "explicitly superseded by ADR 15 (DNS infrastructure)",
       "verdict": "REUSE",
       "flagged": false,
-      "cites_changing_record": false,
+      "cites_changing_record": true,
       "cited": [
+        "GOVUK-0015",
         "GOVUK-0016"
       ],
-      "ms": 4550,
+      "ms": 4309,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "ADAPT",
         "flagged": true,
         "mentions_changing_record": false,
-        "answer": "The original approach of using specific internal DNS zones is still a fundamental part of the platform's networking, but it has been adapted to a much larger, more structured framework. The decision is not reconsidered in the sense of being rejected, but it is no longer the definitive guide for DNS on the platform; it has been subsumed by the broader infrastructure standards defined in later ADRs."
+        "answer": "The original objectives remain valid, but the implementation has moved from an automated multi-zone setup to a more constrained, manually managed single-zone model to accommodate VPC limitations regarding DNS delegation."
       }
     },
     {
@@ -1076,15 +1077,17 @@
       "flagged": true,
       "cites_changing_record": true,
       "cited": [
+        "GOVUK-0012",
+        "GOVUK-0029",
         "GOVUK-0033"
       ],
-      "ms": 4602,
+      "ms": 6743,
       "broken": [
         {
           "id": "A2",
           "statement": "The current IP layout is a viable reference point that can be closely approximated to ease the migration process.",
           "quote": "We will attempt to keep the new IP layout as close as possible to the current one in order to ease migration.",
-          "explanation": "GOVUK-0033 (2018-09-26) explicitly supersedes the original networking outline and states that the previously chosen IP address ranges conflict with the VPN needed for Carrenza, meaning the original IP layout is no longer viable.",
+          "explanation": "GOVUK-0033 (2018-09-26) states that GOVUK-0003\u2019s staging and production IP ranges matched Carrenza as far as possible, but the chosen IP addresses conflict with the VPN to Carrenza, so the VPCs were assigned new IP ranges; the old layout is no longer a viable close reference.",
           "evidence": [
             "GOVUK-0033"
           ]
@@ -1092,10 +1095,10 @@
       ],
       "warnings": [],
       "reflect": {
-        "verdict": "ADAPT",
+        "verdict": "RECONSIDER",
         "flagged": true,
-        "mentions_changing_record": false,
-        "answer": "The networking outline in GOVUK-0003 requires an ADAPT verdict. While the core IP assignment strategy and environmental isolation principles (VPC-per-environment) formed the basis for the infrastructure, the platform's network architecture has been modified by subsequent decisions (such as changes to load balancer tiers and DNS infrastructure). The original 'Networking Outline' serves as the found"
+        "mentions_changing_record": true,
+        "answer": "The original decision in GOVUK-0003 regarding the networking strategy for GOV.UK's AWS environments has been superseded by GOVUK-0033 due to IP address conflicts caused by the requirement for VPN connectivity between AWS and Carrenza infrastructure."
       }
     },
     {
@@ -1105,18 +1108,30 @@
       "changed_later": true,
       "changed_by": "GOVUK-0038",
       "history": "implicitly reversed: ADR 38 moves Mongo apps, naming Content Store, to DocumentDB",
-      "verdict": "REUSE",
-      "flagged": false,
-      "cites_changing_record": false,
-      "cited": [],
-      "ms": 2656,
-      "broken": [],
+      "verdict": "RECONSIDER",
+      "flagged": true,
+      "cites_changing_record": true,
+      "cited": [
+        "GOVUK-0038"
+      ],
+      "ms": 9503,
+      "broken": [
+        {
+          "id": "A1",
+          "statement": "Content Store is the sole consumer of the api-mongo cluster, meaning no other applications depend on it.",
+          "quote": "The only application that uses the api-mongo cluster is Content Store.",
+          "explanation": "GOVUK-0038 lists the current MongoDB topology as five clusters: Licensify, performance monitoring, router, and one per cloud provider for all other apps including content. It does not include a separate api-mongo cluster, so the condition that Content Store is the sole consumer of an api-mongo cluster no longer describes the current architecture.",
+          "evidence": [
+            "GOVUK-0038"
+          ]
+        }
+      ],
       "warnings": [],
       "reflect": {
         "verdict": "RECONSIDER",
         "flagged": true,
         "mentions_changing_record": false,
-        "answer": "The conditions relied upon in GOVUK-0028 (manual MongoDB cluster management on EC2 and the need to minimize instance counts to save costs) have been rendered obsolete by the shift to managed cloud database services. The 'single point of failure' concern for MongoDB is now managed through the adoption of AWS DocumentDB, which replaces the manual clustering approach that necessitated the original co"
+        "answer": "The consolidation of the api-mongo cluster into the primary mongo cluster was a tactical move for a lift and shift migration to AWS. Today, GOV.UK's architecture is focused on migrating those workloads to AWS DocumentDB. Therefore, rather than re-evaluating the merge of MongoDB clusters, the current focus should be on the technical constraints of the DocumentDB migration, such as MongoDB API versi"
       }
     },
     {
@@ -1130,16 +1145,21 @@
       "flagged": false,
       "cites_changing_record": false,
       "cited": [
-        "GOVUK-0026"
+        "GOVUK-0023",
+        "GOVUK-0025",
+        "GOVUK-0026",
+        "GOVUK-0030",
+        "GOVUK-0031",
+        "GOVUK-0035"
       ],
-      "ms": 6247,
+      "ms": 5163,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "REUSE",
         "flagged": false,
         "mentions_changing_record": false,
-        "answer": "The decision in GOVUK-0021 remains the appropriate approach for GOV.UK as it successfully replaced manual certificate management with AWS-managed services, simplifying infrastructure deployment. The operational advantages continue to outweigh trade-offs like vendor lock-in, and the reliance on ELBs/ALBs remains consistent with the platform's strategy."
+        "answer": "The approach fits with current infrastructure practices. While specific load balancer implementations (such as the transition from Classic ELBs to ALBs) have evolved, the underlying architectural pattern of using ACM for certificate management and terminating SSL at the load balancer layer remains the standard for the platform."
       }
     },
     {
@@ -1149,18 +1169,22 @@
       "changed_later": false,
       "changed_by": null,
       "history": "not revisited in the record",
-      "verdict": "REUSE",
-      "flagged": false,
+      "verdict": "ADAPT",
+      "flagged": true,
       "cites_changing_record": false,
-      "cited": [],
-      "ms": 7514,
+      "cited": [
+        "GOVUK-0027",
+        "GOVUK-0028",
+        "GOVUK-0037"
+      ],
+      "ms": 5265,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "REUSE",
         "flagged": false,
         "mentions_changing_record": false,
-        "answer": "The decision documented in GOVUK-0022 ('Remove the Elasticsearch proxy') to replace local nginx-based Elasticsearch proxies with AWS Elastic Load Balancers (ELBs) remains the appropriate approach for GOV.UK today. The architectural rationale remains sound and consistent with current platform standards."
+        "answer": "The decision to remove the local nginx-based Elasticsearch proxy remains valid because the reliance on AWS-native services like ELBs effectively replaces the need for the redundant proxy layer, and there is no evidence that application requirements have reverted or that the proxy layer needs to be reinstated."
       }
     },
     {
@@ -1170,18 +1194,22 @@
       "changed_later": false,
       "changed_by": null,
       "history": "not revisited in the record",
-      "verdict": "REUSE",
-      "flagged": false,
+      "verdict": "ADAPT",
+      "flagged": true,
       "cites_changing_record": false,
-      "cited": [],
-      "ms": 6147,
+      "cited": [
+        "GOVUK-0015",
+        "GOVUK-0030",
+        "GOVUK-0038"
+      ],
+      "ms": 8101,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "REUSE",
         "flagged": false,
         "mentions_changing_record": false,
-        "answer": "The approach of pinning AMI versions remains a valid and necessary architectural constraint to prioritize infrastructure stability and prevent disruptive resource recreation in environments with legacy deployment dependencies, provided that the underlying patching mechanism (Puppet) remains the primary method for maintaining instance security."
+        "answer": "The decision to use explicit AMI image names instead of dynamic lookups remains valid to prevent unexpected infrastructure changes and support legacy components that require manual post-provisioning configuration. The platform mitigates the risk of using older AMI versions through automated Puppet-based security patching and allows for overrides via tfvars."
       }
     },
     {
@@ -1191,18 +1219,20 @@
       "changed_later": false,
       "changed_by": null,
       "history": "not revisited in the record",
-      "verdict": "REUSE",
-      "flagged": false,
+      "verdict": "ADAPT",
+      "flagged": true,
       "cites_changing_record": false,
-      "cited": [],
-      "ms": 9979,
+      "cited": [
+        "GOVUK-0029"
+      ],
+      "ms": 12446,
       "broken": [],
       "warnings": [],
       "reflect": {
         "verdict": "REUSE",
         "flagged": false,
         "mentions_changing_record": false,
-        "answer": "The decision to use AWS ElastiCache for Redis remains active and consistent with the GOV.UK TechOps strategy of leveraging managed services to reduce operational overhead and Puppet management. No evidence suggests the decision has failed or that the underlying conditions have changed."
+        "answer": "The decision in GOVUK-0025 is still the current approach. The underlying conditions\u2014the desire to minimize self-managed infrastructure and leverage AWS managed services\u2014continue to hold true for the GOV.UK hosting platform. The subsequent decision to consolidate instances (GOVUK-0029) is an optimization of the original architecture rather than a departure from the fundamental choice of using Elast"
       }
     },
     {
@@ -1212,18 +1242,20 @@
       "changed_later": false,
       "changed_by": null,
       "history": "not revisited in the record",
-      "verdict": "REUSE",
-      "flagged": false,
+      "verdict": "ADAPT",
+      "flagged": true,
       "cites_changing_record": false,
-      "cited": [],
-      "ms": 8220,
+      "cited": [
+        "GOVUK-0033"
+      ],
+      "ms": 5319,
       "broken": [],
       "warnings": [],
       "reflect": {
-        "verdict": "RECONSIDER",
-        "flagged": true,
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "flagged": false,
         "mentions_changing_record": false,
-        "answer": "The decision to combine api-redis and backend-redis should be re-evaluated because the original justification was tied to specific, potentially outdated service requirements (Rummager), and the consolidation increased the risk of issues propagating across dependent applications."
+        "answer": "There is insufficient evidence to definitively categorize the status of this decision as REUSE, ADAPT, or RECONSIDER because the documentation does not contain follow-up ADRs or incident reports indicating whether the predicted availability issues materialized or if the team subsequently reverted to segregated Redis instances."
       }
     }
   ]

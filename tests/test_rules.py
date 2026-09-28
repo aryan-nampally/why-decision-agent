@@ -85,3 +85,21 @@ def test_admissible_and_age():
     assert not rules.admissible(date(2022, 11, 3), date(2023, 2, 14))
     assert rules.age(date(2023, 2, 14), date(2026, 9, 28)) == "3 years 7 months ago"
     assert rules.age(date(2026, 9, 1), date(2026, 9, 28)) == "less than a month ago"
+
+
+def test_uncited_unknown_is_no_change_recorded():
+    """A judged UNKNOWN with no provided citation means nothing addresses it: HOLDS / no change recorded."""
+    checks, w = rules.settle_uncited_unknowns([chk(1, U), chk(2, U, ev=["SIG-1"]), chk(3, U, ev=["FAKE"])],
+                                              {"SIG-1"}, {"A1", "A2", "A3"})
+    checks, _ = rules.ground(checks, {"SIG-1"})
+    assert [c.status for c in checks] == [H, U, H]
+    assert checks[0].basis == "no_change_recorded" and len(w) == 2
+
+
+def test_settling_keeps_fail_safe():
+    """Assumptions the judge never returned (failure or omission) stay UNKNOWN, so the verdict is never REUSE;
+    BROKEN without evidence is still downgraded to UNKNOWN, not HOLDS."""
+    checks, _ = rules.settle_uncited_unknowns([chk(1, U, False), chk(2, B)], {"SIG-1"}, judged_ids={"A2"})
+    checks, _ = rules.ground(checks, {"SIG-1"})
+    assert [c.status for c in checks] == [U, U]
+    assert rules.verdict(checks, False, evaluation_complete=False) != Verdict.REUSE

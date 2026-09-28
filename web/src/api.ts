@@ -60,6 +60,7 @@ export const api = {
   holdback: () => call<HoldbackDoc[]>("/api/holdback"),
   ingestHoldback: (id: string) => call<{ record: { id: string } }>(`/api/holdback/${id}`, {}),
   timeline: () => call<TimelineItem[]>("/api/timeline"),
+  resetDemo: () => call<{ records: number }>("/api/demo/reset", {}),
   accept: (body: { question: string; title: string; decision: string; rationale: string; based_on: string | null; team: string }) =>
     call<Decision>("/api/decisions/accept", body),
 };

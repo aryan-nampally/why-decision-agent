@@ -1,0 +1,41 @@
+{
+  "note": "Same 8 decisions, same cached extraction; only the judging model / code version differ.",
+  "runs": [
+    {
+      "label": "demo model, current code",
+      "model": "gpt-oss-120b",
+      "code": "current",
+      "file": "real_govuk.json",
+      "run_at": "2026-09-28T12:08:54+00:00",
+      "targets": 3,
+      "flagged": 1,
+      "cited": 1,
+      "controls": 5,
+      "left_alone": 5
+    },
+    {
+      "label": "qwen, current code",
+      "model": "qwen-3.8-27b",
+      "code": "current",
+      "file": "real_govuk_qwen_current.json",
+      "run_at": "2026-09-28T12:12:39+00:00",
+      "targets": 3,
+      "flagged": 2,
+      "cited": 2,
+      "controls": 5,
+      "left_alone": 1
+    },
+    {
+      "label": "qwen, earlier code",
+      "model": "qwen/qwen3.8-27b",
+      "code": "before the uncited-UNKNOWN rule",
+      "file": "real_govuk_qwen.json",
+      "run_at": "2026-09-28T07:30:27+00:00",
+      "targets": 3,
+      "flagged": 3,
+      "cited": 3,
+      "controls": 5,
+      "left_alone": 4
+    }
+  ]
+}

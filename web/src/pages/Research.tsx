@@ -40,7 +40,7 @@ export default function ResearchPage() {
           <h2>What we claim</h2>
           <ul>
             <li>Memory with decision structure catches stale decisions that a memoryless model reuses.</li>
-            <li>The approach works on ADRs someone else wrote (GOV.UK), including an implicit reversal.</li>
+            <li>Assumption extraction works on ADRs someone else wrote: 109 grounded assumptions from GOV.UK's real records.</li>
             <li>Every warning comes with a witness: an assumption, a quote, and a dated record.</li>
           </ul>
         </div>
@@ -50,6 +50,7 @@ export default function ResearchPage() {
             <li>That nobody builds decision memory — Varve and others do.</li>
             <li>That two-stage recall beats a single recall: on our small corpus it doesn't.</li>
             <li>That a 26-question synthetic pilot generalizes; it's a pilot.</li>
+            <li>That the GOV.UK retrospective is settled: on 8 real decisions the verdicts swing with the model, and we report every run.</li>
             <li>That the LLM's per-assumption judgement is always right: it is bounded and audited, not trusted.</li>
           </ul>
         </div>

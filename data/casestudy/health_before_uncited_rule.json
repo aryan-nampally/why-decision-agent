@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-28T12:06:02+00:00",
+  "generated_at": "2026-09-28T10:57:12+00:00",
   "as_of": "2026-09-28",
   "model": "gpt-oss-120b",
   "decisions": [
@@ -20,7 +20,7 @@
           "evidence": [
             "SIG-2025-12"
           ],
-          "explanation": "Write volume now exceeds the original projection: peak ledger writes reached 3,140\u202fwrites/sec (5\u00d7 2023 peak) and FP&A projects 4,500\u202fwrites/sec for next year, well above the ~1,800\u202fwrites/sec the single primary was assumed to handle."
+          "explanation": "Peak ledger writes reached 3,140\u202fwrites/sec in Dec\u202f2025 and FP&A projects 4,500\u202fwrites/sec for next year, far exceeding the 1,800\u202fwrites/sec limit the decision relied on."
         },
         {
           "id": "A3",
@@ -29,7 +29,7 @@
           "evidence": [
             "SIG-2025-08"
           ],
-          "explanation": "Finance month\u2011end reporting has been migrated to Snowflake and direct ad\u2011hoc queries against the production ledger primary are now disabled, contradicting the assumption that reporting would continue on the same DB with minor rewrites."
+          "explanation": "Finance month\u2011end reporting has been migrated to Snowflake and direct queries against the production ledger are now disabled, invalidating the assumption that reporting can continue on the same PostgreSQL instance."
         }
       ],
       "failures": [],
@@ -88,9 +88,10 @@
           "statement": "The platform team has sufficient Kafka operational expertise to manage MSK.",
           "critical": true,
           "evidence": [
-            "SIG-2025-05"
+            "SIG-2025-05",
+            "PM-2025-06"
           ],
-          "explanation": "The platform team\u2019s Kafka operational expertise has diminished: Jin Park left the Platform team and only Marcus Oyelaran remains with production Kafka experience, reducing the team to a single knowledgeable engineer."
+          "explanation": "Platform team expertise has degraded: Jin Park left the team and only Marcus remains with Kafka experience, and a post\u2011mortem shows the team\u2019s Kafka knowledge now rests on a single person and the runbook lacked coverage for the failure mode."
         }
       ],
       "failures": [],
@@ -126,7 +127,7 @@
           "evidence": [
             "SIG-2026-02"
           ],
-          "explanation": "Recent signal [SIG-2026-02] indicates that enterprise prospects now require SOC\u202f2 Type\u202fII attestation, directly contradicting the assumption that no contracts need SOC\u202f2."
+          "explanation": "Enterprise prospects now require SOC\u202f2 Type\u202fII attestation, making the original \u201cno SOC\u202f2 required\u201d assumption false."
         }
       ],
       "failures": [],
