@@ -2,6 +2,8 @@
 
 **WHY remembers why your organization made each engineering decision, notices when the assumptions behind it stop being true, and changes its recommendation because of what it remembers.**
 
+**▶ [Watch the demo video](https://drive.google.com/file/d/1O4H11UF_WvzLslILO_R4eEaBhiYjgkso/view?usp=sharing)**
+
 Architecture decision records capture *what* was decided. They don't notice when the world that justified the decision moves on — and the evidence that it moved on usually lives in other documents, written by other people, years later. WHY keeps decisions, incidents and environment changes in [Hindsight](https://github.com/vectorize-io/hindsight) memory, recovers the implicit assumptions each decision depended on, and checks them against everything that happened since.
 
 ```
