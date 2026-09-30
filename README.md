@@ -37,19 +37,7 @@ Without memory, the same model answers "the expected 1.2k writes per second is w
 
 ## How it works
 
-```
-                 ┌──────────── React UI (web/, Vite + TypeScript) ────────────┐
-                 │ Ask · Then vs Now · Evidence · Memory trace · Tripwire │
-                 └──────────────────────────┬───────────────────────────┘
-                                            │ FastAPI (src/app.py)
-   ┌────────────────────────────────────────┴────────────────────────────────────────┐
-   │ 1 recall precedent (kind:adr) → 2 recall changes per assumption (kind:signal/pm) │
-   │ 3 LLM judges each assumption → 4 code grounds citations → 5 rule-based verdict    │
-   └──────────┬───────────────────────────────┬────────────────────────────┬──────────┘
-        Hindsight Cloud                 SQLite record store             LLM (OpenAI-compatible)
-   retain / recall / reflect        canonical records by ID        openai/gpt-oss-120b
-   what is relevant, and when       what was actually written      narrow JSON judgements
-```
+![WHY architecture: the six-step ask pipeline, memory writes, and Hindsight, the record store and the LLM](docs/img/architecture.png)
 
 Design rules that keep it auditable:
 
